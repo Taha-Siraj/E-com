@@ -70,7 +70,8 @@ const Categories = () => {
       <div className="flex justify-center items-center py-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 px-6">
           {filterProduct.map((items) => (
-            <div key={items.id} className="min-h-[300px] w-[300px] bg-[#111827] rounded-lg flex justify-center items-center flex-col px-2 text-white py-4 gap-y-3 hover:scale-105 transition-all">
+            <div key={items.id} className="min-h-[300px] w-[300px] bg-[#111827] shadow-[0_4px_10px_rgba(0,0,0,0.8)]
+            rounded-lg flex justify-center items-center flex-col px-2 text-white py-4 gap-y-3 hover:scale-105 transition-all">
           
               <img 
                 src={ items.images || "https://rb.gy/olmcee"} 

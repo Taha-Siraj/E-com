@@ -21,7 +21,6 @@ const CustomRoutes = () => {
         <Route path='/Product' element={<Product/>} />
         <Route path='/Signup' element={<Signup/>} />
     </Routes>
-    <Fotter/>
     </>
   )
 }
