@@ -4,8 +4,6 @@ import { MoonLoader } from "react-spinners"
 
 
 const Product = () => {
-
-
     const fetchProduct = async () => {
         let res = await axios.get("https://api.escuelajs.co/api/v1/products")
        return res.data

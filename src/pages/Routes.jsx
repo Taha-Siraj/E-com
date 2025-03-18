@@ -7,6 +7,7 @@ import Signup from './Signup'
 import Header from './Header'
 import Fotter from './Fotter'
 import Categories from './Categories'
+import Aboutus from './Aboutus'
 
 const CustomRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const CustomRoutes = () => {
         <Route path='/Login' element={<Login/>} />
         <Route path='/' element={<Home/>} />
         <Route path='/Categories' element={<Categories/>} />
+        <Route path='/Aboutus' element={<Aboutus/>} />
         <Route path='/Product' element={<Product/>} />
         <Route path='/Signup' element={<Signup/>} />
     </Routes>
