@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
 import axios from "axios";
-
+import { GlobalContext } from '../Context/Context'
 const Signup = () => {
   const [isShow, setIsShow] = useState(false);
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {state , dispatch} = useContext(GlobalContext)
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const Signup = () => {
         password,
         avatar: "https://api.lorem.space/image/face?w=150&h=150", 
       });
-
+      
       console.log("User Registered:", res.data);
       setName("");
       setEmail("");
@@ -27,6 +27,9 @@ const Signup = () => {
       
     } catch (error) {
       console.error("Signup Error:", error.response?.data || error.message);
+      setName("");
+      setEmail("");
+      setPassword("");
     }
   };
   
@@ -70,7 +73,7 @@ const Signup = () => {
               placeholder="Password"
               id="password"
               onChange={(e) => setPassword(e.target.value)}
-              className="py-2 px-3 border-0 outline-0 rounded-sm w-full text-black text-[18px]"
+              className="py-2 px- border-0 outline-0 rounded-sm w-full text-black text-[18px]"
             />
             <span
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-2xl cursor-pointer z-50 pointer-events-auto text-gray-700"

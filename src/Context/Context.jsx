@@ -6,6 +6,7 @@ export const GlobalContext = createContext(null);
 const initialState = {
     user: {},
     isLogin: null,
+    token: null,
 };
 
 export default function ContextProvider({ children }) {

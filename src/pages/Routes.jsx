@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Routes , Route } from 'react-router-dom'
 import Login from './Login'
 import Home from './Home'
@@ -8,11 +8,16 @@ import Header from './Header'
 import Fotter from './Fotter'
 import Categories from './Categories'
 import Aboutus from './Aboutus'
+import { GlobalContext } from '../Context/Context'
 
 const CustomRoutes = () => {
+  
+  const{state} = useContext(GlobalContext)
+
   return (
     <>
     <Header/>
+    {(state?.isLogin=== true)?(
     <Routes>
         <Route path='/Login' element={<Login/>} />
         <Route path='/' element={<Home/>} />
@@ -21,6 +26,14 @@ const CustomRoutes = () => {
         <Route path='/Product' element={<Product/>} />
         <Route path='/Signup' element={<Signup/>} />
     </Routes>
+    ):
+    <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path='/Signup' element={<Signup/>} />
+    </Routes>
+    
+    
+    } 
     </>
   )
 }

@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 
 const Categories = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
-
-  // Fetch categories from API
   const fetchCategories = async () => {
     try {
       const res = await axios.get("https://api.escuelajs.co/api/v1/categories");
@@ -16,7 +14,6 @@ const Categories = () => {
     }
   };
 
-  // Fetch products from API
   const fetchProduct = async () => {
     try {
       const res = await axios.get("https://api.escuelajs.co/api/v1/products");
@@ -26,8 +23,6 @@ const Categories = () => {
       return [];
     }
   };
-
-  // Queries for fetching data
   const { data: products = [], isLoading: prodisLoading, isError: prodisError } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProduct
@@ -38,7 +33,6 @@ const Categories = () => {
     queryFn: fetchCategories
   });
 
-  // Filter products based on selected category
   const filterProduct = selectedCategory
     ? products.filter(product => product?.category?.id === Number(selectedCategory))
     : products;
