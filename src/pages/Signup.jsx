@@ -28,7 +28,20 @@ const Signup = () => {
         draggable: true,
         theme: "dark",
         transition: Bounce,
-      });
+      }) 
+      return
+    }
+    if(password.length < 6){
+      toast.error("Password should be at least 6 characters ", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      })
       return
     }
   
@@ -40,13 +53,21 @@ const Signup = () => {
         setName("")
         setEmail("")
         setPassword("")
-        dispatch(user)
-        console.log(state,  "state")
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log("error" , error)
+        toast.error("This Email Already In Use", {
+              position: "top-center",
+              autoClose: 1000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+              transition: Bounce,
+            });
 
       });
   };
