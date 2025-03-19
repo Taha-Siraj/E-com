@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
 import { GlobalContext } from '../Context/Context'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import Login from "./Login";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Bounce } from "react-toastify";
 
 const Signup = () => {
   const [isShow, setIsShow] = useState(false);
@@ -17,6 +18,20 @@ const Signup = () => {
   const registerUser = async (e) => {
     e.preventDefault();
     const auth = getAuth();
+    if(email === "" || password === "" || name === ""){
+      toast.warn("Please fill in all fields!", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return
+    }
+  
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -40,6 +55,20 @@ const Signup = () => {
   
 
   return (
+    <>
+     <ToastContainer
+            position="top-center"
+            autoClose={1500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition={Bounce} />
+   
     <div className="bg-slate-500 h-screen w-full flex justify-center items-center">
       <div className="min-h-[400px] w-[400px] bg-gray-900 py-4 rounded-lg px-8 overflow-hidden">
         <form className="flex flex-col justify-center items-center h-full gap-2 font-mono relative" onSubmit={registerUser}>
@@ -101,6 +130,7 @@ const Signup = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
