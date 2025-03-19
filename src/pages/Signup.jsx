@@ -1,36 +1,39 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
-import axios from "axios";
 import { GlobalContext } from '../Context/Context'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import Login from "./Login";
+
+
 const Signup = () => {
   const [isShow, setIsShow] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const {state , dispatch} = useContext(GlobalContext)
+  const navigate = useNavigate()
 
   const registerUser = async (e) => {
     e.preventDefault();
-    try {
-      let res = await axios.post("https://api.escuelajs.co/api/v1/users/", {
-        name,
-        email,
-        password,
-        avatar: "https://api.lorem.space/image/face?w=150&h=150", 
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("users", user)
+        navigate("/login")
+        setName("")
+        setEmail("")
+        setPassword("")
+        dispatch(user)
+        console.log(state,  "state")
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("error" , error)
+
       });
-      
-      console.log("User Registered:", res.data);
-      setName("");
-      setEmail("");
-      setPassword("");
-      
-    } catch (error) {
-      console.error("Signup Error:", error.response?.data || error.message);
-      setName("");
-      setEmail("");
-      setPassword("");
-    }
   };
   
   
@@ -73,7 +76,7 @@ const Signup = () => {
               placeholder="Password"
               id="password"
               onChange={(e) => setPassword(e.target.value)}
-              className="py-2 px- border-0 outline-0 rounded-sm w-full text-black text-[18px]"
+              className="py-2 px-3 border-0 outline-0 rounded-sm w-full text-black text-[18px]"
             />
             <span
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-2xl cursor-pointer z-50 pointer-events-auto text-gray-700"

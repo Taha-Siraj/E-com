@@ -19,17 +19,18 @@ const CustomRoutes = () => {
     <Header/>
     {(state?.isLogin=== true)?(
     <Routes>
-        <Route path='/Login' element={<Login/>} />
-        <Route path='/' element={<Home/>} />
-        <Route path='/Categories' element={<Categories/>} />
-        <Route path='/Aboutus' element={<Aboutus/>} />
-        <Route path='/Product' element={<Product/>} />
-        <Route path='/Signup' element={<Signup/>} />
+      <Route path='/Login' element={<Login/>} />
+      <Route path='/' element={<Home/>} />
+      <Route path='/Categories' element={<Categories/>} />
+      <Route path='/Aboutus' element={<Aboutus/>} />
+      <Route path='/Product' element={<Product/>} />
+      <Route path='/Signup' element={<Signup/>} />
     </Routes>
     ):
     <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/Signup' element={<Signup/>} />
+      <Route path='/' element={<Home/>} />
+      <Route path='/login' element={<Login/>} />
+      <Route path='/Signup' element={<Signup/>} />
     </Routes>
     
     

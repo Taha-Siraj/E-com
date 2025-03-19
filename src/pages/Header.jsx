@@ -28,7 +28,7 @@ const Header = () => {
       </div>
     </div>
      {(isopen)?
-    <div className='md:hidden -translate-y-[full] transition-all duration-3000 bg-gray-900 text-white py-4 w-full absolute top-[60px] left-0 shadow-xl'>
+    <div className='md:hidden -translate-y-[full] transition-all duration-3000 bg-gray-900 text-white py-4 w-full absolute top-[60px] left-0 shadow-xl z-10'>
     <ul className='flex  flex-col gap-y-4 items-center gap-x-5 text-[22px] text-white md:hidden'>
     <li><a href="">Home</a></li>
     <li><a href="">Categories</a></li>
