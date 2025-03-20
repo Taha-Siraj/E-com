@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
 import { getAuth, signInWithEmailAndPassword ,  signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
@@ -6,12 +6,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
+import { GlobalContext } from '../Context/Context';
 
 const Login = () => {
   const [isShow , setIsShow] = useState(false)
   const [email , setEmail] = useState("")
   const [password , setPassword] = useState("")
   const navigate =  useNavigate()
+  const {state  , dispatch} = useContext(GlobalContext)
+ 
+  useEffect(() => {
+    console.log("state",state) 
+  } , [state])
 
   const signinUser = (e) => {
     e.preventDefault()
@@ -32,10 +38,11 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
     const user = userCredential.user;
+    dispatch({type: 'USER_LOGIN', payload: user})
+    navigate("/")
     console.log("user", user)
     setEmail("")
     setPassword("")
-    navigate("/")
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -53,7 +60,7 @@ const Login = () => {
     setEmail("")
     setPassword("")
   });
-  }
+}
 
   const signinGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -64,6 +71,8 @@ const Login = () => {
     const token = credential.accessToken;
     const user = result.user;
     console.log("users Google",user)
+    dispatch({ type: 'USER_LOGIN', payload: user });
+    navigate("/")
     toast.success('SuceesFully Login With Google', {
       position: "top-center",
       autoClose: 1000,
@@ -143,7 +152,12 @@ const Login = () => {
                <button type="submit" className="bg-slate-300 py-2 px-5 text-xl rounded-sm">
                  Login
                </button>
-               <span className=' flex justify-center items-center gap-x-3 rounded-md font-semibold font-mono text-[18px] cursor-pointer bg-slate-200 py-1 px-4 capitalize' onClick={signinGoogle} >continue with google<FcGoogle className='text-4xl'/></span>
+               <div className="flex items-center w-full">
+                 <hr className="flex-grow border-t border-gray-300" />
+                 <span className="px-2 text-white font-sans capitalize">OR Cteated with</span>
+                 <hr className="flex-grow border-t border-gray-300" />
+               </div>
+               <span className=' flex justify-center items-center gap-x-3 rounded-md font-semibold font-mono text-[18px] cursor-pointe py-1 px-4 capitalize' onClick={signinGoogle} ><FcGoogle className='text-4xl cursor-pointer'/></span>
              </form>
            </div>
     </div>

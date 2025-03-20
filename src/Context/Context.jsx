@@ -5,7 +5,7 @@ export const GlobalContext = createContext(null);
 
 const initialState = {
     user: {},
-    isLogin: null,
+    isLogin: false,
   
 };
 

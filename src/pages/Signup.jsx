@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
 import { GlobalContext } from '../Context/Context'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce } from "react-toastify";
@@ -14,6 +14,10 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const {state , dispatch} = useContext(GlobalContext)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    console.log("Updated state:", state);
+  }, [state]); 
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -44,12 +48,16 @@ const Signup = () => {
       })
       return
     }
-  
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+    .then((userCredential) => {
         const user = userCredential.user;
         console.log("users", user)
-        navigate("/login")
+          dispatch({ type: 'USER_LOGIN', payload: user });
+          updateProfile(auth.currentUser, {
+            displayName: name,
+          })
+
+        navigate("/")
         setName("")
         setEmail("")
         setPassword("")
