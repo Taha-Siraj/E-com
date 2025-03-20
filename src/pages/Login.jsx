@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import Swal from 'sweetalert2';
+import { getAuth, signInWithEmailAndPassword ,  signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
+
 const Login = () => {
   const [isShow , setIsShow] = useState(false)
   const [email , setEmail] = useState("")
@@ -55,6 +55,36 @@ const Login = () => {
   });
   }
 
+  const signinGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+ signInWithPopup(auth, provider)
+   .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const user = result.user;
+    console.log("users Google",user)
+    toast.success('SuceesFully Login With Google', {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+      });
+
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.customData.email;
+    const credential = GoogleAuthProvider.credentialFromError(error);
+
+  });
+
+  }
   return (
     <>
     <ToastContainer
@@ -113,7 +143,7 @@ const Login = () => {
                <button type="submit" className="bg-slate-300 py-2 px-5 text-xl rounded-sm">
                  Login
                </button>
-               <span className=' flex justify-center items-center gap-x-3 rounded-md font-semibold font-mono text-[18px] cursor-pointer bg-slate-200 py-1 px-4 capitalize' >continue with google<FcGoogle className='text-4xl'/></span>
+               <span className=' flex justify-center items-center gap-x-3 rounded-md font-semibold font-mono text-[18px] cursor-pointer bg-slate-200 py-1 px-4 capitalize' onClick={signinGoogle} >continue with google<FcGoogle className='text-4xl'/></span>
              </form>
            </div>
     </div>
