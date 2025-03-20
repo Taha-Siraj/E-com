@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce } from "react-toastify";
-
+import { FcGoogle } from "react-icons/fc";
 const Login = () => {
   const [isShow , setIsShow] = useState(false)
   const [email , setEmail] = useState("")
@@ -72,7 +72,7 @@ const Login = () => {
       />
     <div className='bg-slate-500 h-screen W-[100%] flex justify-center items-center'>
      <div className="min-h-[400px] w-[400px] bg-gray-900 py-2 rounded-lg px-8 overflow-hidden">
-             <form className="flex flex-col justify-center items-center h-full gap-6 font-mono relative" onSubmit={signinUser}>
+             <form className="flex flex-col justify-center items-center h-full gap-3 font-mono relative" onSubmit={signinUser}>
                <h1 className="text-white text-3xl font-serif">Login Form</h1>
                <label htmlFor="email" className="text-2xl text-white w-full">
                  Email:
@@ -113,6 +113,7 @@ const Login = () => {
                <button type="submit" className="bg-slate-300 py-2 px-5 text-xl rounded-sm">
                  Login
                </button>
+               <span className=' flex justify-center items-center gap-x-3 rounded-md font-semibold font-mono text-[18px] cursor-pointer bg-slate-200 py-1 px-4 capitalize' >continue with google<FcGoogle className='text-4xl'/></span>
              </form>
            </div>
     </div>
