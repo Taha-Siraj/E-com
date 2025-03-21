@@ -20,9 +20,10 @@ const Header = () => {
     useGSAP(() => {
       let tl = gsap.timeline();
       tl.from('#logo', {
-         y: -40, 
+         y: -50,
+         delay: 0.5, 
          opacity: 0,
-          duration: 1
+          
         }); 
       tl.from('#nav ul li', {
          y: -40, 
