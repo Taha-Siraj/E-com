@@ -4,6 +4,8 @@ import { IoMdClose } from "react-icons/io";
 import { Link } from 'react-router-dom'
 import { GlobalContext } from '../Context/Context';
 import { Button } from 'flowbite-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const Header = () => {
   const [isopen , setisopen] = useState (false)
@@ -14,14 +16,27 @@ const Header = () => {
         console.log("state",state) 
       } , [state])
      dispatch({ type: 'USER-LOGOUT'})
-    }
+    }   
+    useGSAP(() => {
+      let tl = gsap.timeline();
+      tl.from('#logo', {
+         y: -40, 
+         opacity: 0,
+          duration: 1
+        }); 
+      tl.from('#nav ul li', {
+         y: -40, 
+         opacity: 0,
+         stagger: 0.3,
+        }); 
+  }) 
 
   return (
     <>
     <div className='bg-[#192231] h-[70px] w-full '>
       <div className='h-full w-full flex justify-between items-center px-12'>
-        <h1 className='text-3xl font-extrabold text-[#8E44AD]'>🛍️ My Store👜</h1>
-        <nav className=' items-center gap-x-4 mt-3'>
+        <h1 id='logo' className='text-3xl font-extrabold text-[#8E44AD]'>🛍️ My Store👜</h1>
+        <nav id='nav' className=' items-center gap-x-4 mt-3'>
             <ul className='items-center  gap-x-5 text-[22px] text-white hidden md:flex'>
                 <li><Link to="/" className='no-underline text-[#c746ff] ' >Home</Link></li>
                 <li><Link to="/Product"  className='no-underline text-[#c746ff] '>Product</Link></li>
