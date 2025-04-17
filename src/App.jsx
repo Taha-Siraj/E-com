@@ -1,6 +1,8 @@
 import React from 'react'
 import Routes from './pages/Routes'
 import { initializeApp } from "firebase/app";
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 const App = () => {
 
   const firebaseConfig = {
@@ -13,7 +15,11 @@ const App = () => {
   };
   const app = initializeApp(firebaseConfig);
   return (
-   <Routes/>
+    <>
+    <Routes/>
+  {/* <Login/> */}
+  {/* <Signup/> */}
+  </>
   )
 }
 

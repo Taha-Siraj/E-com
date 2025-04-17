@@ -2,9 +2,11 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import Product from "./Product"
 import Fotter from "./Fotter"
+import Header from './Header';
 const Home = () => {
   return (
     <div className='h-[90vh]'>
+      <Header/>
    <Carousel className="relative h-full">
   <Carousel.Item interval={1000} className="relative">
     <img className="d-block w-100 h-[90vh] object-cover" src="thumb-01.jpg" alt="Exclusive Drop" />

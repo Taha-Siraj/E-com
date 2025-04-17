@@ -1,77 +1,114 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import { FiMenu } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { GlobalContext } from '../Context/Context';
 import { Button } from 'flowbite-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import Swal from 'sweetalert2';
+import { getAuth, signOut } from 'firebase/auth';
 
 const Header = () => {
-  const [isopen , setisopen] = useState (false)
-  
-  const {state , dispatch } = useContext(GlobalContext)
-    const logoutUser = ( ) => { 
-      useEffect(() => {
-        console.log("state",state) 
-      } , [state])
-     dispatch({ type: 'USER-LOGOUT'})
-    }   
-    useGSAP(() => {
-      let tl = gsap.timeline();
-      tl.from('#logo', {
-         y: -50,
-         delay: 0.5, 
-         opacity: 0,
-          
-        }); 
-      tl.from('#nav ul li', {
-         y: -40, 
-         opacity: 0,
-         stagger: 0.3,
-        }); 
-  }) 
+  const [isOpen, setIsOpen] = useState(false);
+  const { state, dispatch } = useContext(GlobalContext);
+
+  const logoutUser = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        dispatch({ type: 'USER_LOGOUT' });
+        Swal.fire('Logged Out', 'You have logged out successfully', 'success');
+      })
+      .catch((error) => {
+        Swal.fire('Error', 'Error during logout', 'error');
+        console.error('Error during logout:', error);
+      });
+  };
+
+  useGSAP(() => {
+    let tl = gsap.timeline();
+    tl.from('#logo', {
+      y: -20,
+      delay: 0.3,
+      opacity: 0,
+      duration: 0.5,
+    });
+    tl.from('#nav ul li', {
+      y: -10,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.4,
+    });
+  }, []);
 
   return (
     <>
-    <div className='bg-[#192231] h-[70px] w-full '>
-      <div className='h-full w-full flex justify-between items-center px-12'>
-        <h1 id='logo' className='text-3xl font-extrabold text-[#8E44AD]'>🛍️ My Store👜</h1>
-        <nav id='nav' className=' items-center gap-x-4 mt-3'>
-            <ul className='items-center  gap-x-5 text-[22px] text-white hidden md:flex'>
-                <li><Link to="/" className='no-underline text-[#c746ff] ' >Home</Link></li>
-                <li><Link to="/Product"  className='no-underline text-[#c746ff] '>Product</Link></li>
-                <li><Link to="/Categories"  className='no-underline text-[#c746ff] '>Categories</Link></li>
-                <li><Link to="/Aboutus"  className='no-underline text-[#c746ff] '>About</Link></li>
-
-                {(state?.isLogin === true)?( <button className='py-2 px-4 bg-green-600 rounded-lg text-2xl text-stone-200'> 
-                  <Link to="/Login"  className='no-underline  text-stone-200' onClick={logoutUser}>Logout</Link>
-                </button> ) : ( state?.isLogin === false)?( <li><Link to="/Login"  className='no-underline text-[#c746ff] '>Login</Link></li>):null }
-                <li><Link to="/Signup"  className='no-underline text-[#c746ff] '>Signup</Link></li>
+      <div className="bg-white h-[70px] w-full shadow-md fixed top-0 left-0 z-20">
+        <div className="h-full w-full flex justify-between items-center px-6 md:px-12">
+          <Link to="/" id="logo" className="text-2xl font-bold text-blue-600 flex items-center gap-2">
+            🛍️ My Store.Co
+          </Link>
+          <nav id="nav" className="hidden md:flex items-center gap-6">
+            <ul className="flex items-center gap-6 text-lg text-gray-700">
+              <li><Link to="/" className="no-underline hover:text-blue-600 transition">Home</Link></li>
+              <li><Link to="/Product" className="no-underline hover:text-blue-600 transition">Products</Link></li>
+              <li><Link to="/Categories" className="no-underline hover:text-blue-600 transition">Categories</Link></li>
+              <li><Link to="/Aboutus" className="no-underline hover:text-blue-600 transition">About</Link></li>
+              {state?.isLogin === true ? (
+                <li>
+                  <Button
+                    onClick={logoutUser}
+                    color="success"
+                    className="py-1 px-4 bg-green-600 hover:bg-green-700 transition"
+                  >
+                    Logout
+                  </Button>
+                </li>
+              ) : state?.isLogin === false ? (
+                <li><Link to="/Login" className="no-underline hover:text-blue-600 transition">Login</Link></li>
+              ) : null}
+              <li><Link to="/Signup" className="no-underline text-blue-600 font-medium hover:underline">Sign Up</Link></li>
             </ul>
-        </nav>
-        {(isopen) ?
-        <i className='text-3xl text-white block cursor-pointer md:hidden' onClick={() => setisopen(!isopen)}  ><IoMdClose/></i>   
-    : 
-    <i className='text-3xl text-white block cursor-pointer  md:hidden' onClick={() => setisopen(!isopen)} ><FiMenu/></i>
-    }
+          </nav>
+          <button
+            className="md:hidden text-2xl text-gray-700"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <IoMdClose /> : <FiMenu />}
+          </button>
+        </div>
       </div>
-    </div>
-     {(isopen)?
-    <div className='md:hidden -translate-y-[full] transition-all duration-3000 bg-gray-900 text-white py-4 w-full absolute top-[60px] left-0 shadow-xl z-10'>
-    <ul className='flex  flex-col gap-y-4 items-center gap-x-5 text-[22px] text-white md:hidden'>
-    <li><a href="">Home</a></li>
-    <li><a href="">Categories</a></li>
-    <li><a href="">Product</a></li>
-    <li><a href="">Signup</a></li>
-    <li><a href="">Login</a></li>
-    </ul>
-    </div>
-    :null 
-    }
-    
-    </>
-  )
-}
 
-export default Header
+      {isOpen && (
+        <div className="md:hidden bg-white w-full fixed top-[70px] left-0 shadow-lg z-10 transition-all duration-300 ease-in-out">
+          <ul className="flex flex-col gap-4 py-4 text-lg text-gray-700 text-center">
+            <li><Link to="/" className="no-underline hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Home</Link></li>
+            <li><Link to="/Product" className="no-underline hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Products</Link></li>
+            <li><Link to="/Categories" className="no-underline hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Categories</Link></li>
+            <li><Link to="/Aboutus" className="no-underline hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>About</Link></li>
+            {state?.isLogin === true ? (
+              <li>
+                <Button
+                  onClick={() => {
+                    logoutUser();
+                    setIsOpen(false);
+                  }}
+                  color="success"
+                  className="mx-auto py-1 px-4 bg-green-600 hover:bg-green-700 transition"
+                >
+                  Logout
+                </Button>
+              </li>
+            ) : state?.isLogin === false ? (
+              <li><Link to="/Login" className="no-underline hover:text-blue-600 transition" onClick={() => setIsOpen(false)}>Login</Link></li>
+            ) : null}
+            <li><Link to="/Signup" className="no-underline text-blue-600 font-medium hover:underline" onClick={() => setIsOpen(false)}>Sign Up</Link></li>
+          </ul>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Header;
