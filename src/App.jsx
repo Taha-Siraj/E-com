@@ -1,6 +1,7 @@
 import React from 'react'
 import { initializeApp } from "firebase/app";
-import UserSignup from './Pages/User/UserSignup';
+import Signup from './Authentication/Signup';
+import Login from './Authentication/Login';
 const App = () => {
 
   const firebaseConfig = {
@@ -14,7 +15,8 @@ const App = () => {
   const app = initializeApp(firebaseConfig);
   return (
     <>
-    <UserSignup/>
+    {/* <Signup/> */}
+    <Login/>
   </>
   )
 }

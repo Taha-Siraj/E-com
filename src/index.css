@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+#login{
+    background-image: url(login.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#login form{
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+/* Login.css */
