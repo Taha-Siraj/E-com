@@ -1,6 +1,6 @@
 // src/Login.jsx
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 const Login = () => {
@@ -17,20 +17,20 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await axios.post('http://localhost:5004/login', formData, {
-        withCredentials: true,
-      });
-
-      toast.success(res.data.message);
-      console.log("Login Response:", res.data);
-    } catch (err) {
-      console.error("Login Error:", err);
-      toast.error(err.response?.data?.message || "Login failed");
-    }
-  };
+  e.preventDefault();
+  try {
+    let res = await axios.post("http://localhost:5004/login",{
+      email: formData.email,
+      password: formData.password
+    },{ 
+      headers:{ "Content-Type": 'application/json' },
+      withCredentials: true
+    })
+    console.log(res)
+  } catch (error) {
+   console.log(error.response?.data?.message);
+  }
+};
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gray-100">
