@@ -20,16 +20,13 @@ const Signup = () => {
       [name]: value
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { firstName, lastName, email, password } = formData;
-    
     if (!firstName || !lastName || !email || !password) {
       toast.error("All fields are required");
       return;
     }
-    
     try {
       setLoader(true)
       const res = await axios.post(`${baseUrl}/signup`, {
@@ -42,12 +39,12 @@ const Signup = () => {
           "Content-Type": "application/json"
         }
       });
-      toast.success(res.data.message || "Signup successful!");
+      toast.success("successfully User Created");
       console.log("Signup Response:", res.data);
       setLoader(false)
     } catch (error) {
-      console.error("Signup Error:", error.response?.data?.message || error.message);
       toast.error(error.response?.data?.message || "Something went wrong");
+      console.error("Signup Error:", error.response?.data?.message || error.message);
       setLoader(false)
     }
   };
