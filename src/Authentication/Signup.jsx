@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Toaster, toast } from 'sonner';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -57,7 +54,7 @@ const Signup = () => {
 
   return (
     <>
-      <Toaster position="top-right" richColors />
+      <Toaster position="top-center" richColors />
       <div className="w-full h-screen flex items-center justify-center bg-gray-100">
         <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-80">
           <h2 className="text-xl font-semibold mb-4">Signup Form</h2>
@@ -99,11 +96,19 @@ const Signup = () => {
             required
           />
           <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-          >
-           {loader ?  <Skeleton height={20} width={200} /> : "Signup"}
-          </button>
+          type="submit"
+          disabled={loader}
+          className={`w-full flex items-center justify-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600 ${
+            loader ? 'opacity-70 cursor-not-allowed' : ''
+          }`}
+        >
+          {loader ? (
+            <div className="h-5 w-5 border-[3px] border-white border-t-blue-500 rounded-full animate-spin-slow"></div>
+
+          ) : (
+            "Signup"
+          )}
+        </button>
         </form>
       </div>
     </>
