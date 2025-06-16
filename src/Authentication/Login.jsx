@@ -8,7 +8,7 @@ const Login = () => {
     email: "",
     password: ""
   });
-
+  const baseUrl = "https://server-ecom-rho.vercel.app"
   const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
@@ -19,7 +19,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    let res = await axios.post("http://localhost:5004/login",{
+    let res = await axios.post(`${baseUrl}/login`,{
       email: formData.email,
       password: formData.password
     },{ 
