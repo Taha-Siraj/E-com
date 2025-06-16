@@ -1,7 +1,5 @@
-// src/Login.jsx
 import axios from 'axios';
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
 
 const Login = () => {
   const [formData, setFormData] = useState({

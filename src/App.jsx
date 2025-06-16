@@ -15,7 +15,7 @@ const App = () => {
   const app = initializeApp(firebaseConfig);
   return (
     <>
-    {/* <Signup/> */}
+    <Signup/>
     <Login/>
   </>
   )
