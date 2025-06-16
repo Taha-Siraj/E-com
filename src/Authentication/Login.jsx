@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 
 const Login = () => {
@@ -8,6 +9,7 @@ const Login = () => {
     password: ""
   });
   const [loader , setLoader] = useState(false);
+  const navigate = useNavigate()
   const baseUrl = "https://server-ecom-rho.vercel.app"
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -35,6 +37,7 @@ const Login = () => {
     toast.success("Succesfully User Login")
     setLoader(false)
     console.log("res", res)
+    navigate("/")
   } catch (error) {
     toast.error(error.response?.data?.message)
     console.log(error)
