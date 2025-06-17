@@ -14,7 +14,6 @@ const Login = () => {
   const navigate = useNavigate();
   const baseUrl = 'https://server-ecom-rho.vercel.app';
 
-  // Animations
   useGSAP(() => {
     gsap.from('#img', {
       x: -200,
@@ -30,7 +29,7 @@ const Login = () => {
     });
   }, []);
 
-  // Formik Setup
+  
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -63,7 +62,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-evenly bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 gap-x-10 px-4">
       <Toaster position="top-center" richColors />
       
-      {/* Image */}
+
       <div id="img" className="hidden md:flex justify-center items-center">
         <img
           src="https://www.ymple.com/images/template2020/user/signup.png"
@@ -72,7 +71,6 @@ const Login = () => {
         />
       </div>
 
-      {/* Login Form */}
       <form
         id="login"
         onSubmit={formik.handleSubmit}
@@ -80,7 +78,6 @@ const Login = () => {
       >
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Welcome Back</h2>
 
-        {/* Email Field */}
         <div className="mb-4">
           <label className="block text-sm font-semibold text-gray-700 mb-1">Email</label>
           <input
@@ -101,7 +98,6 @@ const Login = () => {
           )}
         </div>
 
-        {/* Password Field */}
         <div className="mb-4">
           <label className="block text-sm font-semibold text-gray-700 mb-1">Password</label>
           <input
@@ -122,7 +118,6 @@ const Login = () => {
           )}
         </div>
 
-        {/* Link to Signup */}
         <div className="text-sm text-gray-600 mb-4">
           Don't have an account?{' '}
           <Link to="/signup" className="text-blue-600 hover:underline">
@@ -130,7 +125,6 @@ const Login = () => {
           </Link>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={loader}

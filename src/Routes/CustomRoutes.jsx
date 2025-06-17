@@ -10,13 +10,7 @@ const CustomRoutes = () => {
 
   return (
     <Routes>
-      {/* Protected Route: Home */}
-      <Route
-        path="/"
-        element={
-          state.isLogin ? <Home /> : <Navigate to="/login" replace />
-        }
-      />
+      <Route path="/" element={state.isLogin ? <Home /> : <Navigate to="/login" replace />}/>
 
       <Route path="/login" element={state.isLogin ? <Navigate to="/" replace /> : <Login />}
       />
