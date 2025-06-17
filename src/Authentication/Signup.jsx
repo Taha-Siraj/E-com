@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import 'react-toastify/dist/ReactToastify.css';
 import { Toaster, toast } from 'sonner';
 import { useFormik } from 'formik';
-import {TextField} from '@mui/material';
 import * as Yup from 'yup';
+import { Link, useNavigate } from 'react-router-dom';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const Signup = () => {
-
   const baseUrl = "https://server-ecom-rho.vercel.app";
+  const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
+
   const formik = useFormik({
-    initialValues:{
+    initialValues: {
       firstName: "",
       lastName: "",
       email: "",
@@ -22,56 +25,84 @@ const Signup = () => {
       email: Yup.string().email('Invalid email').required('Email is required'),
       password: Yup.string().min(8, 'At least 8 characters').required('Password is required'),
     }),
-
-    onSubmit: async(values) => {
-      console.log(values)
-       const { firstName, lastName, email, password } = formik.values;
-    if (!firstName || !lastName || !email || !password) {
-      toast.error("All fields are required");
-      return;
-    }
-    try {
-      setLoader(true)
-      const res = await axios.post(`${baseUrl}/signup`, {
-        firstName,
-        lastName,
-        email,
-        password
-      }, {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-      toast.success("successfully User Created");
-      console.log("Signup Response:", res.data);
-      setLoader(false)
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong");
-      console.error("Signup Error:", error.response?.data?.message || error.message);
-      setLoader(false)
-    }
+    onSubmit: async (values) => {
+      try {
+        setLoader(true);
+        const res = await axios.post(`${baseUrl}/signup`, values, {
+          headers: { "Content-Type": "application/json" }
+        });
+        toast.success("Successfully created account!");
+        setTimeout(() => navigate("/login"), 1500);
+      } catch (error) {
+        toast.error(error.response?.data?.message || "Something went wrong");
+      } finally {
+        setLoader(false);
+      }
     }
   });
 
-
-
+  useGSAP(() => {
+   gsap.from("#img",{
+    x: -200,
+    opacity: 0,
+    duration: 1,
+  }) 
+  gsap.from("#signup",{
+    x: 200,
+    opacity: 0,
+    duration: 1,
+   }) 
+  })
 
   return (
     <>
       <Toaster position="top-center" richColors />
-      <div>
-        <form onSubmit={formik.handleSubmit}>
-            <TextField
-            label="First Name"
-            name='firstName'
-            value={formik.values.firstName}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-            helperText={formik.touched.firstName && formik.error.firstName}
-            />
+      <div className="min-h-screen bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 flex  items-center justify-evenly ">
+        <div id='img' className='flex justify-center items-center'>
+          <img src="https://www.ymple.com/images/template2020/user/signup.png" className='h-[450px] w-full'  alt="" />
+        </div>
+        <div id='signup' className="w-full max-w-md bg-white bg-opacity-90 backdrop-blur-md shadow-xl rounded-xl p-8">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Create Your Account</h2>
+          <form onSubmit={formik.handleSubmit} className="space-y-5">
 
-        </form>
+            {["firstName", "lastName", "email", "password"].map((field, idx) => {
+              const isPassword = field === "password";
+              const label = field.charAt(0).toUpperCase() + field.slice(1).replace("Name", " Name");
+              return (
+                <div key={idx}>
+                  <label className="block text-sm font-semibold text-gray-700">{label}</label>
+                  <input
+                    type={isPassword ? "password" : "text"}
+                    name={field}
+                    value={formik.values[field]}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    placeholder={`Enter your ${label.toLowerCase()}`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200 ${
+                      formik.touched[field] && formik.errors[field] ? "border-red-500" : "border-gray-300"
+                    }`}
+                  />
+                  {formik.touched[field] && formik.errors[field] && (
+                    <p className="text-sm text-red-500 mt-1">{formik.errors[field]}</p>
+                  )}
+                </div>
+              );
+            })}
+
+            <div className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loader}
+              className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-600 hover:to-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300 disabled:opacity-60"
+            >
+              {loader ? "Signing up..." : "Sign Up"}
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );

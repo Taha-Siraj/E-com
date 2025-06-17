@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 
-
-#login{
+body{
+    overflow: hidden;
+}
+/* #login{
     background-image: url(login.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-}
-#login form{
+} */
+#signup{
     background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
 }
