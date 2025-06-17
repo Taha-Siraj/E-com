@@ -1,15 +1,39 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react';
+import { GlobalContext } from '../Context/Context';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const Home = () => {
-  
-    return (
-    <div>
-      <h1>Home</h1>
-      <Link to='/login' className='py-2 px-4 bg-slate-700 text-xl font-poppins rounded-md active:scale-90 text-white no-underline' >Login</Link>
-      <Link to='/signup' className='py-2 px-4 bg-slate-900 text-xl font-poppins rounded-md active:scale-90 text-white no-underline' >Signup</Link>
-    </div>
-  )
-}
+  const { state, dispatch } = useContext(GlobalContext);
+  const navigate = useNavigate();
 
-export default Home
+  const handleLogout = () => {
+    dispatch({ type: 'USER_LOGOUT' });
+    toast.success('Logged out successfully!');
+    navigate('/login');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center px-4">
+      <div className="bg-white bg-opacity-90 backdrop-blur-md shadow-2xl rounded-xl p-10 max-w-xl w-full text-center">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+          Welcome, {`${state.user.user.first_name} ${state.user.user.last_name}`}! 🎉
+        </h1>
+        <p className="text-gray-600 mb-8">
+          You have successfully logged in to the E-Commerce App.
+        </p>
+
+        <div className="flex justify-center gap-4">
+          <button
+            onClick={handleLogout}
+            className="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-300"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;

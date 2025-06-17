@@ -1,30 +1,29 @@
-import React, { useContext, useState } from 'react'
-import Login from '../Authentication/Login'
-import Signup from '../Authentication/Signup'
-import { Route, Routes } from 'react-router-dom'
-import Home from '../Pages/Home'
-import { GlobalContext } from '../Context/Context'
+import React, { useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Login from '../Authentication/Login';
+import Signup from '../Authentication/Signup';
+import Home from '../Pages/Home';
+import { GlobalContext } from '../Context/Context';
 
 const CustomRoutes = () => {
+  const { state } = useContext(GlobalContext);
 
-  const {state } = useContext(GlobalContext)
   return (
-    <div>
-      {(state.isLogin === true) ?
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<Signup/>}/>      
-      </Routes>
-      :
-      <Routes>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<Signup/>}/>      
-      </Routes>
-      }
-      
-    </div>
-  )
-}
-export default CustomRoutes
+    <Routes>
+      {/* Protected Route: Home */}
+      <Route
+        path="/"
+        element={
+          state.isLogin ? <Home /> : <Navigate to="/login" replace />
+        }
+      />
 
+      <Route path="/login" element={state.isLogin ? <Navigate to="/" replace /> : <Login />}
+      />
+      <Route path="/signup" element={state.isLogin ? <Navigate to="/" replace /> : <Signup />}
+      />
+    </Routes>
+  );
+};
+
+export default CustomRoutes;
