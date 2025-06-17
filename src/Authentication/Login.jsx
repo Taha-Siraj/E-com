@@ -43,7 +43,6 @@ const Login = () => {
     console.log(error)
   }
 };
-
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gray-100">
        <Toaster position="top-center" richColors />
