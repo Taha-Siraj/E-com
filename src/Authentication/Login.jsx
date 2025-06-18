@@ -13,6 +13,8 @@ const Login = () => {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const baseUrl = 'https://server-ecom-rho.vercel.app';
+  
+  // const baseUrl = 'http://localhost:5004';
 
   useGSAP(() => {
     gsap.from('#img', {
@@ -46,9 +48,10 @@ const Login = () => {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true,
         });
-
+        
         toast.success('User logged in successfully');
         dispatch({ type: 'USER_LOGIN', payload: res.data });
+         localStorage.setItem("user", JSON.stringify(res.data)); 
         setTimeout(() => navigate('/'), 1500);
       } catch (error) {
         toast.error(error.response?.data?.message || 'Login failed. Try again.');
@@ -58,6 +61,7 @@ const Login = () => {
     },
   });
 
+  
   return (
     <div className="min-h-screen flex items-center justify-evenly bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 gap-x-10 px-4">
       <Toaster position="top-center" richColors />

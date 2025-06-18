@@ -2,16 +2,39 @@ import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../Context/Context';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import axios from 'axios';
 
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch({ type: 'USER_LOGOUT' });
-    toast.success('Logged out successfully!');
-    navigate('/login');
+   const baseUrl = 'https://server-ecom-rho.vercel.app';
+  // const baseUrl = 'http://localhost:5004';
+  const handleLogout = async() => {
+    try {
+      let res = await axios.post(`${baseUrl}/logout`,{},
+         {withCredentials: true}
+        )
+      dispatch({ type: 'USER_LOGOUT' });
+      console.log(res)
+      toast.success('Logged out successfully!');
+      navigate('/login');
+    } catch (error) {
+       console.error("Logout Error:", error);
+    toast.error("Failed to logout. Try again.");      
+    }
   };
+
+  useEffect(() => {
+    const userStore = localStorage.getItem("user");
+    if(userStore){
+      dispatch({type: "USER_LOGIN", payload: JSON.parse(userStore)})
+    }else{
+      navigate('/login');
+    }
+  },[])
+  if (!state.user) {
+  return <div className="text-white">Loading...</div>;
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center px-4">

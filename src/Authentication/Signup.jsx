@@ -7,10 +7,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
+
 const Signup = () => {
   const baseUrl = "https://server-ecom-rho.vercel.app";
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+  // const baseUrl = "http://localhost:5004";
 
   const formik = useFormik({
     initialValues: {
