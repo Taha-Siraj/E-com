@@ -1,7 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 body{
     overflow: hidden;
 }
+#home{
+    background-image: url(https://img.freepik.com/premium-photo/floating-3d-laptop-with-shop-visor-product-icons-cart-screen_272306-73.jpg?semt=ais_hybrid&w=740);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#home-user{
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+
 

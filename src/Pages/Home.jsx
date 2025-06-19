@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import axios from 'axios';
 
+
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const navigate = useNavigate();
@@ -29,12 +30,12 @@ const Home = () => {
 
 
   return (
-    <div id='home' className="min-h-screen bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center px-4">
-      <div className="bg-white bg-opacity-90 backdrop-blur-md shadow-2xl rounded-xl p-10 max-w-xl w-full text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+    <div id='home' className="font-poppins min-h-screen flex items-center justify-center px-4">
+      <div id='home-user' className="rounded-xl p-10 max-w-xl w-full text-center">
+        <h1 className="text-4xl font-bold text-gray-100 mb-4">
           Welcome, {`${state.user.user.first_name} ${state.user.user.last_name}`}! 🎉
         </h1>
-        <p className="text-gray-600 mb-8">
+        <p className="text-gray-200 mb-8">
           You have successfully logged in to the E-Commerce App.
         </p>
 

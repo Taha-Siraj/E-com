@@ -5,7 +5,7 @@
     background-repeat: no-repeat;
 }
 #signup{
-   background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
       border-radius: 20px;
