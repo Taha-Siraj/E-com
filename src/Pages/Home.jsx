@@ -19,7 +19,7 @@ const Home = () => {
          {withCredentials: true}
         )
       dispatch({ type: 'USER_LOGOUT' });
-      console.log(res)
+      console.log("res", res)
       localStorage.removeItem("user")
       setTimeout(() => navigate('/'), 1500);
       toast.success('Logged out successfully!');
