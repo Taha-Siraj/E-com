@@ -7,6 +7,7 @@ import { toast, Toaster } from 'sonner';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import './login.css'
 
 const Login = () => {
   const { dispatch } = useContext(GlobalContext);
@@ -17,17 +18,10 @@ const Login = () => {
   // const baseUrl = 'http://localhost:5004';
 
   useGSAP(() => {
-    gsap.from('#img', {
-      x: -200,
-      opacity: 0,
-      duration: 1,
-      ease: 'power2.out',
-    });
-    gsap.from('#login', {
-      x: 200,
-      opacity: 0,
-      duration: 1,
-      ease: 'power2.out',
+    gsap.from('#login-form', {
+     scale: 1.5,
+     opacity: 0,
+     duration: 1,
     });
   }, []);
 
@@ -63,27 +57,17 @@ const Login = () => {
 
   
   return (
-    <div className="min-h-screen flex items-center justify-evenly bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 gap-x-10 px-4">
+    <div id='login-bg' className="font-poppins min-h-screen flex items-center justify-center gap-x-10 px-4">
       <Toaster position="top-center" richColors />
-      
-
-      <div id="img" className="hidden md:flex justify-center items-center">
-        <img
-          src="https://www.ymple.com/images/template2020/user/signup.png"
-          alt="Login Illustration"
-          className="h-[450px] drop-shadow-xl"
-        />
-      </div>
-
       <form
-        id="login"
+        id="login-form"
         onSubmit={formik.handleSubmit}
-        className="w-full max-w-sm bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow-xl p-6"
+        className="w-full flex justify-center flex-col  max-w-sm gap-y-6 p-4"
       >
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Welcome Back</h2>
+        <h2 className="text-3xl font-bold text-center text-[#fff]">Welcome Back</h2>
 
-        <div className="mb-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Email</label>
+        <div>
+          <label className="block text-sm font-semibold text-gray-200 mb-1">Email</label>
           <input
             type="email"
             name="email"
@@ -102,8 +86,8 @@ const Login = () => {
           )}
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Password</label>
+        <div>
+          <label className="block text-sm font-semibold text-gray-200 mb-1">Password</label>
           <input
             type="password"
             name="password"
@@ -118,13 +102,14 @@ const Login = () => {
             }`}
           />
           {formik.touched.password && formik.errors.password && (
-            <p className="text-sm text-red-500 mt-1">{formik.errors.password}</p>
+            <p className="text-sm text-red-500">{formik.errors.password}</p>
           )}
         </div>
 
-        <div className="text-sm text-gray-600 mb-4">
+        <div className=" flex justify-center items-center  gap-x-2 text-xl
+         text-gray-200">
           Don't have an account?{' '}
-          <Link to="/signup" className="text-blue-600 hover:underline">
+          <Link to="/signup" className="text-gray-300  hover:underline">
             Sign up
           </Link>
         </div>

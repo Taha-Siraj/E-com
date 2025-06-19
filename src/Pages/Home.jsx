@@ -17,6 +17,7 @@ const Home = () => {
       dispatch({ type: 'USER_LOGOUT' });
       console.log(res)
       toast.success('Logged out successfully!');
+      localStorage.removeItem("user")
       navigate('/login');
     } catch (error) {
        console.error("Logout Error:", error);
@@ -24,20 +25,11 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    const userStore = localStorage.getItem("user");
-    if(userStore){
-      dispatch({type: "USER_LOGIN", payload: JSON.parse(userStore)})
-    }else{
-      navigate('/login');
-    }
-  },[])
-  if (!state.user) {
-  return <div className="text-white">Loading...</div>;
-}
+
+
 
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center px-4">
+    <div id='home' className="min-h-screen bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center px-4">
       <div className="bg-white bg-opacity-90 backdrop-blur-md shadow-2xl rounded-xl p-10 max-w-xl w-full text-center">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
           Welcome, {`${state.user.user.first_name} ${state.user.user.last_name}`}! 🎉

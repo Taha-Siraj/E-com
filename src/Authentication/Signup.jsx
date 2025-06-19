@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import './signup.css'
 
 
 const Signup = () => {
@@ -44,13 +45,8 @@ const Signup = () => {
   });
 
   useGSAP(() => {
-   gsap.from("#img",{
-    x: -200,
-    opacity: 0,
-    duration: 1,
-  }) 
   gsap.from("#signup",{
-    x: 200,
+    scale: 1.5,
     opacity: 0,
     duration: 1,
    }) 
@@ -58,13 +54,11 @@ const Signup = () => {
 
   return (
     <>
+   
       <Toaster position="top-center" richColors />
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 flex  items-center justify-evenly ">
-        <div id='img' className='flex justify-center items-center'>
-          <img src="https://www.ymple.com/images/template2020/user/signup.png" className='h-[450px] w-full'  alt="" />
-        </div>
-        <div id='signup' className="w-full max-w-md bg-white bg-opacity-90 backdrop-blur-md shadow-xl rounded-xl p-8">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Create Your Account</h2>
+      <div id='signup-bg' className="h-screen flex  items-center justify-evenly bg-gray-950 font-poppins">
+        <div id='signup' className="w-full max-w-md  shadow-xl rounded-xl p-8">
+          <h2 className="text-3xl font-bold text-center text-[#fff] mb-8">Create Your Account</h2>
           <form onSubmit={formik.handleSubmit} className="space-y-5">
 
             {["firstName", "lastName", "email", "password"].map((field, idx) => {
@@ -72,7 +66,7 @@ const Signup = () => {
               const label = field.charAt(0).toUpperCase() + field.slice(1).replace("Name", " Name");
               return (
                 <div key={idx}>
-                  <label className="block text-sm font-semibold text-gray-700">{label}</label>
+                  <label className="block text-sm font-semibold ">{label}</label>
                   <input
                     type={isPassword ? "password" : "text"}
                     name={field}
@@ -91,9 +85,9 @@ const Signup = () => {
               );
             })}
 
-            <div className="text-sm text-gray-600">
+            <div className="flex  justify-center items-center gap-x-2 text-center text-xl text-[#fff]">
               Already have an account?{" "}
-              <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
+              <Link to="/login" className="text-gray-300 hover:underline text-xl">Login</Link>
             </div>
 
             <button
@@ -105,7 +99,7 @@ const Signup = () => {
             </button>
           </form>
         </div>
-      </div>
+    </div>
     </>
   );
 };
