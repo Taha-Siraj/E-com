@@ -32,13 +32,12 @@ const Home = () => {
   useGSAP(() => {
   gsap.from("#home-user",{
     scale: 1.5,
+    y: -200,
+    rotate: 300,
     opacity: 0,
-    rotate: 360,
-    duration: 1.5,
+    duration: 1,
    }) 
   })
-
-
 
   return (
     <div id='home' className="font-poppins min-h-screen flex items-center justify-center px-4">
