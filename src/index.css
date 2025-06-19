@@ -8,7 +8,7 @@ body{
 };
 
 #home{
-    background-image: url(https://img.freepik.com/free-photo/black-friday-sales-sign-neon-light_23-2151833112.jpg?semt=ais_hybrid&w=740);
+    background-image: url(/public/home.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
