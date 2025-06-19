@@ -57,13 +57,14 @@ const Signup = () => {
    
       <Toaster position="top-center" richColors />
       <div id='signup-bg' className="h-screen flex  items-center justify-evenly bg-gray-950 font-poppins">
-        <div id='signup' className="w-full max-w-md  shadow-xl rounded-xl p-8">
+        <div id='signup' className="w-full max-w-md  shadow-xl rounded-xl p-4">
           <h2 className="text-3xl font-bold text-center text-[#fff] mb-8">Create Your Account</h2>
-          <form onSubmit={formik.handleSubmit} className="space-y-5">
+          <form onSubmit={formik.handleSubmit} className="space-y-5 flex justify-center flex-col gap-y-1">
 
             {["firstName", "lastName", "email", "password"].map((field, idx) => {
               const isPassword = field === "password";
               const label = field.charAt(0).toUpperCase() + field.slice(1).replace("Name", " Name");
+
               return (
                 <div key={idx}>
                   <label className="block text-sm font-semibold ">{label}</label>
