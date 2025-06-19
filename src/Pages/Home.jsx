@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import './home.css'
 
 
 const Home = () => {
