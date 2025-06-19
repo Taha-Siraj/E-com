@@ -3,6 +3,8 @@ import { GlobalContext } from '../Context/Context';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 
 const Home = () => {
@@ -17,15 +19,24 @@ const Home = () => {
         )
       dispatch({ type: 'USER_LOGOUT' });
       console.log(res)
-      toast.success('Logged out successfully!');
       localStorage.removeItem("user")
+      setTimeout(() => navigate('/'), 1500);
+      toast.success('Logged out successfully!');
       navigate('/login');
     } catch (error) {
-       console.error("Logout Error:", error);
+    console.error("Logout Error:", error);
     toast.error("Failed to logout. Try again.");      
     }
   };
 
+  useGSAP(() => {
+  gsap.from("#home-user",{
+    scale: 1.5,
+    opacity: 0,
+    rotate: 360,
+    duration: 1.5,
+   }) 
+  })
 
 
 
