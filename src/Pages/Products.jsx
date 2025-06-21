@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 const Products = () => {
 
-    let baseUrl = 'http://localhost:5004'
+    let baseUrl = 'http://localhost:5004/allproducts'
     const [allProduct , setAllProduct] = useState([]);
     const getProduct = async () => {
         try {
