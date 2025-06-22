@@ -129,7 +129,7 @@ const Addproduct = () => {
                     <input
                         type="text"
                         value={formData.description}
-                        placeholder='description' name='description' className={input} onChange={handleChange} />
+                        placeholder='Product description' name='description' className={input} onChange={handleChange} />
 
                     <button type='submit' onClick={addProduct} className={input}>Add Product</button>
                 </div>
