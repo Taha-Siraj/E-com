@@ -60,6 +60,9 @@ const Home = () => {
            <button className='py-2 px-3 rounded shadow-2xl bg-green-500   hover:scale-95 hover:bg-green-600 capitalize no-underline'>
             <Link className='no-underline  text-[#fff]' to='/addproduct'> Add Product</Link>
           </button>
+           <button className='py-2 px-3 rounded shadow-2xl bg-green-500   hover:scale-95 hover:bg-green-600 capitalize no-underline'>
+            <Link className='no-underline  text-[#fff]' to='/product'> All Show Product</Link>
+          </button>
         </div>
       </div>
     </div>

@@ -60,6 +60,10 @@ const Products = () => {
         ))}
       </select>
 
+        <button className='py-2 px-3 rounded shadow-2xl bg-green-500   hover:scale-95 hover:bg-green-600 capitalize no-underline'>
+                  <Link className='no-underline  text-[#fff]' to='/addproduct'> ADD Product & category </Link>
+                </button>
+
       <div className=' flex flex-wrap gap-y-10 gap-x-10 md:flex-row flex-col justify-center items-center'>
         {filteredProduct.map((eachProduct) => (
           <div key={eachProduct.product_id} className='justify-evenly items-center bg-gray-300 w-[400px] text-[20px] rounded-lg shadow-inner text-center flex flex-col  py-6 px-3  h-[400px]'>
@@ -70,6 +74,7 @@ const Products = () => {
           </div>
         ))}
       </div>
+     
     </div>
   );
 };
