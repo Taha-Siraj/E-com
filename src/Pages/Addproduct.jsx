@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { redirect } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import '../index.css'
 
 const Addproduct = () => {
@@ -95,6 +95,9 @@ const Addproduct = () => {
     return (
         <> 
            <div>
+             <button className='py-2 px-4 rounded shadow-2xl bg-green-500 border outline hover:scale-95 hover:bg-green-600 text-white capitalize no-underline'>
+                    <Link  className='no-underline text-xl font-semibold text-[#fff]' to='/Product'> Show Product</Link>
+                    </button>
                 <div className='font-poppins h-screen flex flex-col gap-y-5 md:flex-row justify-evenly items-center py-10 '>
                 <div className='h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize'>
                     <h1>add Product</h1>

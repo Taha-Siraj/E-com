@@ -48,7 +48,7 @@ const Products = () => {
       <h1>Products</h1>
 
       <button className='py-2 px-4 rounded shadow-2xl bg-green-500 border outline hover:scale-95 hover:bg-green-600 text-white capitalize no-underline'>
-        <Link  className='no-underline text-xl font-semibold text-[#fff]' to='/addProduct'> Add Product</Link>
+        <Link  className='no-underline text-xl font-semibold text-[#fff]' to='/addproduct'> Add Product</Link>
         </button>
       <select
         onChange={handleCategoryChange}

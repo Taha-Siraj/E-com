@@ -10,19 +10,28 @@ import Addproduct from '../Pages/Addproduct';
 
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
+
   if (loading) {
     return <div className="text-white text-2xl text-center p-8">Loading...</div>;
   }
 
   return (
     <Routes>
-      <Route path="/" element={state.isLogin ? <Home /> : <Navigate to="/login" replace />} />
-      <Route path="/login" element={state.isLogin ? <Navigate to="/" replace /> : <Login />} />
-      <Route path="/signup" element={state.isLogin ? <Navigate to="/" replace /> : <Signup />} />
-      <Route path="*" element={ <Navigate to='/login' /> } />
-      <Route path="/product" element={<Products/>} />
-      <Route path="/Categories" element={<Categories/>} />
-      <Route path="/Addproduct" element={<Addproduct/>} />
+      {state.isLogin ? (
+        <>
+          <Route path="/" element={<Home />} />
+          <Route path="/product" element={<Products />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/addproduct" element={<Addproduct />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </>
+      ) : (
+        <>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </>
+      )}
     </Routes>
   );
 };
