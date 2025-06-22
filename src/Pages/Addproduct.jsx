@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { redirect } from 'react-router-dom';
+import '../index.css'
 
 const Addproduct = () => {
 
@@ -19,7 +20,7 @@ const Addproduct = () => {
         description: ""
     })
     const handleChange = (e) => {
-        const { name, value } = e.target;
+    const { name, value } = e.target;
         setFormData((prev) => ({
             ...prev,
             [name]: value
@@ -28,7 +29,7 @@ const Addproduct = () => {
     }
 
     const addProduct = async () => {
-        const { productName, productImg, price, description, categoryId } = formData;
+    const { productName, productImg, price, description, categoryId } = formData;
         try {
             let res = await axios.post(`${baseURL}/products`, {
                 productName,
@@ -88,12 +89,15 @@ const Addproduct = () => {
             alert(error.response.data.message)
         }
     };
-
+ 
+    const [isOpen , setIsOpen ] = useState(false);
 
     const input = 'border outline-none py-2 px-4 font-poppins text-black'
     return (
-        <>
-            <div className='font-poppins h-screen flex flex-col gap-y-5 md:flex-row justify-evenly items-center py-10 '>
+        <> 
+        <button onClick={() => setIsOpen(!isOpen)} className='py-2 px-4 rounded-md border bg-gray-700 text-2xl text-white font-poppins ' >Open popup</button>
+           {isOpen ?  <div className='fixed top-0 left-0 right-0 ' id='galssbg'>
+                <div className='font-poppins h-screen flex flex-col gap-y-5 md:flex-row justify-evenly items-center py-10 '>
                 <div className='h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize'>
                     <h1>add Product</h1>
                     <input
@@ -149,6 +153,10 @@ const Addproduct = () => {
                     <button type='submit' onClick={addCategory} className={input}>Add category</button>
                 </div>
             </div>
+            </div>
+            :
+            null
+            }
         </>
     )
 }
