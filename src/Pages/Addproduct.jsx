@@ -4,6 +4,7 @@ import '../index.css'
 import { Toaster, toast } from 'sonner';
 import Products from './Products';
 import { Link, useNavigate } from 'react-router-dom';
+import Loader from './Loader';
 const Addproduct = () => {
 
     // const baseURL = 'http://localhost:5004';
@@ -21,6 +22,7 @@ const Addproduct = () => {
         categoryName: "",
         description: ""
     })
+    const [loading, setLoading] = useState(false)
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
@@ -32,6 +34,7 @@ const Addproduct = () => {
 
     const addProduct = async () => {
         const { productName, productImg, price, description, categoryId } = formData;
+        setLoading(true)
         try {
             let res = await axios.post(`${baseURL}/products`, {
                 productName,
@@ -48,10 +51,11 @@ const Addproduct = () => {
                 categoryId: "",
                 description: "",
             })
-            setTimeout(() => navigate("/product") , 1000)
+            setTimeout(() => navigate("/product") , 1500)
+            setLoading(false)
         } catch (error) {
             toast.error(error.response.data.message);
-
+            
         }
     }
     const handleCategory = (e) => {
@@ -68,15 +72,16 @@ const Addproduct = () => {
             setAllcategory(res2.data);
         } catch (error) {
             toast.error(error.response?.data?.message);
-
+            
         }
     }
     useEffect(() => {
         fetchCategory()
     }, [])
 
-
+    
     const addCategory = async () => {
+        setLoading(true)
         const { categoryName, description } = category;
         try {
             let res = await axios.post(`${baseURL}/category`, {
@@ -84,11 +89,13 @@ const Addproduct = () => {
                 description
             })
             fetchCategory();
-            console.log(res.data);
             setCategory({
                 categoryName: "",
                 description: ""
             })
+            console.log(res.data.message, "res.data.message");
+            toast.success(res.data.message); 
+            setLoading(false)
         } catch (error) {
             toast.error(error.response?.data?.message);
         }
@@ -134,7 +141,7 @@ const Addproduct = () => {
                             value={formData.description}
                             placeholder='Product description' name='description' className={input} onChange={handleChange} />
 
-                        <button type='submit' onClick={addProduct} className={btn}>Add Product</button>
+                        <button type='submit' onClick={addProduct} className={btn}>{loading ? <Loader/> : "Add Product"}</button>
                     </div>
 
                     <div className='h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize bg-gray-100 shadow-inner'>
@@ -154,7 +161,7 @@ const Addproduct = () => {
                             name='description'
                             onChange={handleCategory}
                         />
-                        <button type='submit' onClick={addCategory} className={btn}>Add category</button>
+                        <button type='submit' onClick={addCategory} className={btn}>{loading ? <Loader/> : "Add category"}</button>
                     </div>
                 </div>
 
