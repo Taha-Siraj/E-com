@@ -1,15 +1,23 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { redirect } from 'react-router-dom';
 
 const Addproduct = () => {
 
     const baseURL = 'http://localhost:5004';
+
+    const [allcategory, setAllcategory] = useState([]);
     const [formData, setFormData] = useState({
         productName: "",
         price: "",
         description: "",
         productImg: "",
         categoryId: ""
+    })
+
+    const [category, setCategory] = useState({
+        categoryName: "",
+        description: ""
     })
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -19,50 +27,129 @@ const Addproduct = () => {
         }))
         console.log(formData)
     }
+
     const addProduct = async () => {
+        const { productName, productImg, price, description, categoryId } = formData;
         try {
             let res = await axios.post(`${baseURL}/products`, {
-
+                productName,
+                productImg,
+                price,
+                categoryId,
+                description
+            })
+            console.log("added produce", res.data)
+            setFormData({
+                productImg: "",
+                productName: "",
+                price: "",
+                categoryId: "",
+                description: "",
             })
         } catch (error) {
-
+            alert(error.response.data.message)
         }
     }
+
+    const handleCategory = (e) => {
+        let { name, value } = e.target;
+        setCategory((prev) => ({
+            ...prev,
+            [name]: value
+        }))
+    };
+
+    const fetchCategory = async () => {
+        try {
+            const res2 = await axios.get(`${baseURL}/allcategories`);
+            setAllcategory(res2.data);
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
+    useEffect(() => {
+        fetchCategory()
+    }, [])
+
+
+    const addCategory = async () => {
+        const {categoryName , description} = category;
+        try {
+            let res = await axios.post(`${baseURL}/category`, {
+                categoryName,
+                description
+            })
+            fetchCategory();
+            console.log(res.data);
+            setCategory({
+                categoryName: "",
+                description: ""
+            })
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    };
+
+
     const input = 'border outline-none py-2 px-4 font-poppins text-black'
     return (
         <>
-        <div className='font-poppins'>
-            <div>
-            <h1>add Product</h1>
-            <input
-                type="text"
-                value={formData.productName}
-                placeholder='productName'
-                name='productName'
-                className={input}
-                onChange={handleChange} />
-            <input
+            <div className='font-poppins h-screen flex flex-col gap-y-5 md:flex-row justify-evenly items-center py-10 '>
+                <div className='h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize'>
+                    <h1>add Product</h1>
+                    <input
+                        type="text"
+                        value={formData.productName}
+                        placeholder='productName'
+                        name='productName'
+                        className={input}
+                        onChange={handleChange} />
+                    <input
+                        value={formData.productImg}
+                        type="text" placeholder='productImg' name='productImg' className={input} onChange={handleChange} />
+                    <input
+                        value={formData.price}
+                        type="number" placeholder='price' name='price' className={input} onChange={handleChange} />
+                    <select
+                        name='categoryId'
+                        value={formData.categoryId}
+                        onChange={handleChange}
+                        className={input} >
+                        <option value="">Select a category</option>
+                        {allcategory.map((cat) => (
+                            <option value={cat.category_id} key={cat.category_id} >
+                                {cat.category_name}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        type="text"
+                        value={formData.description}
+                        placeholder='description' name='description' className={input} onChange={handleChange} />
 
-                value={formData.productImg}
-                type="text" placeholder='productImg' name='productImg' className={input} onChange={handleChange} />
-            <input
-                value={formData.price}
-                type="number" placeholder='price' name='price' className={input} onChange={handleChange} />
-            <input
-                value={formData.categoryId}
-                type="number" placeholder='categoryId' name='categoryId' className={input} onChange={handleChange} />
-            <input
-                type="text"
-                value={formData.description}
-                placeholder='description' name='description' className={input} onChange={handleChange} />
-        </div>
+                    <button type='submit' onClick={addProduct} className={input}>Add Product</button>
+                </div>
 
-        <div>
-            <h1>category</h1>
-            <input type="text" placeholder='categoryName' className={input} />
-            <input type="text" placeholder='description' className={input} />
-        </div>
-        </div>
+                <div className=' flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize'>
+                    <h1>category</h1>
+                    <input type="text"
+                        placeholder='categoryName'
+                        className={input}
+                        name='categoryName'
+                        value={category.categoryName}
+                        onChange={handleCategory}
+                    />
+                    <input
+                        type="text"
+                        placeholder='description'
+                        className={input}
+                        value={category.description}
+                        name='description'
+                        onChange={handleCategory}
+                    />
+                    <button type='submit' onClick={addCategory} className={input}>Add category</button>
+                </div>
+            </div>
         </>
     )
 }
