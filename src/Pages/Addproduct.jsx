@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, redirect } from 'react-router-dom';
 import '../index.css'
-
+import { Toaster, toast } from 'sonner';
+import Products from './Products';
 const Addproduct = () => {
 
     const baseURL = 'http://localhost:5004';
@@ -46,8 +47,9 @@ const Addproduct = () => {
                 categoryId: "",
                 description: "",
             })
-        } catch (error) {
-            alert(error.response.data.message)
+        } catch (error) {         
+        toast.error(error.response.data.message);
+
         }
     }
 
@@ -64,8 +66,9 @@ const Addproduct = () => {
             const res2 = await axios.get(`${baseURL}/allcategories`);
             setAllcategory(res2.data);
         } catch (error) {
-            alert(error.response.data.message)
-        }
+              toast.error(error.response?.data?.message);
+              
+            }
     }
     useEffect(() => {
         fetchCategory()
@@ -86,21 +89,20 @@ const Addproduct = () => {
                 description: ""
             })
         } catch (error) {
-            alert(error.response.data.message)
+            toast.error(error.response?.data?.message);
         }
     };
  
 
-    const input = 'border outline-none py-2 px-4 font-poppins text-black'
+    const input = 'border rounded-md outline-none py-3 px-4 font-poppins text-black w-full'
+    const btn = 'py-2 px-4 text-white rounded bg-green-500 active:scale-95 transition duration-2'; 
     return (
         <> 
            <div>
-             <button className='py-2 px-4 rounded shadow-2xl bg-green-500 border outline hover:scale-95 hover:bg-green-600 text-white capitalize no-underline'>
-                    <Link  className='no-underline text-xl font-semibold text-[#fff]' to='/Product'> Show Product</Link>
-                    </button>
+            <Toaster position="top-center" richColors />
                 <div className='font-poppins h-screen flex flex-col gap-y-5 md:flex-row justify-evenly items-center py-10 '>
-                <div className='h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize'>
-                    <h1>add Product</h1>
+                <div className='bg-gray-100 min:h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize' >
+                    <h1  className='text-green-500 font-semibold '>add Product</h1>
                     <input
                         type="text"
                         value={formData.productName}
@@ -131,29 +133,30 @@ const Addproduct = () => {
                         value={formData.description}
                         placeholder='Product description' name='description' className={input} onChange={handleChange} />
 
-                    <button type='submit' onClick={addProduct} className={input}>Add Product</button>
+                    <button type='submit' onClick={addProduct} className={btn}>Add Product</button>
                 </div>
 
-                <div className=' flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize'>
-                    <h1>category</h1>
+                <div className='h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize bg-gray-100 shadow-inner'>
+                    <h1 className='text-green-500 font-semibold '>category</h1>
                     <input type="text"
-                        placeholder='categoryName'
+                        placeholder='Category Name'
                         className={input}
                         name='categoryName'
                         value={category.categoryName}
                         onChange={handleCategory}
                     />
-                    <input
+                    <textarea
                         type="text"
-                        placeholder='description'
+                        placeholder='Category Description'
                         className={input}
                         value={category.description}
                         name='description'
                         onChange={handleCategory}
                     />
-                    <button type='submit' onClick={addCategory} className={input}>Add category</button>
+                    <button type='submit' onClick={addCategory} className={btn}>Add category</button>
                 </div>
             </div>
+            <Products/>
             </div>
             
         </>
