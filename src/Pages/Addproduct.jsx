@@ -5,7 +5,6 @@ import { redirect } from 'react-router-dom';
 const Addproduct = () => {
 
     const baseURL = 'http://localhost:5004';
-
     const [allcategory, setAllcategory] = useState([]);
     const [formData, setFormData] = useState({
         productName: "",
