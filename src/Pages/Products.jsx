@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
+import Loader from './Loader';
 const Products = () => {
   // let baseUrl = 'http://localhost:5004'
   let baseUrl = 'https://server-ecom-rho.vercel.app';
@@ -9,6 +10,7 @@ const Products = () => {
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setAllcategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [loading , setloading] = useState(true);
   
   const getProduct = async () => {
     try {
@@ -30,7 +32,7 @@ const Products = () => {
   }
 
   useEffect(() => {
-    getProduct();
+    getProduct().finally(() => setloading(false));
   }, []);
 
   const handleCategoryChange = (e) => {
@@ -45,7 +47,11 @@ const Products = () => {
   };
   
   return (
-    <div className='font-poppins flex flex-col justify-center items-center gap-y-3 py-3'>
+   <>
+   {loading ?
+   <Loader/>
+   :
+  <div className='font-poppins flex flex-col justify-center items-center gap-y-3 py-3'>
        <Toaster position="top-center" richColors />
       <h1 className='text-5xl text-green-700 font-semibold font-poppins' >Products</h1>
       <select
@@ -76,6 +82,8 @@ const Products = () => {
       </div>
      
     </div>
+   }
+   </>
   );
 };
 
