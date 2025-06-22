@@ -90,13 +90,11 @@ const Addproduct = () => {
         }
     };
  
-    const [isOpen , setIsOpen ] = useState(false);
 
     const input = 'border outline-none py-2 px-4 font-poppins text-black'
     return (
         <> 
-        <button onClick={() => setIsOpen(!isOpen)} className='py-2 px-4 rounded-md border bg-gray-700 text-2xl text-white font-poppins ' >Open popup</button>
-           {isOpen ?  <div className='fixed top-0 left-0 right-0 ' id='galssbg'>
+           <div>
                 <div className='font-poppins h-screen flex flex-col gap-y-5 md:flex-row justify-evenly items-center py-10 '>
                 <div className='h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize'>
                     <h1>add Product</h1>
@@ -154,9 +152,7 @@ const Addproduct = () => {
                 </div>
             </div>
             </div>
-            :
-            null
-            }
+            
         </>
     )
 }

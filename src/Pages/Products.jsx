@@ -8,7 +8,7 @@ const Products = () => {
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setAllcategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
-
+  
   const getProduct = async () => {
     try {
       const res1 = await axios.get(`${baseUrl}/allproducts`);
