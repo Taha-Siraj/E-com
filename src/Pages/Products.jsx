@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 const Products = () => {
-  let baseUrl = 'http://localhost:5004'
+  // let baseUrl = 'http://localhost:5004'
+  let baseUrl = 'https://server-ecom-rho.vercel.app';
   const [allProduct, setAllProduct] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setAllcategory] = useState([]);

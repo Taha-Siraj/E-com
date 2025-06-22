@@ -11,8 +11,8 @@ import './home.css'
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const navigate = useNavigate();
-  //  const baseUrl = 'https://server-ecom-rho.vercel.app';
-  const baseUrl = 'http://localhost:5004';
+   const baseUrl = 'https://server-ecom-rho.vercel.app';
+  // const baseUrl = 'http://localhost:5004';
   const handleLogout = async () => {
     try {
       let res = await axios.post(`${baseUrl}/logout`, {},
@@ -56,9 +56,6 @@ const Home = () => {
             className="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-300"
           >
             Logout
-          </button>
-          <button className='py-2 px-3 rounded  bg-green-500   hover:scale-95 hover:bg-green-600 text-white capitalize no-underline'>
-            <Link className='no-underline   text-[#fff]' to='/product'> Show Product</Link>
           </button>
            <button className='py-2 px-3 rounded shadow-2xl bg-green-500   hover:scale-95 hover:bg-green-600 capitalize no-underline'>
             <Link className='no-underline  text-[#fff]' to='/addproduct'> Add Product</Link>

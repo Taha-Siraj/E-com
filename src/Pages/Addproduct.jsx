@@ -6,7 +6,8 @@ import { Toaster, toast } from 'sonner';
 import Products from './Products';
 const Addproduct = () => {
 
-    const baseURL = 'http://localhost:5004';
+    // const baseURL = 'http://localhost:5004';
+    const baseURL = 'https://server-ecom-rho.vercel.app';
     const [allcategory, setAllcategory] = useState([]);
     const [formData, setFormData] = useState({
         productName: "",
@@ -39,7 +40,18 @@ const Addproduct = () => {
                 categoryId,
                 description
             })
-            console.log("added produce", res.data)
+            console.log(res.data)
+            const getProduct = async () => {
+            try {
+            const res1 = await axios.get(`${baseUrl}/allproducts`);
+            const res2 = await axios.get(`${baseUrl}/allcategories`);
+            console.log(res1.data ,res2.data);
+            } catch (error) {
+            toast.error(error.response?.data?.message);
+            }
+           }
+           getProduct()
+            toast.success(" SuccesFully Added Product");
             setFormData({
                 productImg: "",
                 productName: "",
@@ -48,7 +60,7 @@ const Addproduct = () => {
                 description: "",
             })
         } catch (error) {         
-        toast.error(error.response.data.message);
+           toast.error(error.response.data.message);
 
         }
     }
