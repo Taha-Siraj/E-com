@@ -6,6 +6,7 @@ import Home from '../Pages/Home';
 import { GlobalContext } from '../Context/Context';
 import Products from '../Pages/Products';
 import Categories from '../Categories';
+import Addproduct from '../Pages/Addproduct';
 
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
@@ -21,6 +22,7 @@ const CustomRoutes = () => {
       <Route path="*" element={ <Navigate to='/login' /> } />
       <Route path="/product" element={<Products/>} />
       <Route path="/Categories" element={<Categories/>} />
+      <Route path="/Addproduct" element={<Addproduct/>} />
     </Routes>
   );
 };
