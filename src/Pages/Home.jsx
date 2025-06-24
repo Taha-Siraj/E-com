@@ -7,11 +7,10 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import './home.css'
 
-
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const navigate = useNavigate();
-   const baseUrl = 'https://server-ecom-rho.vercel.app';
+  const baseUrl = 'https://server-ecom-rho.vercel.app';
   // const baseUrl = 'http://localhost:5004';
   const handleLogout = async () => {
     try {
@@ -39,7 +38,6 @@ const Home = () => {
       duration: 1,
     })
   })
-
   return (
     <div id='home' className="font-poppins min-h-screen flex items-center justify-center px-4">
       <div id='home-user' className="rounded-xl p-10 max-w-xl w-full text-center">
@@ -57,10 +55,10 @@ const Home = () => {
           >
             Logout
           </button>
-           <button className='py-2 px-3 rounded shadow-2xl bg-green-500   hover:scale-95 hover:bg-green-600 capitalize no-underline'>
+          <button className='py-2 px-3 rounded shadow-2xl bg-green-500   hover:scale-95 hover:bg-green-600 capitalize no-underline'>
             <Link className='no-underline  text-[#fff]' to='/addproduct'> Add Product</Link>
           </button>
-           <button className='py-2 px-3 rounded shadow-2xl bg-green-500   hover:scale-95 hover:bg-green-600 capitalize no-underline'>
+          <button className='py-2 px-3 rounded shadow-2xl bg-green-500   hover:scale-95 hover:bg-green-600 capitalize no-underline'>
             <Link className='no-underline  text-[#fff]' to='/product'> All Show Product</Link>
           </button>
         </div>
