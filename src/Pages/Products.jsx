@@ -41,7 +41,7 @@ const Products = () => {
     if (!selected) {
       setFilteredProduct(allProduct);
     } else {
-      const filtered = allProduct.filter(prod => String(prod.category_id) === String(selected));
+      const filtered = allProduct.filter(prod => String(prod.category_name) === String(selected));
       setFilteredProduct(filtered);
     }
   };
@@ -60,7 +60,7 @@ const Products = () => {
         className='py-2 px-3 border rounded-md outline-none'>
         <option value="">All Categories</option>
         {category.map((eachcategory) => (
-          <option value={eachcategory?.category_id} key={eachcategory.category_id}>
+          <option value={eachcategory?.category_name} key={eachcategory.category_id}>
             {eachcategory?.category_name}
           </option>
         ))}
@@ -77,6 +77,7 @@ const Products = () => {
             <p className='text-xl capitalize font-semibold text-neutral-600' >product Name:  {eachProduct?.product_name}</p>
             <p className='text-[17px] font-thin'>{eachProduct?.description}</p>
             <p className='text-green-500 capitalize ' >price: {eachProduct?.price}</p>
+            <p className='text-green-500 capitalize ' >price: {eachProduct?.category_name}</p>
           </div>
         ))}
       </div>
