@@ -14,18 +14,16 @@ const Products = () => {
 
   const getProduct = async () => {
     try {
-      const res1 = await axios.get(`${baseUrl}/allproducts`);
-      setAllProduct(res1.data);
-      setFilteredProduct(res1.data);
+      // Products aur Categories ko ek saath fetch karein
+      const [productsRes, categoriesRes] = await Promise.all([
+        axios.get(`${baseUrl}/allproducts`),
+        axios.get(`${baseUrl}/allcategories`)
+      ]);
+      setAllProduct(productsRes.data);
+      setFilteredProduct(productsRes.data);
+      setAllcategory(categoriesRes.data);
     } catch (error) {
-      toast.error(error.response?.data?.message);
-    }
-
-    try {
-      const res2 = await axios.get(`${baseUrl}/allcategories`);
-      setAllcategory(res2.data);
-    } catch (error) {
-      toast.error(error.response?.data?.message);
+      toast.error(error.response?.data?.message || 'Failed to fetch data');
     }
   };
 
@@ -50,51 +48,84 @@ const Products = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className='font-poppins py-6 px-4 md:px-8'>
-          <div className='text-center mb-6'>
-            <h1 className='text-4xl md:text-5xl font-bold text-green-700 mb-4'>All Products</h1>
-            <div className='flex flex-col sm:flex-row justify-center items-center gap-4'>
-              <select
-                onChange={handleCategoryChange}
-                value={selectedCategory}
-                className='px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition'
-              >
-                <option value="">All Categories</option>
-                {category.map((eachcategory) => (
-                  <option value={eachcategory?.category_name} key={eachcategory.category_id}>
-                    {eachcategory?.category_name}
-                  </option>
-                ))}
-              </select>
+        // Main container
+        <div className='font-poppins bg-gray-50 min-h-screen'>
+          <div className='max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8'>
 
-              <Link
-                to='/addproduct'
-                className='bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md font-medium shadow-md transition transform hover:scale-95'
-              >
-                Add Product & Category
-              </Link>
-            </div>
-          </div>
+            {/* Header: Title and Controls */}
+            <div className='flex flex-col md:flex-row md:justify-between md:items-center gap-6 mb-8'>
+              <h1 className='text-3xl lg:text-4xl font-bold text-gray-800 text-center md:text-left'>
+                Our Products
+              </h1>
+              <div className='flex flex-col sm:flex-row items-center justify-center gap-4'>
+                <select
+                  onChange={handleCategoryChange}
+                  value={selectedCategory}
+                  className='w-full sm:w-auto px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300'
+                >
+                  <option value="">All Categories</option>
+                  {category.map((eachcategory) => (
+                    <option value={eachcategory?.category_name} key={eachcategory.category_id}>
+                      {eachcategory?.category_name}
+                    </option>
+                  ))}
+                </select>
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center items-stretch'>
-            {filteredProduct.map((eachProduct) => (
-              <div
-                key={eachProduct.product_id}
-                className='bg-white/80 backdrop-blur-lg border border-gray-200 rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition'
-              >
-                <img
-                  src={eachProduct?.product_img}
-                  alt="img"
-                  className='w-[150px] h-[200px] object-contain rounded-lg mb-4 shadow-md'
-                />
-                <h2 className='text-xl font-semibold text-gray-800 mb-1 capitalize'>
-                  {eachProduct?.product_name}
-                </h2>
-                <p className= 'py-1 text-green-600 font-bold'>Price: Rs. {eachProduct?.price}</p>
-                <p className='py-1 text-sm text-gray-600 mb-2'>{eachProduct?.description}</p>
-                <p className='py-1 text-sm text-gray-700 mt-1'>Category: {eachProduct?.category_name}</p>
+                <Link
+                  to='/addproduct'
+                  className='w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg font-semibold shadow-md transition-all duration-300 transform hover:-translate-y-0.5'
+                >
+                  Add Product
+                </Link>
               </div>
-            ))}
+            </div>
+
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8'>
+              {filteredProduct.map((eachProduct) => (
+                <div
+                  key={eachProduct.product_id}
+                  className='bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col overflow-hidden group'
+                >
+                  <div className='relative'>
+                    <img
+                      src={eachProduct?.product_img}
+                      alt={eachProduct?.product_name}
+                      className='w-full h-56 object-cover'
+                    />
+                     <div className='absolute top-2 right-2 bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full'>
+                        {eachProduct?.category_name}
+                    </div>
+                  </div>
+
+                  <div className='p-5 flex flex-col flex-grow'>
+                    <h2 className='text-lg font-bold text-gray-800 truncate' title={eachProduct?.product_name}>
+                      {eachProduct?.product_name}
+                    </h2>
+                    <p className='text-sm text-gray-600 mt-1 mb-4 flex-grow'>
+                      {eachProduct?.description}
+                    </p>
+
+                    <div className='mt-auto flex items-center justify-between'>
+                      <p className='text-xl font-semibold text-gray-900'>
+                        Rs. {eachProduct?.price}
+                      </p>
+                       <button className='bg-gray-200 text-gray-800 hover:bg-indigo-500 hover:text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300'>
+                         Add
+                       </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Agar koi product na ho to message dikhayein */}
+            {filteredProduct.length === 0 && (
+                <div className='text-center py-20'>
+                    <h2 className='text-2xl font-semibold text-gray-700'>No Products Found</h2>
+                    <p className='text-gray-500 mt-2'>Please try selecting a different category.</p>
+                </div>
+            )}
+
           </div>
         </div>
       )}

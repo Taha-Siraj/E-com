@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <>
  
-    <div id='home' className="font-poppins">
+    <div className="font-poppins">
           <div className='h-[70px] flex justify-between px-10 items-center font-poppins top-5 left-0 right-0 sticky z-10 mx-5 border-[0.2px]  border-[#99999973] rounded-2xl ' id='nav'>
       <div className='h-full py-1 flex justify-center items-center font-poppins'>
       <h1 className='text-2xl text-red-400'>E-Commerce</h1>
