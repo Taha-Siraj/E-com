@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../Context/Context';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import axios from 'axios';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
 import './home.css'
 import Products from './Products';
 
@@ -30,15 +28,6 @@ const Home = () => {
     }
   };
 
-  // useGSAP(() => {
-  //   gsap.from("#home-user", {
-  //     scale: 1.5,
-  //     y: -200,
-  //     rotate: 300,
-  //     opacity: 0,
-  //     duration: 1,
-  //   })
-  // })
   return (
     <div id='home' className="font-poppins  flex items-center justify-center px-4">
       <Products/>
