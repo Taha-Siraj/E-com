@@ -14,7 +14,6 @@ const Products = () => {
 
   const getProduct = async () => {
     try {
-      // Products aur Categories ko ek saath fetch karein
       const [productsRes, categoriesRes] = await Promise.all([
         axios.get(`${baseUrl}/allproducts`),
         axios.get(`${baseUrl}/allcategories`)
@@ -48,11 +47,9 @@ const Products = () => {
       {loading ? (
         <Loader />
       ) : (
-        // Main container
         <div className='font-poppins bg-gray-50 min-h-screen'>
           <div className='max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8'>
 
-            {/* Header: Title and Controls */}
             <div className='flex flex-col md:flex-row md:justify-between md:items-center gap-6 mb-8'>
               <h1 className='text-3xl lg:text-4xl font-bold text-gray-800 text-center md:text-left'>
                 Our Products
@@ -101,12 +98,12 @@ const Products = () => {
                     <h2 className='text-lg font-bold text-gray-800 truncate' title={eachProduct?.product_name}>
                       {eachProduct?.product_name}
                     </h2>
-                    <p className='text-sm text-gray-600 mt-1 mb-4 flex-grow'>
+                    <p className='text-sm text-start text-gray-600 mt-1 mb-4 flex-grow'>
                       {eachProduct?.description}
                     </p>
 
                     <div className='mt-auto flex items-center justify-between'>
-                      <p className='text-xl font-semibold text-gray-900'>
+                      <p className='py-2 text-xl font-semibold text-gray-900'>
                         Rs. {eachProduct?.price}
                       </p>
                        <button className='bg-gray-200 text-gray-800 hover:bg-indigo-500 hover:text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300'>
@@ -118,7 +115,6 @@ const Products = () => {
               ))}
             </div>
             
-            {/* Agar koi product na ho to message dikhayein */}
             {filteredProduct.length === 0 && (
                 <div className='text-center py-20'>
                     <h2 className='text-2xl font-semibold text-gray-700'>No Products Found</h2>
