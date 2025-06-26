@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import './home.css'
+import Products from './Products';
 
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -40,23 +41,7 @@ const Home = () => {
   // })
   return (
     <div id='home' className="font-poppins min-h-screen flex items-center justify-center px-4">
-      <div id='home-user' className="rounded-xl p-10 max-w-xl w-full text-center">
-        <h1 className="text-4xl font-bold text-gray-100 mb-4">
-          Welcome, {`${state.user.user.first_name} ${state.user.user.last_name}`}! 🎉
-        </h1>
-        <p className="text-gray-200 mb-8">
-          You have successfully logged in to the E-Commerce App.
-        </p>
-
-        <div className="flex justify-center gap-4 items-center">
-          <button
-            onClick={handleLogout}
-            className="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-300"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
+      <Products/>
     </div>
   );
 };
