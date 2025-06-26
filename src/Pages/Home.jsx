@@ -32,7 +32,7 @@ const Home = () => {
     <>
  
     <div id='home' className="font-poppins">
-          <div className='h-[70px] flex bg-gray-400  justify-between px-10 items-center font-poppins top-0 left-0 right-0 sticky z-10' id='nav'>
+          <div className='h-[70px] flex justify-between px-10 items-center font-poppins top-0 left-0 right-0 sticky z-10' id='nav'>
       <div className='h-full py-1'>
           <img src="/logo.png" className='h-full'  alt="" />
       </div>
