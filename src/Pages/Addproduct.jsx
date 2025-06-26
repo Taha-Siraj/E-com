@@ -5,8 +5,8 @@ import { Toaster, toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 const Addproduct = () => {
 
-    const baseURL = 'http://localhost:5004';
-    // const baseURL = 'https://server-ecom-rho.vercel.app';
+    // const baseURL = 'http://localhost:5004';
+    const baseURL = 'https://server-ecom-rho.vercel.app';
     const [allcategory, setAllcategory] = useState([]);
     const [formData, setFormData] = useState({
         productName: "",
