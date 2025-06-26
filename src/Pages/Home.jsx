@@ -118,7 +118,7 @@ const Home = () => {
               <br />
               <span className="text-indigo-600">
                 <Typewriter
-                  words={['Gadget', 'Outfit', 'Book', 'Item']}
+                  words={['computer electronics', 'Outfit', 'Mobile Phone', 'Explore Products', "All Collection" ]}
                   loop={true}
                   cursor
                   cursorStyle='_'
