@@ -72,7 +72,7 @@ const Products = () => {
 
       <div className=' flex flex-wrap gap-y-10 gap-x-10 md:flex-row flex-col justify-center items-center'>
         {filteredProduct.map((eachProduct) => (
-          <div key={eachProduct.product_id} className='justify-evenly items-center bg-gray-300 w-[400px] text-[20px] rounded-lg shadow-inner text-center flex flex-col  py-6 px-3  h-[400px]'>
+          <div key={eachProduct.product_id} className='justify-evenly items-center bg-gray-300 w-[400px] text-[20px] rounded-lg shadow-inner text-center flex flex-col  py-6 px-3  h-[400px]' id='home-user'>
             <img src={eachProduct?.product_img} className='drop-shadow-2xl rounded-lg' alt="img" width={150} height={200} />
             <p className='text-xl capitalize font-semibold text-neutral-600' >product Name:  {eachProduct?.product_name}</p>
             <p className='text-[17px] font-thin'>{eachProduct?.description}</p>

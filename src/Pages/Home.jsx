@@ -40,7 +40,7 @@ const Home = () => {
   //   })
   // })
   return (
-    <div id='home' className="font-poppins min-h-screen flex items-center justify-center px-4">
+    <div id='home' className="font-poppins  flex items-center justify-center px-4">
       <Products/>
     </div>
   );
