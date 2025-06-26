@@ -47,14 +47,15 @@ const Addproduct = () => {
                 categoryId: "",
                 description: "",
             })
-            setTimeout(() => navigate("/product") , 1500)
+            setTimeout(() => navigate("/product"), 1500)
         } catch (error) {
             toast.error(error.response.data.message);
-            
+
         }
     }
     const handleCategory = (e) => {
         let { name, value } = e.target;
+        console.log(name, value)
         setCategory((prev) => ({
             ...prev,
             [name]: value
@@ -67,14 +68,14 @@ const Addproduct = () => {
             setAllcategory(res2.data);
         } catch (error) {
             toast.error(error.response?.data?.message);
-            
+
         }
     }
     useEffect(() => {
         fetchCategory()
     }, [])
 
-    
+
     const addCategory = async () => {
         const { categoryName, description } = category;
         try {
@@ -88,21 +89,21 @@ const Addproduct = () => {
                 description: ""
             })
             console.log(res.data.message, "res.data.message");
-            toast.success(res.data.message); 
+            toast.success(res.data.message);
         } catch (error) {
             toast.error(error.response?.data?.message);
         }
     };
 
 
-    const input = 'border rounded-md outline-none py-3 px-4 font-poppins text-black w-full'
+    const input = 'bg-gray-700  border-[#dadada3f]  capitalize text-[18px] border-[0.5px] rounded-md outline-none py-3 px-4 font-poppins text-gray-300 w-full'
     const btn = 'py-2 px-4 text-white rounded bg-green-500 active:scale-95 transition duration-2';
     return (
         <>
-            <div>
+            <div className='bg-slate-800 font-poppins'>
                 <Toaster position="top-center" richColors />
                 <div className='font-poppins h-screen flex flex-col gap-y-5 md:flex-row justify-evenly items-center py-10 '>
-                    <div className='bg-gray-100 min:h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize' >
+                    <div id='nav' className='border-[0.5px] min:h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border-[#dadada3f] rounded-lg capitalize' >
                         <h1 className='text-green-500 font-semibold '>add Product</h1>
                         <input
                             type="text"
@@ -137,7 +138,7 @@ const Addproduct = () => {
                         <button type='submit' onClick={addProduct} className={btn}>Add product</button>
                     </div>
 
-                    <div className='h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border rounded-md capitalize bg-gray-100 shadow-inner'>
+                    <div className='border-[0.5px] border-[#dadada36] h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4  rounded-md capitalize bg-gray-100 shadow-inner' id='nav'>
                         <h1 className='text-green-500 font-semibold '>category</h1>
                         <input type="text"
                             placeholder='Category Name'
@@ -158,6 +159,28 @@ const Addproduct = () => {
                     </div>
                 </div>
 
+                <div className='flex justify-center items-center py-6'  >
+                    <table className='border px-2 py-2'>
+                        <thead>
+                            <tr>
+                                <th className='p-3 border  text-xl uppercase text-yellow-900 text-center' >Category id</th >
+                                <th className='p-3 border  text-xl uppercase text-yellow-900 text-center' >Category Name</th >
+                                <th className='p-3 border text-xl uppercase text-yellow-900 text-center' >Description</th >
+                            </tr>
+                        </thead>
+                                <tbody>
+                    {allcategory.map((eachCategory , i) => {
+                        return(
+                        <tr>
+                            <td   className='p-3  border text-xl font-poppins capitalize text-center text-green-600'>{eachCategory?.category_id}</td>
+                            <td   className='p-3  border text-xl font-poppins capitalize text-center text-cyan-400 '>{eachCategory?.category_name}</td>
+                            <td  className='text-cyan-400 p-3 border text-xl font-poppins capitalize text-center' >{eachCategory?.description}</td>
+                        </tr>
+                        )
+                    })}
+                    </tbody>
+                    </table>
+                </div>
             </div>
 
         </>
