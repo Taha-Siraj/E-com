@@ -100,7 +100,7 @@ const Addproduct = () => {
     const btn = 'py-2 px-4 text-white rounded bg-green-500 active:scale-95 transition duration-2';
     return (
         <>
-            <div className='bg-slate-800 font-poppins'>
+            <div className='min:h-screen bg-slate-800 font-poppins'>
                 <Toaster position="top-center" richColors />
                 <div className='font-poppins h-screen flex flex-col gap-y-5 md:flex-row justify-evenly items-center py-10 '>
                     <div id='nav' className='border-[0.5px] min:h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border-[#dadada3f] rounded-lg capitalize' >
@@ -171,7 +171,7 @@ const Addproduct = () => {
                                 <tbody>
                     {allcategory.map((eachCategory , i) => {
                         return(
-                        <tr>
+                        <tr key={i}>
                             <td   className='p-3  border text-xl font-poppins capitalize text-center text-green-600'>{eachCategory?.category_id}</td>
                             <td   className='p-3  border text-xl font-poppins capitalize text-center text-cyan-400 '>{eachCategory?.category_name}</td>
                             <td  className='text-cyan-400 p-3 border text-xl font-poppins capitalize text-center' >{eachCategory?.description}</td>
