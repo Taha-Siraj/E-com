@@ -32,9 +32,9 @@ const Home = () => {
     <>
  
     <div id='home' className="font-poppins">
-          <div className='h-[70px] flex justify-between px-10 items-center font-poppins top-0 left-0 right-0 sticky z-10' id='nav'>
+          <div className='h-[70px] flex justify-between px-10 items-center font-poppins top-0 left-0 right-0 sticky z-10 mx-5 rounded-2xl border ' id='nav'>
       <div className='h-full py-1'>
-          <img src="/logo.png" className='h-full'  alt="" />
+          Ecommerce
       </div>
       <div className=' flex text-xl justify-center items-center gap-x-5'>
         <Link to='/home' className='no-underline text-gray-200 hover:text-gray-600 transition duration-75' >Home</Link>
