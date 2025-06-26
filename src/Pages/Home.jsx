@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import './home.css'
 import Products from './Products';
-
+import { Typewriter } from 'react-simple-typewriter';
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const navigate = useNavigate();
@@ -32,13 +32,22 @@ const Home = () => {
     <>
  
     <div id='home' className="font-poppins">
-          <div className='h-[70px] flex justify-between px-10 items-center font-poppins top-0 left-0 right-0 sticky z-10 mx-5 rounded-2xl border ' id='nav'>
-      <div className='h-full py-1'>
-          Ecommerce
+          <div className='h-[70px] flex justify-between px-10 items-center font-poppins top-5 left-0 right-0 sticky z-10 mx-5 border-[0.2px]  rounded-2xl ' id='nav'>
+      <div className='h-full py-1 flex justify-center items-center font-poppins'>
+          <span className='text-3xl font-semibold text-gray-300'>
+        <Typewriter
+          words={['Ecommerce Websites']}
+          loop={0}
+          typeSpeed={70}
+          deleteSpeed={50}
+          delaySpeed={1000}
+        />
+        </span>
       </div>
       <div className=' flex text-xl justify-center items-center gap-x-5'>
         <Link to='/home' className='no-underline text-gray-200 hover:text-gray-600 transition duration-75' >Home</Link>
         <Link to='/product' className='no-underline text-gray-200 hover:text-gray-600 transition duration-75 '>products</Link>
+        <Link to='/category' className='no-underline text-gray-200 hover:text-gray-600 transition duration-75 '>category</Link>
       </div>
     </div>
       <Products/>
