@@ -1,35 +1,33 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import Loader from './Loader';
+
 const Products = () => {
-  // let baseUrl = 'http://localhost:5004'
-  let baseUrl = 'https://server-ecom-rho.vercel.app';
+  const baseUrl = 'https://server-ecom-rho.vercel.app';
   const [allProduct, setAllProduct] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setAllcategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [loading , setloading] = useState(true);
-  
+  const [loading, setloading] = useState(true);
+
   const getProduct = async () => {
     try {
       const res1 = await axios.get(`${baseUrl}/allproducts`);
       setAllProduct(res1.data);
       setFilteredProduct(res1.data);
-      console.log(res1.data)
     } catch (error) {
       toast.error(error.response?.data?.message);
     }
-    
+
     try {
       const res2 = await axios.get(`${baseUrl}/allcategories`);
       setAllcategory(res2.data);
-      console.log(res2.data)
     } catch (error) {
       toast.error(error.response?.data?.message);
     }
-  }
+  };
 
   useEffect(() => {
     getProduct().finally(() => setloading(false));
@@ -45,46 +43,62 @@ const Products = () => {
       setFilteredProduct(filtered);
     }
   };
-  
+
   return (
-   <>
-   {loading ?
-   <Loader/>
-   :
-  <div className='font-poppins flex flex-col justify-center items-center gap-y-3 py-3'>
-       <Toaster position="top-center" richColors />
-      <h1 className='text-5xl text-green-700 font-semibold font-poppins' >Products</h1>
-      <select
-        onChange={handleCategoryChange}
-        value={selectedCategory}
-        className='py-2 px-3 border rounded-md outline-none'>
-        <option value="">All Categories</option>
-        {category.map((eachcategory) => (
-          <option value={eachcategory?.category_name} key={eachcategory.category_id}>
-            {eachcategory?.category_name}
-          </option>
-        ))}
-      </select>
+    <>
+      <Toaster position="top-center" richColors />
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className='font-poppins py-6 px-4 md:px-8'>
+          <div className='text-center mb-6'>
+            <h1 className='text-4xl md:text-5xl font-bold text-green-700 mb-4'>All Products</h1>
+            <div className='flex flex-col sm:flex-row justify-center items-center gap-4'>
+              <select
+                onChange={handleCategoryChange}
+                value={selectedCategory}
+                className='px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition'
+              >
+                <option value="">All Categories</option>
+                {category.map((eachcategory) => (
+                  <option value={eachcategory?.category_name} key={eachcategory.category_id}>
+                    {eachcategory?.category_name}
+                  </option>
+                ))}
+              </select>
 
-        <button className='py-2 px-3 rounded shadow-2xl bg-green-500   hover:scale-95 hover:bg-green-600 capitalize no-underline'>
-                  <Link className='no-underline  text-[#fff]' to='/addproduct'> ADD Product & category </Link>
-                </button>
-
-      <div className=' flex flex-wrap gap-y-10 gap-x-10 md:flex-row flex-col justify-center items-center'>
-        {filteredProduct.map((eachProduct) => (
-          <div key={eachProduct.product_id} className='justify-evenly items-center bg-gray-300 w-[400px] text-[20px] rounded-lg shadow-inner text-center flex flex-col  py-6 px-3  h-[400px]' id='home-user'>
-            <img src={eachProduct?.product_img} className='drop-shadow-2xl rounded-lg' alt="img" width={150} height={200} />
-            <p className='text-xl capitalize font-semibold text-neutral-600' >product Name:  {eachProduct?.product_name}</p>
-            <p className='text-[17px] font-thin'>{eachProduct?.description}</p>
-            <p className='text-green-500 capitalize ' >price: {eachProduct?.price}</p>
-            <p className='text-green-500 capitalize ' >price: {eachProduct?.category_name}</p>
+              <Link
+                to='/addproduct'
+                className='bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md font-medium shadow-md transition transform hover:scale-95'
+              >
+                Add Product & Category
+              </Link>
+            </div>
           </div>
-        ))}
-      </div>
-     
-    </div>
-   }
-   </>
+
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center items-stretch'>
+            {filteredProduct.map((eachProduct) => (
+              <div
+                key={eachProduct.product_id}
+                className='bg-white/80 backdrop-blur-lg border border-gray-200 rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition'
+              >
+                <img
+                  src={eachProduct?.product_img}
+                  alt="img"
+                  className='w-[150px] h-[200px] object-contain rounded-lg mb-4 shadow-md'
+                />
+                <h2 className='text-xl font-semibold text-gray-800 mb-1 capitalize'>
+                  {eachProduct?.product_name}
+                </h2>
+                <p className= 'py-1 text-green-600 font-bold'>Price: Rs. {eachProduct?.price}</p>
+                <p className='py-1 text-sm text-gray-600 mb-2'>{eachProduct?.description}</p>
+                <p className='py-1 text-sm text-gray-700 mt-1'>Category: {eachProduct?.category_name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
