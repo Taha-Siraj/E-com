@@ -53,7 +53,7 @@ const App = () => {
                 productImg: "",
                 categoryId: ""
             });
-            setTimeout(() => {Navigate("/product")} , 1500)
+            setTimeout(() => {navigate("/product")} , 1500)
         } catch (error) {
             toast.error(error.response?.data?.message || "Error adding product.");
             console.error("Add Product Error:", error);
