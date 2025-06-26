@@ -1,190 +1,177 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import '../index.css'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Toaster, toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
-const Addproduct = () => {
+import {  useNavigate } from 'react-router-dom';
+const App = () => {
 
-    // const baseURL = 'http://localhost:5004';
     const baseURL = 'https://server-ecom-rho.vercel.app';
+
     const [allcategory, setAllcategory] = useState([]);
+
     const [formData, setFormData] = useState({
         productName: "",
         price: "",
         description: "",
         productImg: "",
         categoryId: ""
-    })
-    const navigate = useNavigate()
+    });
+
     const [category, setCategory] = useState({
         categoryName: "",
         description: ""
-    })
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value
-        }))
-        console.log(formData)
-    }
+    });
+    const fetchCategory = async () => {
+        try {
+            const res = await axios.get(`${baseURL}/allcategories`);
+            setAllcategory(res.data || []);
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to fetch categories.");
+            console.error("Fetch Category Error:", error);
+        }
+    };
 
+    let navigate = useNavigate()
     const addProduct = async () => {
         const { productName, productImg, price, description, categoryId } = formData;
+        if (!productName || !price || !categoryId || !description) {
+            toast.error("Please fill all required product fields.");
+            return;
+        }
         try {
-            let res = await axios.post(`${baseURL}/products`, {
+            await axios.post(`${baseURL}/products`, {
                 productName,
                 productImg,
                 price,
                 categoryId,
                 description
-            })
-            toast.success(" SuccesFully Added Product");
+            });
+            toast.success("Successfully added product!");
             setFormData({
-                productImg: "",
                 productName: "",
                 price: "",
-                categoryId: "",
                 description: "",
-            })
-            setTimeout(() => navigate("/product"), 1500)
+                productImg: "",
+                categoryId: ""
+            });
+            setTimeout(() => {Navigate("/product")} , 1500)
         } catch (error) {
-            toast.error(error.response.data.message);
-
+            toast.error(error.response?.data?.message || "Error adding product.");
+            console.error("Add Product Error:", error);
         }
-    }
-    const handleCategory = (e) => {
-        let { name, value } = e.target;
-        console.log(name, value)
-        setCategory((prev) => ({
-            ...prev,
-            [name]: value
-        }))
     };
-
-    const fetchCategory = async () => {
-        try {
-            const res2 = await axios.get(`${baseURL}/allcategories`);
-            setAllcategory(res2.data);
-        } catch (error) {
-            toast.error(error.response?.data?.message);
-
-        }
-    }
-    useEffect(() => {
-        fetchCategory()
-    }, [])
-
 
     const addCategory = async () => {
         const { categoryName, description } = category;
-        try {
-            let res = await axios.post(`${baseURL}/category`, {
-                categoryName,
-                description
-            })
-            fetchCategory();
-            setCategory({
-                categoryName: "",
-                description: ""
-            })
-            console.log(res.data.message, "res.data.message");
-            toast.success(res.data.message);
-        } catch (error) {
-            toast.error(error.response?.data?.message);
+        if (!categoryName || !description) {
+            toast.error("Please fill all category fields.");
+            return;
         }
+        try {
+            const res = await axios.post(`${baseURL}/category`, { categoryName, description });
+            toast.success(res.data.message || "Category added successfully!");
+            fetchCategory();
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Error adding category.");
+            console.error("Add Category Error:", error);
+        }
+    };
+    useEffect(() => {
+        fetchCategory();
+    }, []);
+    const handleProductChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    
+    const handleCategoryChange = (e) => {
+        const { name, value } = e.target;
+        setCategory((prev) => ({ ...prev, [name]: value }));
     };
 
 
-    const input = 'bg-gray-700  border-[#dadada3f]  capitalize text-[18px] border-[0.5px] rounded-md outline-none py-3 px-4 font-poppins text-gray-300 w-full'
-    const btn = 'py-2 px-4 text-white rounded bg-green-500 active:scale-95 transition duration-2';
+
+    const cardStyles = "bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-lg p-6 w-full";
+    const inputStyles = "bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 block w-full p-3 transition duration-300 placeholder-gray-400";
+    const buttonStyles = "w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-200 active:scale-95";
+    const titleStyles = "text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500 mb-6 text-center";
+
+
     return (
         <>
-            <div className='min:h-screen bg-slate-800 font-poppins'>
-                <Toaster position="top-center" richColors />
-                <div className='font-poppins h-screen flex flex-col gap-y-5 md:flex-row justify-evenly items-center py-10 '>
-                    <div id='nav' className='border-[0.5px] min:h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4 border-[#dadada3f] rounded-lg capitalize' >
-                        <h1 className='text-green-500 font-semibold '>add Product</h1>
-                        <input
-                            type="text"
-                            value={formData.productName}
-                            placeholder='productName'
-                            name='productName'
-                            className={input}
-                            onChange={handleChange} />
-                        <input
-                            value={formData.productImg}
-                            type="text" placeholder='productImg' name='productImg' className={input} onChange={handleChange} />
-                        <input
-                            value={formData.price}
-                            type="number" placeholder='price' name='price' className={input} onChange={handleChange} />
-                        <select
-                            name='categoryId'
-                            value={formData.categoryId}
-                            onChange={handleChange}
-                            className={input} >
-                            <option value="">Select a category</option>
-                            {allcategory.map((cat) => (
-                                <option value={cat.category_id} key={cat.category_id} >
-                                    {cat.category_name}
-                                </option>
-                            ))}
-                        </select>
-                        <input
-                            type="text"
-                            value={formData.description}
-                            placeholder='Product description' name='description' className={input} onChange={handleChange} />
+            <div className='min-h-screen bg-gray-900 text-gray-200 font-sans flex flex-col items-center p-4 sm:p-6 lg:p-8'>
+                <Toaster position="top-center" richColors theme="dark" />
 
-                        <button type='submit' onClick={addProduct} className={btn}>Add product</button>
+                <h1 className="text-4xl md:text-5xl font-extrabold mb-8 text-center text-white">Product Dashboard</h1>
+
+                <div className='w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10'>
+
+                    <div className={cardStyles}>
+                        <h2 className={titleStyles}>Add New Product</h2>
+                        <div className='flex flex-col gap-y-4'>
+                            <input type="text" value={formData.productName} placeholder='Product Name' name='productName' className={inputStyles} onChange={handleProductChange} />
+                            <input type="text" value={formData.productImg} placeholder='Product Image URL' name='productImg' className={inputStyles} onChange={handleProductChange} />
+                            <input type="number" value={formData.price} placeholder='Price' name='price' className={inputStyles} onChange={handleProductChange} />
+                            <select name='categoryId' value={formData.categoryId} onChange={handleProductChange} className={inputStyles}>
+                                <option value="">Select a category</option>
+                                {Array.isArray(allcategory) && allcategory.map((cat) => (
+                                    <option value={cat.category_id} key={cat.category_id} className="bg-gray-800 text-white">
+                                        {cat.category_name}
+                                    </option>
+                                ))}
+                            </select>
+                            <textarea placeholder='Product Description' value={formData.description} name='description' className={`${inputStyles} min-h-[100px]`} onChange={handleProductChange} />
+                            <button type='button' onClick={addProduct} className={buttonStyles}>Add Product</button>
+                        </div>
                     </div>
 
-                    <div className='border-[0.5px] border-[#dadada36] h-[400px] w-[400px] flex justify-center items-center flex-col gap-y-3 px-4 py-4  rounded-md capitalize bg-gray-100 shadow-inner' id='nav'>
-                        <h1 className='text-green-500 font-semibold '>category</h1>
-                        <input type="text"
-                            placeholder='Category Name'
-                            className={input}
-                            name='categoryName'
-                            value={category.categoryName}
-                            onChange={handleCategory}
-                        />
-                        <textarea
-                            type="text"
-                            placeholder='Category Description'
-                            className={input}
-                            value={category.description}
-                            name='description'
-                            onChange={handleCategory}
-                        />
-                        <button type='submit' onClick={addCategory} className={btn}>Add Category</button>
+                    <div className={cardStyles}>
+                        <h2 className={titleStyles}>Add New Category</h2>
+                        <div className='flex flex-col gap-y-4'>
+                            <input type="text" placeholder='Category Name' className={inputStyles} name='categoryName' value={category.categoryName} onChange={handleCategoryChange} />
+                            <textarea placeholder='Category Description' className={`${inputStyles} min-h-[100px]`} value={category.description} name='description' onChange={handleCategoryChange} />
+                            <div className="flex-grow"></div> 
+                            <button type='button' onClick={addCategory} className={`${buttonStyles} mt-auto`}>Add Category</button>
+                        </div>
                     </div>
                 </div>
 
-                <div className='flex justify-center items-center py-6'  >
-                    <table className='border px-2 py-2'>
-                        <thead>
-                            <tr>
-                                <th className='p-3 border  text-xl uppercase text-yellow-900 text-center' >Category id</th >
-                                <th className='p-3 border  text-xl uppercase text-yellow-900 text-center' >Category Name</th >
-                                <th className='p-3 border text-xl uppercase text-yellow-900 text-center' >Description</th >
-                            </tr>
-                        </thead>
-                                <tbody>
-                    {allcategory.map((eachCategory , i) => {
-                        return(
-                        <tr key={i}>
-                            <td   className='p-3  border text-xl font-poppins capitalize text-center text-green-600'>{eachCategory?.category_id}</td>
-                            <td   className='p-3  border text-xl font-poppins capitalize text-center text-cyan-400 '>{eachCategory?.category_name}</td>
-                            <td  className='text-cyan-400 p-3 border text-xl font-poppins capitalize text-center' >{eachCategory?.description}</td>
-                        </tr>
-                        )
-                    })}
-                    </tbody>
-                    </table>
+                <div className={`${cardStyles} max-w-6xl`}>
+                     <h2 className={titleStyles}>Available Categories</h2>
+                     <div className="overflow-x-auto relative rounded-lg border border-gray-700">
+                        <table className='w-full text-sm text-left text-gray-300'>
+                            <thead className='text-xs text-gray-400 uppercase bg-gray-700/50'>
+                                <tr>
+                                    <th scope="col" className='px-6 py-3'>ID</th>
+                                    <th scope="col" className='px-6 py-3'>Category Name</th>
+                                    <th scope="col" className='px-6 py-3'>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {Array.isArray(allcategory) && allcategory.length > 0 ? (
+                                    allcategory.map((eachCategory) => (
+                                    <tr key={eachCategory.category_id} className='bg-gray-800/60 border-b border-gray-700 hover:bg-gray-700/80 transition-colors duration-200'>
+                                        <td className='px-6 py-4 font-mono text-green-400'>{eachCategory?.category_id}</td>
+                                        <td className='px-6 py-4 font-medium text-white'>{eachCategory?.category_name}</td>
+                                        <td className='px-6 py-4'>{eachCategory?.description}</td>
+                                    </tr>
+                                ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="3" className="text-center py-8 text-gray-500">
+                                            No categories found. Add one above!
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
         </>
-    )
+    );
 }
 
-export default Addproduct
+export default App;
+
