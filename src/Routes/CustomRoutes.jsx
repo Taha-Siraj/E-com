@@ -6,7 +6,6 @@ import Home from '../Pages/Home';
 import { GlobalContext } from '../Context/Context';
 import Products from '../Pages/Products';
 import Addproduct from '../Pages/Addproduct';
-import NavBar from '../Pages/NavBar';
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
 
@@ -16,7 +15,6 @@ const CustomRoutes = () => {
 
   return (
    <>
-      <NavBar/>
     <Routes>
       {state.isLogin ? (
         <>

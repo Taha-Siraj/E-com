@@ -5,9 +5,7 @@ import {  useNavigate } from 'react-router-dom';
 const App = () => {
 
     const baseURL = 'https://server-ecom-rho.vercel.app';
-
     const [allcategory, setAllcategory] = useState([]);
-
     const [formData, setFormData] = useState({
         productName: "",
         price: "",
@@ -15,7 +13,6 @@ const App = () => {
         productImg: "",
         categoryId: ""
     });
-
     const [category, setCategory] = useState({
         categoryName: "",
         description: ""

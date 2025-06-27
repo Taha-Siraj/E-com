@@ -140,8 +140,7 @@ const Home = () => {
               </Link>
             </div>
           </div>
-        </div>
-        
+        </div>   
         <div id="products-section">
           <Products />
         </div>
