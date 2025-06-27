@@ -8,13 +8,11 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import './signup.css'
 
-
 const Signup = () => {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   // const baseUrl = "http://localhost:5004";
   const baseUrl = "https://server-ecom-rho.vercel.app";
-
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -54,7 +52,6 @@ const Signup = () => {
 
   return (
     <>
-   
       <Toaster position="top-center" richColors />
       <div id='signup-bg' className="h-screen flex  items-center justify-evenly bg-gray-950 font-poppins">
         <div id='signup' className="w-full max-w-md  shadow-xl rounded-xl p-4">
@@ -64,7 +61,6 @@ const Signup = () => {
             {["firstName", "lastName", "email", "password"].map((field, idx) => {
               const isPassword = field === "password";
               const label = field.charAt(0).toUpperCase() + field.slice(1).replace("Name", " Name");
-
               return (
                 <div key={idx}>
                   <label className="block text-sm font-semibold ">{label}</label>

@@ -141,7 +141,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-
+        
         <div id="products-section">
           <Products />
         </div>
