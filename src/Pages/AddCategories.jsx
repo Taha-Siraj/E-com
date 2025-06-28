@@ -25,13 +25,12 @@ const AddCategories = () => {
             let getCategory = await axios.get(`${baseUrl}/allcategories`);
             setAllcategory(getCategory.data);
         } catch (error) {
-            console.log(error)
+            toast.error('Something went wrong!');
         }
     }
     useEffect(() => {
         fetchCategory();
     } , []);
-
     const handleFormCategory = async (e) => {
         e.preventDefault();
         const {categoryName, description} = CategoryForm;
@@ -46,15 +45,13 @@ const AddCategories = () => {
                     categoryName,
                     description
                 })
-                fetchCategory();
                 toast.success('Category Updated Successfully!');
-                console.log("res1.data", res1.data);
+                fetchCategory();
                 setCategoryID("")
                 setCategoryForm({categoryName: "" , description: ""})
                 setloader(false)
             } catch (error) {
                 toast.error('Something went wrong!');
-                console.log("Edit Err",error)   
                 setloader(false)
         }
     }
@@ -97,7 +94,7 @@ const AddCategories = () => {
     <div className='font-poppins flex bg-gray-900 h-screen justify-center items-center flex-col py-10'>
         <Toaster position="top-center" richColors />
         <div ref={formRef}  className='border-[0.1px] w-[450px] h-[300px] flex justify-center items-center flex-col gap-4 rounded-lg border-[#dadada58] bg-gray-950 px-10' >
-            <h1 className={titleStyles}>Add Category</h1>
+            <h1 className={titleStyles}>{CategoryID ? "Updated Category" : "Add Category"}</h1>
             <form  onSubmit={handleFormCategory}>
             <input 
             type="text" 
@@ -121,7 +118,7 @@ const AddCategories = () => {
             </form>
         </div>
         <div className="overflow-x-auto px-10 py-10">
-        <table className="min-w-full bg-gray-950 text-[#fff] font-poppins capitalize border border-gray-200 shadow-md rounded-lg">
+        <table className="min-w-full bg-gray-950 text-[#fff] font-poppins capitalize border-[0.3px]  border-[#dadada3a] shadow-md rounded-lg">
             <thead className="bg-cyan-500 text-white">
             <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold">Category Name</th>
