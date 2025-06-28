@@ -5,8 +5,8 @@ import Signup from '../Authentication/Signup';
 import Home from '../Pages/Home';
 import { GlobalContext } from '../Context/Context';
 import Products from '../Pages/Products';
+import AddCategories from '../Pages/AddCategories';
 import Addproduct from '../Pages/Addproduct';
-import { Cursor } from 'react-simple-typewriter';
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
 
@@ -21,7 +21,8 @@ const CustomRoutes = () => {
         <>
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Products />} />
-          <Route path="/addproduct" element={<Addproduct />} />
+          <Route path="/AddCategories" element={<AddCategories />} />
+          <Route path="/Addproduct" element={<Addproduct />} />
           <Route path="*" element={<Navigate to="/" />} />
         </>
       ) : (
