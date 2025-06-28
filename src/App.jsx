@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import Signup from './Authentication/Signup';
 import Login from './Authentication/Login';
 import CustomRoutes from './Routes/CustomRoutes';
+import Addproduct from './Pages/AddProducts';
 const App = () => {
 
   const firebaseConfig = {
@@ -16,6 +17,7 @@ const App = () => {
   const app = initializeApp(firebaseConfig);
   return (
     <>
+    {/* <Addproduct/> */}
     <CustomRoutes/>
 
   </>
