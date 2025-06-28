@@ -9,12 +9,13 @@ const AddProducts = () => {
     productName: "",
     price: "",
     description: "",
-    categoryId: "",
+    categoryName: "",
     productImg: "",
   })
   const [allcategories , setAllcategory] = useState([]);
-  const [allproducts , setallproducts] = useState([]);
-
+  const [allAddProducts , setAllAddproducts] = useState([]);
+  const [productId, setproductId] = useState("");
+ 
   const handleChange = (e) => {
     const {name , value} = e.target;
     setproductform((prev) => ({
@@ -27,6 +28,7 @@ const AddProducts = () => {
     try {
       let res = await axios.get(`${baseUrl}/allcategories`);
       setAllcategory(res.data)
+      console.log(res.data)
     } catch (error) {
       toast.error('Something went wrong!');
     }
@@ -34,37 +36,74 @@ const AddProducts = () => {
   const fetchProducts = async () => {
     try {
       let res =  await axios.get(`${baseUrl}/allproducts`);
-      setallproducts(res.data);
+      setAllAddproducts(res.data);
       console.log(res.data);
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  const addproduct = async (e) => {
+    e.preventDefault();
+    let {productName, price, description, categoryName, productImg} = productform;
+    if(!productName || !price || !description || !categoryName || !productImg){
+      toast.warning("All Field are Requried");
+      return;
+    }
+
+    if(productId){
+      try {
+        let res = await axios.put(`${baseUrl}/product/${productId}`,{
+          productName,
+          price,
+          description,
+          productImg,
+          categoryName
+        })
+        fetchProducts();
+        setproductId("")  
+        setproductform({
+        productName: "",
+        price: "",
+        description: "",
+        categoryName: "",
+        productImg: "",
+        })
+        console.log(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    else{
+      try {
+      let res = await axios.post(`${baseUrl}/products`,{
+        productName,
+        price,
+        description,
+        productImg,
+        categoryName
+      })
+      fetchProducts();
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+    }
+  }  
+
+  const deletedProduct = async (id) => {
+    try {
+      let res = await axios.delete(`${baseUrl}/product/${id}`)
+      console.log(res.data);
+      fetchProducts()
+    } catch (error) {
+      console.log(error)
     }
   }
   useEffect(() => {
     fetchCategory();
     fetchProducts();
   },[])
-
-  const addproduct = async (e) => {
-    e.preventDefault();
-    let {productName, price, description, categoryId, productImg} = productform;
-    if(!productName || !price || !description || !categoryId || !productImg){
-      toast.warning("All Field are Requried");
-      return;
-    }
-    try {
-      let res = await axios.post(`${baseUrl}/products`,{
-        productName,
-        price,
-        description,
-        productImg,
-        categoryId
-      })
-      console.log(res.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }  
 
 
   const inputStyle = 'border-[0.5px] py-3 px-4 rounded-md placeholder:text-gray-300 w-full border-[#dadada6e] bg-gray-700 outline-none focus:border-gray-300 transition-all duration-75';
@@ -77,29 +116,34 @@ const AddProducts = () => {
         <input
         type="text"
         name='productName'
-        onChange={handleChange}
-        placeholder='Product Name' className={inputStyle} />
+         value={productform.productName}
+         onChange={handleChange}
+         placeholder='Product Name' className={inputStyle} />
         <input
          type="number"
          name='price'
+         value={productform.price}
         onChange={handleChange}
          placeholder='Product price'
          className={inputStyle} />
         <input 
          type="text" 
+         value={productform.description}
          placeholder='Product description'
          name='description'
-        onChange={handleChange}
+         onChange={handleChange}
          className={inputStyle} />
         <input 
         type="text" 
         name='productImg'
         onChange={handleChange}
+        value={productform.productImg}
         placeholder='Product Imgage URL' 
         className={inputStyle} />
         <select 
          className={inputStyle}
-         name='categoryId'
+         name='categoryName'
+         value={productform.categoryName}
          onChange={handleChange}>
          <option value="">Select A category</option>
           {allcategories.map((cat) => (
@@ -107,17 +151,30 @@ const AddProducts = () => {
           ))} 
         </select>
         <button 
-        className='bg-green-800 text-gray-300 font-semibold flex justify-center w-full rounded-lg py-2 px-4 items-center'>Add Product</button>
+        className='bg-green-800 text-gray-300 font-semibold flex justify-center w-full rounded-lg py-2 px-4 items-center'>{productId? "update Product" : "Add Product"}</button>
       </form>
 
-      <div>
-        {allproducts.map((eachProduct) => (
-          <div key={eachProduct?.product_id} className='bg-gray-700 rounded-lg px-4 py-4 h-[350px] flex justify-center items-center font-poppins  flex-col text-balck
+      <div className='flex justify-center flex-col gap-y-10 px-5 flex-wrap items-center gap-x-8 md:flex-row'>
+        {allAddProducts.map((eachProduct) => (
+          <div key={eachProduct?.product_id} className='bg-gray-700 rounded-lg px-4 py-6 min:h-[350px] flex justify-center items-center font-poppins text-gray-300 flex-col text-balck
            text-start gap-y-4 capitalize border-[#dadada6e] border-[0.3px]'>
-            <img src={eachProduct?.product_img} alt="" width={200} className='object-center rounded-lg' height={200}/>
-            <pc className='text-[18px]' >Product Name: {eachProduct?.product_name}</pc>
+            <img src={eachProduct?.product_img} alt="" width={150} className='object-center rounded-lg' height={150}/>
+            <p className='text-[18px]' >Product Name: {eachProduct?.product_name}</p>
             <p className='text-[17px] font-semibold text-green-700 '>RS:{eachProduct?.price}</p>
-            <p>{eachProduct?.description}</p>
+            <p>description: {eachProduct?.description}</p>
+            <div className='flex justify-center items-center flex-col gap-y-2 w-full gap-x-2'>
+              <button className='bg-green-800 text-gray-300 font-semibold flex justify-center w-full rounded-lg py-2 px-4 items-center'
+              onClick={() => {setproductId(eachProduct?.product_id);
+                setproductform({
+                  productName: eachProduct?.product_name,
+                  price: eachProduct?.price,
+                  description: eachProduct?.description,
+                  productImg: eachProduct?.product_img,
+                  categoryName: eachProduct?.category_name
+                })
+                }}>Edit Product</button>
+              <button onClick={() => deletedProduct(eachProduct?.product_id)} className='bg-red-800 text-gray-300 font-semibold  justify-center w-full rounded-lg py-2 px-4 '>Delete Product</button>
+            </div>
           </div>
         ))}
       </div>
