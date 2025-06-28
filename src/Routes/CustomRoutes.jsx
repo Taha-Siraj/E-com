@@ -6,6 +6,7 @@ import Home from '../Pages/Home';
 import { GlobalContext } from '../Context/Context';
 import Products from '../Pages/Products';
 import Addproduct from '../Pages/Addproduct';
+import { Cursor } from 'react-simple-typewriter';
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
 
