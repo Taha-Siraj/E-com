@@ -28,8 +28,8 @@ const Home = () => {
   const navLinks = [
     { title: 'Home', path: '/' },
     { title: 'Products', path: '/product' },
-    { title: 'Add product', path: '/addproduct' },
     { title: 'Add Categories', path: '/AddCategories' },
+    { title: 'Add product', path: '/addproduct' },
   ];
 
   return (
