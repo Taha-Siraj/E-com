@@ -45,7 +45,7 @@ const Login = () => {
         
         toast.success('User logged in successfully');
         dispatch({ type: 'USER_LOGIN', payload: res.data.user});
-        localStorage.setItem("user", JSON.stringify(res.data)); 
+        localStorage.setItem("user", JSON.stringify(res.data.user)); 
         setTimeout(() => navigate('/'), 1500);
       } catch (error) {
         toast.error(error.response?.data?.message || 'Login failed. Try again.');
