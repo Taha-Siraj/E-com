@@ -10,8 +10,6 @@ import AddProducts from '../Pages/AddProducts';
 
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
-  console.log(state)
-
   if (loading) {
     return <div className="text-white text-2xl text-center p-8">Loading...</div>;
   }

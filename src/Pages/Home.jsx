@@ -10,7 +10,6 @@ const Home = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const baseUrl = 'https://server-ecom-rho.vercel.app';
- console.log("user_role", state.user.user_role)
   const handleLogout = async () => {
     try {
       await axios.post(`${baseUrl}/logout`, {}, { withCredentials: true });
