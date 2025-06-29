@@ -195,7 +195,6 @@ const AddProducts = () => {
         </p>
       </div>
 
-      {/* Action Buttons Section */}
       <div className="flex flex-col gap-3 mt-auto">
         <button
           className="bg-green-700 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
