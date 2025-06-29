@@ -9,7 +9,7 @@ const AddProducts = () => {
     productName: "",
     price: "",
     description: "",
-    categoryName: "",
+    categoryId: "",
     productImg: "",
   })
   const [allcategories , setAllcategory] = useState([]);
@@ -45,8 +45,8 @@ const AddProducts = () => {
 
   const addproduct = async (e) => {
     e.preventDefault();
-    let {productName, price, description, categoryName, productImg} = productform;
-    if(!productName || !price || !description || !categoryName || !productImg){
+    let {productName, price, description, categoryId, productImg} = productform;
+    if(!productName || !price || !description || !categoryId || !productImg){
       toast.warning("All Field are Requried");
       return;
     }
@@ -58,7 +58,7 @@ const AddProducts = () => {
           price,
           description,
           productImg,
-          categoryName
+          categoryId
         })
         fetchProducts();
         setproductId("")  
@@ -66,12 +66,12 @@ const AddProducts = () => {
         productName: "",
         price: "",
         description: "",
-        categoryName: "",
+        categoryId: "",
         productImg: "",
         })
         console.log(res.data)
       } catch (error) {
-        console.log(error)
+        console.log(error?.response?.data?.message)
       }
     }
     else{
@@ -81,12 +81,12 @@ const AddProducts = () => {
         price,
         description,
         productImg,
-        categoryName
+        categoryId
       })
       fetchProducts();
       console.log(res.data)
     } catch (error) {
-      console.log(error)
+      console.log(error.response?.data?.message)
     }
     }
   }  
@@ -142,8 +142,8 @@ const AddProducts = () => {
         className={inputStyle} />
         <select 
          className={inputStyle}
-         name='categoryName'
-         value={productform.categoryName}
+         name='categoryId'
+         value={productform.categoryId}
          onChange={handleChange}>
          <option value="">Select A category</option>
           {allcategories.map((cat) => (
@@ -170,7 +170,7 @@ const AddProducts = () => {
                   price: eachProduct?.price,
                   description: eachProduct?.description,
                   productImg: eachProduct?.product_img,
-                  categoryName: eachProduct?.category_name
+                  categoryId: eachProduct?.category_id
                 })
                 }}>Edit Product</button>
               <button onClick={() => deletedProduct(eachProduct?.product_id)} className='bg-red-800 text-gray-300 font-semibold  justify-center w-full rounded-lg py-2 px-4 '>Delete Product</button>
