@@ -77,41 +77,44 @@ const Products = () => {
               </div>
             </div>
 
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8'>
-              {filteredProduct.map((eachProduct) => (
-                <div
-                  key={eachProduct.product_id}
-                  className='bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col overflow-hidden group'
-                >
-                  <div className='relative'>
-                    <img
-                      src={eachProduct?.product_img}
-                      alt={eachProduct?.product_name}
-                      className='w-full h-56 object-cover'
-                    />
-                     <div className='absolute top-2 right-2 bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full'>
-                        {eachProduct?.category_name}
+           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 p-4'>
+            {filteredProduct.map((eachProduct) => (
+              <div
+                key={eachProduct.product_id}
+                className='bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col overflow-hidden border border-gray-200 group' 
+              >
+                <div className='relative overflow-hidden'>
+                  <img
+                    src={eachProduct?.product_img}
+                    alt={eachProduct?.product_name || "Product Image"}
+                    className='w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300' 
+                  />
+                  {eachProduct?.category_name && ( 
+                    <div className='absolute top-3 left-3 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md'> 
+                      {eachProduct.category_name}
                     </div>
-                  </div>
+                  )}
+                </div>
 
-                  <div className='p-5 flex flex-col flex-grow'>
-                    <h2 className='text-lg font-bold text-gray-800 truncate' title={eachProduct?.product_name}>
-                      {eachProduct?.product_name}
-                    </h2>
-                    <p className='text-sm text-start text-gray-600 mt-1 mb-4 flex-grow'>
-                      {eachProduct?.description}
+                <div className='p-5 flex flex-col flex-grow'>
+                  <h2 className='text-xl font-extrabold text-gray-900 mb-2 line-clamp-2' title={eachProduct?.product_name}> 
+                    {eachProduct?.product_name}
+                  </h2>
+                  <p className='text-sm text-gray-600 mb-4 line-clamp-3 flex-grow'>
+                    {eachProduct?.description || "No description available."}
+                  </p>
+
+                  <div className='flex items-center justify-between mt-auto pt-4 border-t border-gray-100'>
+                    <p className='text-2xl font-bold text-gray-900'>
+                      Rs. <span className='text-green-600'>{eachProduct?.price}</span> 
                     </p>
-
-                    <div className='mt-auto flex items-center justify-between'>
-                      <p className='py-2 text-xl font-semibold text-gray-900'>
-                        Rs. {eachProduct?.price}
-                      </p>
-                    </div>
+                
                   </div>
                 </div>
-              ))}
-            </div>
-            
+              </div>
+            ))}
+          </div>
+                      
             {filteredProduct.length === 0 && (
                 <div className='text-center py-20'>
                     <h2 className='text-2xl font-semibold text-gray-700'>No Products Found</h2>
