@@ -5,13 +5,12 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import Products from './Products';
 import { Typewriter } from 'react-simple-typewriter';
-
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const baseUrl = 'https://server-ecom-rho.vercel.app';
- console.log("user_role", state.user.user.user_role)
+ console.log("user_role", state.user.user_role)
   const handleLogout = async () => {
     try {
       await axios.post(`${baseUrl}/logout`, {}, { withCredentials: true });
@@ -28,7 +27,7 @@ const Home = () => {
   const navLinks = [
     { title: 'Home', path: '/' },
     { title: 'Products', path: '/product' },
-    ...(state.user.user.user_role === 1 ?[
+    ...(state.user.user_role === 1 ?[
       { title: 'Add product', path: '/addproduct' },
       { title: 'Add Categories', path: '/AddCategories' },
     ]: [])

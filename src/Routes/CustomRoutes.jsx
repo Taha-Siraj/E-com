@@ -10,6 +10,7 @@ import AddProducts from '../Pages/AddProducts';
 
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
+  console.log(state)
 
   if (loading) {
     return <div className="text-white text-2xl text-center p-8">Loading...</div>;
@@ -19,7 +20,7 @@ const CustomRoutes = () => {
     <Routes>
       {state.isLogin ? (
         <>
-          {state.user.user.user_role === 1 && (
+          {state?.user?.user_role === 1 && (
             <>
               <Route path="/addproduct" element={<AddProducts />} />
               <Route path="/addcategories" element={<AddCategories />} />

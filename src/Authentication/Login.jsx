@@ -43,7 +43,7 @@ const Login = () => {
           withCredentials: true,
         });
         
-        dispatch({ type: 'USER_LOGIN', user: res.data});
+        dispatch({ type: 'USER_LOGIN', payload: res.data.user});
         localStorage.setItem("user", JSON.stringify(res.data)); 
         toast.success('User logged in successfully');
         setTimeout(() => navigate('/'), 1500);

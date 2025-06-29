@@ -12,6 +12,7 @@ const AddCategories = () => {
     const [CategoryID, setCategoryID] = useState("");
     const [loader , setloader] = useState(false);
     const formRef = useRef(null);
+    const [fetchLoading, setFetchLoading] = useState(false); 
     const handlecategoryChange = (e) => {
         let {name, value} = e.target
         setCategoryForm((prev) => ({
@@ -21,9 +22,11 @@ const AddCategories = () => {
     }
 
     const fetchCategory = async () =>{
+        setFetchLoading(true);
         try {
             let getCategory = await axios.get(`${baseUrl}/allcategories`);
             setAllcategory(getCategory.data);
+            setFetchLoading(false);
         } catch (error) {
             toast.error('Something went wrong!');
         }
@@ -117,8 +120,11 @@ const AddCategories = () => {
             </button>
             </form>
         </div>
+
         <div className="overflow-x-auto px-10 py-10">
-        <table className="min-w-full bg-gray-950 text-[#fff] font-poppins capitalize border-[0.3px]  border-[#dadada3a] shadow-md rounded-lg">
+            {fetchLoading ? (<div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin "></div> ) 
+            :
+            <table className="min-w-full bg-gray-950 text-[#fff] font-poppins capitalize border-[0.3px]  border-[#dadada3a] shadow-md rounded-lg">
             <thead className="bg-cyan-500 text-white">
             <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold">Category Name</th>
@@ -154,7 +160,8 @@ const AddCategories = () => {
                 </tr>
             ))}
             </tbody>
-        </table>
+        </table>}
+        
         </div>
     </div>
   )
