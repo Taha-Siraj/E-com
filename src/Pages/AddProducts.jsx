@@ -90,6 +90,13 @@ const AddProducts = () => {
         categoryId
       })
       fetchProducts();
+      setproductform({
+        productName: "",
+        price: "",
+        description: "",
+        productImg: "",
+        categoryId: "",
+       })
       setloading(false);
       toast.success("Product Added Successfully!");
     } catch (error) {
@@ -123,7 +130,7 @@ const AddProducts = () => {
     <>
     <div className='bg-gray-950 py-10 min:h-screen flex justify-center items-center flex-col gap-y-10'>
   <Toaster position="top-center" richColors />
-  <form ref={formRef} onSubmit={addproduct} className='flex justify-center flex-col border border-gray-700 rounded-xl min:h-[400px] w-[400px] bg-gray-800 text-gray-200 gap-y-5 font-poppins px-8 py-8 shadow-2xl'> 
+  <form ref={formRef} onSubmit={addproduct} className='flex justify-center flex-col border-[0.2px] border-[#dadada4a] rounded-xl min:h-[400px] w-[400px] bg-gray-800 text-gray-200 gap-y-5 font-poppins px-8 py-8 shadow-2xl'> 
     <h1 className='text-3xl font-extrabold text-white mb-4'>{productId ? "Update Product" : "Add Product"}</h1> 
     <input
       type="text"
@@ -185,13 +192,13 @@ const AddProducts = () => {
     {allAddProducts.map((eachProduct) => (
       <div
         key={eachProduct?.product_id}
-        className="bg-gray-800 rounded-xl p-6 w-[320px] flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border border-gray-700"
+        className="bg-gray-800 rounded-xl p-6 w-[320px] flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border-[0.2px] border-[#dadada4a]"
       >
         <div className="w-full flex justify-center mb-5">
           <img
             src={eachProduct?.product_img}
             alt={eachProduct?.product_name || "Product Image"}
-            className="h-[200px] w-full object-cover rounded-lg border border-gray-600"
+            className="h-[200px] w-full object-cover rounded-lg border-[0.2px] border-[#dadada4a]"
           />
         </div>
 
