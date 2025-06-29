@@ -6,8 +6,8 @@ import Home from '../Pages/Home';
 import { GlobalContext } from '../Context/Context';
 import Products from '../Pages/Products';
 import AddCategories from '../Pages/AddCategories';
-import Addproduct from '../Pages/AddProducts';
 import AddProducts from '../Pages/AddProducts';
+
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
 
@@ -16,14 +16,17 @@ const CustomRoutes = () => {
   }
 
   return (
-   <>
     <Routes>
       {state.isLogin ? (
         <>
+          {state.user.user.user_role === 1 && (
+            <>
+              <Route path="/addproduct" element={<AddProducts />} />
+              <Route path="/addcategories" element={<AddCategories />} />
+            </>
+          )}
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Products />} />
-          <Route path="/AddCategories" element={<AddCategories />} />
-          <Route path="/Addproduct" element={<AddProducts />} />
           <Route path="*" element={<Navigate to="/" />} />
         </>
       ) : (
@@ -34,7 +37,6 @@ const CustomRoutes = () => {
         </>
       )}
     </Routes>
-   </>
   );
 };
 
