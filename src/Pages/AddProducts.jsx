@@ -89,14 +89,15 @@ const AddProducts = () => {
         productImg,
         categoryId
       })
-      fetchProducts();
+      console.log(res.data);
       setproductform({
         productName: "",
         price: "",
         description: "",
-        productImg: "",
         categoryId: "",
-       })
+        productImg: "",
+      })
+      fetchProducts();
       setloading(false);
       toast.success("Product Added Successfully!");
     } catch (error) {
