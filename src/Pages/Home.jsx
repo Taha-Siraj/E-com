@@ -11,7 +11,7 @@ const Home = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const baseUrl = 'https://server-ecom-rho.vercel.app';
-
+ console.log("user_role", state.user.user.user_role)
   const handleLogout = async () => {
     try {
       await axios.post(`${baseUrl}/logout`, {}, { withCredentials: true });
@@ -28,8 +28,10 @@ const Home = () => {
   const navLinks = [
     { title: 'Home', path: '/' },
     { title: 'Products', path: '/product' },
-    { title: 'Add Categories', path: '/AddCategories' },
-    { title: 'Add product', path: '/addproduct' },
+    ...(state.user.user.user_role === 1 ?[
+      { title: 'Add product', path: '/addproduct' },
+      { title: 'Add Categories', path: '/AddCategories' },
+    ]: [])
   ];
 
   return (
