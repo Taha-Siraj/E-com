@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 
 const AddProducts = () => {
@@ -17,6 +18,7 @@ const AddProducts = () => {
   const [productId, setproductId] = useState("");
   const [loading, setloading] = useState(false);
   const [deletedProductID , setdeletedProductID] = useState("");
+  const formRef = useRef(null)
   const handleChange = (e) => {
     const {name , value} = e.target;
     setproductform((prev) => ({
@@ -120,8 +122,8 @@ const AddProducts = () => {
   return (
     <div className='bg-gray-950 py-10 min:h-screen flex justify-center items-center flex-col gap-y-10'>
       <Toaster position="top-center" richColors />
-      <form onSubmit={addproduct} className='flex justify-center flex-col border-[#dadada6e] items-center border-[0.5px] rounded-lg min:h-[400px] w-[400px] bg-gray-800 text-[#fff] gap-y-3 font-poppins px-6 py-6'>
-        <h1 className={titleStyles}>Add Product</h1>
+      <form ref={formRef} onSubmit={addproduct} className='flex justify-center flex-col border-[#dadada6e] items-center border-[0.5px] rounded-lg min:h-[400px] w-[400px] bg-gray-800 text-[#fff] gap-y-3 font-poppins px-6 py-6'>
+        <h1 className={titleStyles}>{productId ? "Update Product": "Add Product"}</h1>
         <input
         type="text"
         name='productName'
@@ -163,30 +165,71 @@ const AddProducts = () => {
         className='bg-green-800 text-gray-300 font-semibold flex justify-center w-full rounded-lg py-2 px-4 items-center'>{loading ? <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin "></div>: productId? "update Product" : "Add Product"}</button>
       </form>
 
-      <div className='flex justify-center flex-col gap-y-10 px-5 flex-wrap items-center gap-x-8 md:flex-row'>
-        {allAddProducts.map((eachProduct) => (
-          <div key={eachProduct?.product_id} className='bg-gray-700 rounded-lg px-4 py-6 min:h-[350px] flex justify-center items-center font-poppins text-gray-300 flex-col text-balck
-           text-start gap-y-4 capitalize border-[#dadada6e] border-[0.3px]'>
-            <img src={eachProduct?.product_img} alt="" width={150} className='object-center rounded-lg' height={150}/>
-            <p className='text-[18px]' >Product Name: {eachProduct?.product_name}</p>
-            <p className='text-[17px] font-semibold text-green-700 '>RS:{eachProduct?.price}</p>
-            <p>description: {eachProduct?.description}</p>
-            <div className='flex justify-center items-center flex-col gap-y-2 w-full gap-x-2'>
-              <button className='bg-green-800 text-gray-300 font-semibold flex justify-center w-full rounded-lg py-2 px-4 items-center'
-              onClick={() => {setproductId(eachProduct?.product_id);
-                setproductform({
-                  productName: eachProduct?.product_name,
-                  price: eachProduct?.price,
-                  description: eachProduct?.description,
-                  productImg: eachProduct?.product_img,
-                  categoryId: eachProduct?.category_id
-                })
-                }}>Edit Product</button>
-              <button onClick={() => deletedProduct(eachProduct?.product_id)} className='bg-red-800 text-gray-300 font-semibold  justify-center w-full rounded-lg py-2 px-4 '>{(deletedProductID === eachProduct.product_id )?<div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin "></div> : "Delete Product"}</button>
-            </div>
-          </div>
-        ))}
+      <button className='bg-green-800 text-gray-300 font-semibold flex justify-center mt-8 rounded-lg py-2 px-4 items-center '> <Link className='text-blue-400' to={"/addcategories"} >Add category Page</Link></button>
+
+      <div className="flex flex-wrap justify-center gap-8 px-5 w-full py-8">
+  {allAddProducts.map((eachProduct) => (
+    <div
+      key={eachProduct?.product_id}
+      className="bg-gray-800 rounded-xl p-6 w-[320px] flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border border-gray-700"
+    >
+      {/* Image Section */}
+      <div className="w-full flex justify-center mb-5">
+        <img
+          src={eachProduct?.product_img}
+          alt={eachProduct?.product_name || "Product Image"}
+          className="h-[200px] w-full object-cover rounded-lg border border-gray-600"
+        />
       </div>
+
+      {/* Product Info Section */}
+      <div className="flex flex-col gap-3 mb-6 flex-grow">
+        <h3 className="text-xl font-bold text-white truncate">
+          {eachProduct?.product_name}
+        </h3>
+        <p className="text-lg font-bold text-green-400">
+          PKR: {eachProduct?.price}
+        </p>
+        <p className="text-sm text-gray-300 line-clamp-3">
+          {eachProduct?.description || "No description available."}
+        </p>
+      </div>
+
+      {/* Action Buttons Section */}
+      <div className="flex flex-col gap-3 mt-auto">
+        <button
+          className="bg-green-700 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+          onClick={() => {
+            setproductId(eachProduct?.product_id);
+            setproductform({
+              productName: eachProduct?.product_name,
+              price: eachProduct?.price,
+              description: eachProduct?.description,
+              productImg: eachProduct?.product_img,
+              categoryId: eachProduct?.category_id,
+            });
+            setTimeout(() => {
+              formRef.current.scrollIntoView({ behavior: "smooth" });
+            }, 100);
+          }}
+        >
+          Edit Product
+        </button>
+
+        <button
+          onClick={() => deletedProduct(eachProduct?.product_id)}
+          className="bg-red-700 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+        >
+          {deletedProductID === eachProduct.product_id ? (
+            <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
+          ) : (
+            "Delete Product"
+          )}
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
     </div>
   )
 }

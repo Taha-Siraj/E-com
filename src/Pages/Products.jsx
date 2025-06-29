@@ -106,7 +106,6 @@ const Products = () => {
                       <p className='py-2 text-xl font-semibold text-gray-900'>
                         Rs. {eachProduct?.price}
                       </p>
-                      
                     </div>
                   </div>
                 </div>

@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { toast, Toaster } from 'sonner';
 import Loader from './Loader';
+import { Link } from 'react-router-dom';
 const AddCategories = () => {
     const baseUrl = 'https://server-ecom-rho.vercel.app';
     const [CategoryForm, setCategoryForm] = useState({
@@ -94,8 +95,9 @@ const AddCategories = () => {
     const inputStyles = "w-[100%] mb-3 border-[0.1px] py-3 px-4 rounded-md bg-gray-700 text-gray-200 text-sm rounded-lg focus:ring-2 border-[#dadada58] placeholder:text-[16px]  outline-none transition duration-300 ";
     const titleStyles = "text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500  text-center";
     return (
-    <div className='font-poppins flex bg-gray-900 min-[100%]: justify-center items-center flex-col py-10'>
+        <>
         <Toaster position="top-center" richColors />
+    <div className='min:h-[100vh] font-poppins flex bg-gray-900 justify-center items-center flex-col py-10'>
         <div ref={formRef}  className='border-[0.1px] w-[450px] h-[300px] flex justify-center items-center flex-col gap-4 rounded-lg border-[#dadada58] bg-gray-950 px-10' >
             <h1 className={titleStyles}>{CategoryID ? "Updated Category" : "Add Category"}</h1>
             <form  onSubmit={handleFormCategory}>
@@ -120,8 +122,8 @@ const AddCategories = () => {
             </button>
             </form>
         </div>
-
-        <div className="overflow-x-auto px-10 py-10">
+        <button className='bg-green-800 text-gray-300 font-semibold flex justify-center mt-8 rounded-lg py-2 px-4 items-center '> <Link className='text-blue-400' to={"/addproduct"} >Add Product Page</Link></button>
+        <div className="overflow-x-auto px-10 flex justify-center items-center min:h-[100%] py-10">
             {fetchLoading ? (<div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin "></div> ) 
             :
             <table className="min-w-full bg-gray-950 text-[#fff] font-poppins capitalize border-[0.3px]  border-[#dadada3a] shadow-md rounded-lg">
@@ -164,6 +166,7 @@ const AddCategories = () => {
         
         </div>
     </div>
+  </>
   )
 }
 export default AddCategories
