@@ -106,9 +106,7 @@ const Products = () => {
                       <p className='py-2 text-xl font-semibold text-gray-900'>
                         Rs. {eachProduct?.price}
                       </p>
-                       <button className='bg-gray-200 text-gray-800 hover:bg-indigo-500 hover:text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300'>
-                         Add
-                       </button>
+                      
                     </div>
                   </div>
                 </div>
