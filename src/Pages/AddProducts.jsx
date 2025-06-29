@@ -11,11 +11,12 @@ const AddProducts = () => {
     description: "",
     categoryId: "",
     productImg: "",
-  })
+  });
   const [allcategories , setAllcategory] = useState([]);
   const [allAddProducts , setAllAddproducts] = useState([]);
   const [productId, setproductId] = useState("");
- 
+  const [loading, setloading] = useState(false);
+  const [deletedProductID , setdeletedProductID] = useState("");
   const handleChange = (e) => {
     const {name , value} = e.target;
     setproductform((prev) => ({
@@ -35,14 +36,14 @@ const AddProducts = () => {
   }
   const fetchProducts = async () => {
     try {
-      let res =  await axios.get(`${baseUrl}/allproducts`);
-      setAllAddproducts(res.data);
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
+       let res =  await axios.get(`${baseUrl}/allproducts`);
+       setAllAddproducts(res.data);
+       console.log(res.data);
+      } catch (error) {
+        console.log(error?.response?.data?.message);
+      }
     }
-  }
-
+    
   const addproduct = async (e) => {
     e.preventDefault();
     let {productName, price, description, categoryId, productImg} = productform;
@@ -53,6 +54,7 @@ const AddProducts = () => {
 
     if(productId){
       try {
+        setloading(true);
         let res = await axios.put(`${baseUrl}/product/${productId}`,{
           productName,
           price,
@@ -69,14 +71,16 @@ const AddProducts = () => {
         categoryId: "",
         productImg: "",
         })
-        console.log(res.data)
+        setloading(false)
       } catch (error) {
         console.log(error?.response?.data?.message)
+        setloading(false)
       }
     }
     else{
       try {
-      let res = await axios.post(`${baseUrl}/products`,{
+        setloading(true)
+        let res = await axios.post(`${baseUrl}/products`,{
         productName,
         price,
         description,
@@ -84,20 +88,25 @@ const AddProducts = () => {
         categoryId
       })
       fetchProducts();
-      console.log(res.data)
+      setloading(false);
+      toast.success("Product Added Successfully!");
     } catch (error) {
-      console.log(error.response?.data?.message)
+      toast.error(error.response?.data?.message);
+      setloading(false);
     }
     }
   }  
 
   const deletedProduct = async (id) => {
     try {
+      setdeletedProductID(id)
       let res = await axios.delete(`${baseUrl}/product/${id}`)
       console.log(res.data);
+      toast.success('Deleted Product!');
       fetchProducts()
     } catch (error) {
       console.log(error)
+      toast.error('Product dit not Deleted!');
     }
   }
   useEffect(() => {
@@ -151,7 +160,7 @@ const AddProducts = () => {
           ))} 
         </select>
         <button 
-        className='bg-green-800 text-gray-300 font-semibold flex justify-center w-full rounded-lg py-2 px-4 items-center'>{productId? "update Product" : "Add Product"}</button>
+        className='bg-green-800 text-gray-300 font-semibold flex justify-center w-full rounded-lg py-2 px-4 items-center'>{loading ? <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin "></div>: productId? "update Product" : "Add Product"}</button>
       </form>
 
       <div className='flex justify-center flex-col gap-y-10 px-5 flex-wrap items-center gap-x-8 md:flex-row'>
@@ -173,7 +182,7 @@ const AddProducts = () => {
                   categoryId: eachProduct?.category_id
                 })
                 }}>Edit Product</button>
-              <button onClick={() => deletedProduct(eachProduct?.product_id)} className='bg-red-800 text-gray-300 font-semibold  justify-center w-full rounded-lg py-2 px-4 '>Delete Product</button>
+              <button onClick={() => deletedProduct(eachProduct?.product_id)} className='bg-red-800 text-gray-300 font-semibold  justify-center w-full rounded-lg py-2 px-4 '>{(deletedProductID === eachProduct.product_id )?<div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin "></div> : "Delete Product"}</button>
             </div>
           </div>
         ))}

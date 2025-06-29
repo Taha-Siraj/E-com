@@ -91,7 +91,7 @@ const AddCategories = () => {
     const inputStyles = "w-[100%] mb-3 border-[0.1px] py-3 px-4 rounded-md bg-gray-700 text-gray-200 text-sm rounded-lg focus:ring-2 border-[#dadada58] placeholder:text-[16px]  outline-none transition duration-300 ";
     const titleStyles = "text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500  text-center";
     return (
-    <div className='font-poppins flex bg-gray-900 h-screen justify-center items-center flex-col py-10'>
+    <div className='font-poppins flex bg-gray-900 min-[100%]: justify-center items-center flex-col py-10'>
         <Toaster position="top-center" richColors />
         <div ref={formRef}  className='border-[0.1px] w-[450px] h-[300px] flex justify-center items-center flex-col gap-4 rounded-lg border-[#dadada58] bg-gray-950 px-10' >
             <h1 className={titleStyles}>{CategoryID ? "Updated Category" : "Add Category"}</h1>
