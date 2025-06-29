@@ -173,7 +173,6 @@ const AddProducts = () => {
       key={eachProduct?.product_id}
       className="bg-gray-800 rounded-xl p-6 w-[320px] flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border border-gray-700"
     >
-      {/* Image Section */}
       <div className="w-full flex justify-center mb-5">
         <img
           src={eachProduct?.product_img}
@@ -182,7 +181,6 @@ const AddProducts = () => {
         />
       </div>
 
-      {/* Product Info Section */}
       <div className="flex flex-col gap-3 mb-6 flex-grow">
         <h3 className="text-xl font-bold text-white truncate">
           {eachProduct?.product_name}
