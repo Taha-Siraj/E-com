@@ -96,18 +96,19 @@ const Products = () => {
                   )}
                 </div>
 
-                <div className='p-5 flex flex-col flex-grow'>
-                  <h2 className='text-xl font-extrabold text-gray-900 mb-2 line-clamp-2' title={eachProduct?.product_name}> 
+                <div className='px-2 text-center py-5 flex flex-col'>
+                  <h2 className='text-[17px] font-extrabold text-gray-900 ' title={eachProduct?.product_name}> 
                     {eachProduct?.product_name}
                   </h2>
-                  <p className='text-sm text-gray-600 mb-4 line-clamp-3 flex-grow'>
-                    {eachProduct?.description || "No description available."}
-                  </p>
+                  
 
-                  <div className='flex items-center justify-between mt-auto pt-4 border-t border-gray-100'>
+                  <div className='flex flex-col gap-y-8 items-center justify-between mt-auto pt-4 border-t border-gray-100'>
                     <p className='text-2xl font-bold text-gray-900'>
                       Rs. <span className='text-green-600'>{eachProduct?.price}</span> 
                     </p>
+                    <p className='text-sm text-gray-600 '>
+                    {eachProduct?.description || "No description available."}
+                  </p>
                 
                   </div>
                 </div>
