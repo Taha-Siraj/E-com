@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 
 const AddProducts = () => {
-  
   const baseUrl = 'https://server-ecom-rho.vercel.app';
   const [productform, setproductform] = useState({
     productName: "",
