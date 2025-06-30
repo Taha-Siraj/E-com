@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import Products from './Products';
 import { Typewriter } from 'react-simple-typewriter';
+import { IoIosLogOut } from "react-icons/io";
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -26,6 +27,8 @@ const Home = () => {
   const navLinks = [
     { title: 'Home', path: '/' },
     { title: 'Products', path: '/product' },
+    { title: 'Blog', path: '/blog' },
+    { title: 'Hot Deal', path: '/hotdeal' },
     ...(state.user.user_role === 1 ?[
       { title: 'Add product', path: '/addproduct' },
       { title: 'Add Categories', path: '/AddCategories' },
@@ -35,12 +38,12 @@ const Home = () => {
   return (
     <div className="font-poppins bg-white">
       <header className="sticky top-0 z-50">
-        <nav className="bg-white/80 backdrop-blur-lg shadow-sm">
+        <nav className="bg-[#FFFFFF] backdrop-blur-lg shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-20">
               <div className="flex-shrink-0">
-                <Link to="/" className="text-3xl font-bold text-indigo-600">
-                  E-Shop
+                <Link to="/" className="text-3xl font-bold no-underline">
+                  <span className='text-green-600 '>E</span>-Shop
                 </Link>
               </div>
 
@@ -58,9 +61,7 @@ const Home = () => {
               
               <div className="hidden md:block">
                  {state.user ? (
-                    <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-all">
-                        Logout
-                    </button>
+                    <IoIosLogOut onClick={handleLogout} className='text-3xl text-gray-500 cursor-pointer hover:text-gray-700'/>
                  ) : (
                     <Link to="/login" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-all">
                         Login
