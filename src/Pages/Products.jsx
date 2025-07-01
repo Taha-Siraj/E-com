@@ -49,7 +49,7 @@ const Products = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className='font-poppins bg-gray-50 min-h-screen'>
+        <div className='font-poppins bg-[#FFFFFF] min-h-screen'>
           <div className='max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8'>
 
             <div className='flex flex-col md:flex-row md:justify-between md:items-center gap-6 mb-8'>
@@ -83,13 +83,14 @@ const Products = () => {
             {filteredProduct.map((eachProduct) => (
               <div
                 key={eachProduct.product_id}
-                className='bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col overflow-hidden border border-gray-200 group' 
+                className='bg-white rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]' 
               >
                 <div className='relative overflow-hidden'>
                   <img
                     src={eachProduct?.product_img}
                     alt={eachProduct?.product_name || "Product Image"}
-                    className='w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300' 
+                    className='w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-300' 
+
                   />
                   {eachProduct?.category_name && ( 
                     <div className='absolute top-3 left-3 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md'> 
