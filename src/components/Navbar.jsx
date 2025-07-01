@@ -5,6 +5,7 @@ import { GlobalContext } from '../Context/Context';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { CiMenuFries } from "react-icons/ci";
+import Home from '../Pages/Home';
 const Navbar = () => {
 
     const { state, dispatch } = useContext(GlobalContext);
@@ -52,19 +53,19 @@ const Navbar = () => {
                 {isMenuOpen ?  null :  <CiMenuFries/>}   
                 </button>
               </div>
-                <Link to="/" className="text-3xl font-bold no-underline">
-                  <span className='text-green-600 '>E</span>-Shop
+                <Link to="/" className="text-3xl text-green-600 uppercase font-bold no-underline">
+                  <span className="text-black">E-</span>Shop
                 </Link>
               </div>
 
-              <div className="hidden lg:flex items-baseline space-x-6">
+              <div className="hidden lg:flex items-baseline space-x-8">
                 {navLinks.map((link) => (
                   <Link
                     key={link.title}
                     to={link.path}
-                    className="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-base font-medium transition-colors"
-                  >
+                    className="relative group text-gray-600 no-underline hover:text-green-700 rounded-md text-base font-medium transition-colors">
                     {link.title}
+                     <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-green-700 transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 ))}
               </div>

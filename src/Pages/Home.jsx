@@ -12,34 +12,28 @@ const Home = () => {
   const navigate = useNavigate();
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
     const baseUrl = 'http://localhost:5004';
-  
-
- 
-
   return (
-    <div className="font-poppins bg-white py-6 px-10">
-     <div className='bg-[#FCF0E4] w-full px-6 sm:px-10 md:px-14 rounded-lg flex flex-col md:flex-row justify-between items-center gap-6'>
-  {/* Left Content */}
-  <div className='flex flex-col justify-center items-center md:items-start  gap-3 max-w-md py-2'>
+    <div className="font-poppins bg-white py-6">
+    <div className='px-10'>
+    <div className='bg-[#FCF0E4] w-full px-6 sm:px-10 md:px-14 rounded-lg flex flex-col md:flex-row justify-between items-center gap-6'>
+    <div className='flex flex-col justify-center items-center md:items-start  gap-3 max-w-md py-2'>
     <h1 className='text-xl sm:text-2xl md:text-3xl sm:text-center md:text-start font-semibold text-green-800 leading-tight'>
-      Grab Upto 50% Off on Selected Headphones
+    Grab Upto 50% Off on Selected Headphones
     </h1>
     <button className='bg-green-900 py-2 px-4 rounded-md font-semibold hover:bg-green-950 text-white'>
-      Buy Now
+    Buy Now
     </button>
   </div>
-
-  {/* Image */}
   <img
     src="banner.webp"
     alt="Headphone Banner"
-    className='w-full max-w-xs sm:max-w-sm md:max-w-md'
-  />
-</div>
+    className='w-full max-w-xs sm:max-w-sm md:max-w-md'/>
+  </div>
+  </div>
 
       <main>
         <div className="bg-white">
-          <div className="text-center py-24 md:py-32 px-4">
+          <div className="text-center py-10 md:py-12 px-4">
             <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
               Discover Your Next Favorite
               <br />
