@@ -1,17 +1,4 @@
-#signup-bg{
-    background-image: url(https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-#signup{
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border-radius: 20px;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-}
+
 #signup label{
     font-size: 16px;
     color: #fff;

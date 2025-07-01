@@ -53,9 +53,9 @@ const Signup = () => {
   return (
     <>
       <Toaster position="top-center" richColors />
-      <div id='signup-bg' className="h-screen flex  items-center justify-evenly bg-gray-950 font-poppins">
-        <div id='signup' className="w-full max-w-md  shadow-xl rounded-xl p-4">
-          <h2 className="text-3xl font-bold text-center text-[#fff] mb-8">Create Your Account</h2>
+      <div id='signup-bg' className="h-screen mt-20 flex  items-center justify-evenly bg-[#F3F4F6] font-poppins">
+        <div id='signup' className="rounded-lg border-[0.5px] border-[#dadadaa0] w-full bg flex justify-center flex-col bg-[#FFFFFF] max-w-sm p-4">
+          <h2 className="text-2xl font-bold text-center text-[#6b6b6b]">Create Your Account</h2>
           <form onSubmit={formik.handleSubmit} className="space-y-5 flex justify-center flex-col gap-y-1">
 
             {["firstName", "lastName", "email", "password"].map((field, idx) => {
@@ -82,9 +82,10 @@ const Signup = () => {
               );
             })}
 
-            <div className="flex  justify-center items-center gap-x-2 text-center text-xl text-[#fff]">
+            <div className="flex justify-center items-center  gap-x-2 text-md
+         text-[#747686]">
               Already have an account?{" "}
-              <Link to="/login" className="text-gray-300 hover:underline text-xl">Login</Link>
+              <Link to="/login" className="text-[#747686] no-underline  hover:underline">Login</Link>
             </div>
 
             <button
