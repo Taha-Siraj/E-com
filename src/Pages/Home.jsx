@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import Products from './Products';
 import { Typewriter } from 'react-simple-typewriter';
+import Navbar from '../components/Navbar';
 
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -13,7 +14,7 @@ const Home = () => {
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
     const baseUrl = 'http://localhost:5004';
   return (
-    <div className="font-poppins bg-white py-6">
+    <div className="font-poppins bg-white pt-20">
     <div className='px-10'>
     <div className='bg-[#FCF0E4] w-full px-6 sm:px-10 md:px-14 rounded-lg flex flex-col md:flex-row justify-between items-center gap-6'>
     <div className='flex flex-col justify-center items-center md:items-start  gap-3 max-w-md py-2'>

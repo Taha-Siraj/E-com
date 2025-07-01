@@ -7,6 +7,7 @@ import { GlobalContext } from '../Context/Context';
 import Products from '../Pages/Products';
 import AddProducts from '../admin/AddProducts';
 import AddCategories from '../admin/AddCategories';
+import  Navbar  from '../components/Navbar';
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
   if (loading) {
@@ -14,7 +15,9 @@ const CustomRoutes = () => {
   }
 
   return (
+        <>
     <Routes>
+      
       {state.isLogin ? (
         <>
           {state?.user?.user_role === 1 && (
@@ -35,6 +38,8 @@ const CustomRoutes = () => {
         </>
       )}
     </Routes>
+        
+        </>
   );
 };
 
