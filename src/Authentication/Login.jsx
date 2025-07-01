@@ -59,10 +59,10 @@ const Login = () => {
   return (
     <div id='login-bg' className="font-poppins min-h-screen flex items-center justify-center gap-x-10 px-4 bg-[#F3F4F6]">
       <Toaster position="top-center" richColors />
-      <form className="w-full bg flex justify-center  flex-col bg-[#FFFFFF] max-w-sm gap-2 p-4" id="login-form"
+      <form className="rounded-lg border-[0.5px] border-[#dadadaa0] w-full bg flex justify-center flex-col bg-[#FFFFFF] max-w-sm gap-2 p-4" id="login-form"
         onSubmit={formik.handleSubmit}>
-        <h2 className="text-2xl text-green-600 text-center uppercase font-bold"><span className="text-black">E-</span>Shop</h2>
-        <span className='text-xl font-semibold text-center'>Welcome Back!</span>
+        <h2 className="text-2xl text-green-600 flex justify-center items-center  text-center uppercase font-bold"><span className="text-black">E-</span>Shop</h2>
+       <span className='text-xl font-semibold text-center'>Welcome Back!</span>
         <div>
           <label className="block text-sm font-semibold text-gray-200 ">Email</label>
           <input
@@ -102,10 +102,11 @@ const Login = () => {
           )}
         </div>
 
-        <div className=" flex justify-center items-center  gap-x-2 text-xl
-         text-gray-200">
-          Don't have an account?{' '}
-          <Link to="/signup" className="text-gray-300  hover:underline">
+        <div className=" flex justify-center items-center  gap-x-2 text-md
+         text-[#747686]">
+          Don’t have an account?{' '}
+         
+          <Link to="/signup" className="text-[#747686] no-underline  hover:underline">
             Sign up
           </Link>
         </div>
