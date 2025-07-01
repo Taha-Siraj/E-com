@@ -31,43 +31,12 @@ const Home = () => {
     className='w-full max-w-xs sm:max-w-sm md:max-w-md'/>
   </div>
   </div>
-
-      <main>
-        <div className="bg-white">
-          <div className="text-center py-10 md:py-12 px-4">
-            <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-              Discover Your Next Favorite
-              <br />
-              <span className="text-indigo-600">
-                <Typewriter
-                  words={['computer electronics', 'Outfit', 'Mobile Phone', 'Explore Products', "All Collection" ]}
-                  loop={true}
-                  cursor
-                  cursorStyle='_'
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={1000}
-                />
-              </span>
-            </h1>
-            <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-500">
-              Your one-stop shop for everything you need. Quality products, unbeatable prices.
-            </p>
-            <div className="mt-8">
-              <Link
-                to="/product"
-                className="inline-block bg-indigo-600 text-white font-bold text-lg rounded-lg px-8 py-3 transition-transform transform hover:-translate-y-1"
-              >
-                Explore Products
-              </Link>
-            </div>
-          </div>
-        </div>   
-        <div id="products-section">
-          <Products />
-        </div>
-      </main>
-    </div>
+  <main>
+  <div id="products-section">
+    <Products />
+  </div>
+  </main>
+  </div>
   );
 };
 
