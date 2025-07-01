@@ -15,7 +15,7 @@ const Navbar = () => {
 
      const navLinks = [
     { title: 'Home', path: '/' },
-    { title: 'Products', path: '/product' },
+    { title: 'Shop', path: '/product' },
     { title: 'Blog', path: '/blog' },
     { title: 'Hot Deal', path: '/hotdeal' },
     ...(state.user.user_role === 1 ?[
