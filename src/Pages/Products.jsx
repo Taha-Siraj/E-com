@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import Loader from './Loader';
-
+import { MdOutlineStarPurple500 } from "react-icons/md";
+import { MdStarPurple500 } from "react-icons/md";
+import { FaLuggageCart } from "react-icons/fa";
 const Products = () => {
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
   const baseUrl = 'http://localhost:5004';
@@ -83,8 +85,7 @@ const Products = () => {
             {filteredProduct.map((eachProduct) => (
               <div
                 key={eachProduct.product_id}
-                className='bg-white rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]' 
-              >
+                className='bg-white rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
                 <div className='relative overflow-hidden'>
                   <img
                     src={eachProduct?.product_img}
@@ -99,21 +100,15 @@ const Products = () => {
                   )}
                 </div>
 
-                <div className='px-2 text-center py-5 flex flex-col'>
-                  <h2 className='text-[17px] font-extrabold text-gray-900 ' title={eachProduct?.product_name}> 
+                <div className='px-3 text-start justify-center items-start capitalize py-4 gap-y-3 flex flex-col'>
+                  <h2 className='text-[16px] font-semibold text-black' title={eachProduct?.product_name}> 
                     {eachProduct?.product_name}
                   </h2>
-                  
-
-                  <div className='flex flex-col gap-y-8 items-center justify-between mt-auto pt-4 border-t border-gray-100'>
+                  <p className='text-md flex justify-start items-start text-[#93D991]'><MdOutlineStarPurple500/><MdOutlineStarPurple500/> <MdOutlineStarPurple500/> <MdOutlineStarPurple500/> <MdStarPurple500/> <span className='text-sm text-[#ABABAB]'>5 Reviews</span> </p>
                     <p className='text-2xl font-bold text-gray-900'>
                       Rs. <span className='text-green-600'>{eachProduct?.price}</span> 
                     </p>
-                    <p className='text-sm text-gray-600 '>
-                    {eachProduct?.description || "No description available."}
-                  </p>
-                
-                  </div>
+                    <button className='bg-[#063c28cc] mt-2 flex justify-center gap-x-2 items-center rounded-full py-2 px-4 font-semibold hover:scale-100 transition-all  text-[#f0f0f0]'><FaLuggageCart/>  Add to cart</button>
                 </div>
               </div>
             ))}
