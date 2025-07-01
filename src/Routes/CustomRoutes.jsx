@@ -5,9 +5,8 @@ import Signup from '../Authentication/Signup';
 import Home from '../Pages/Home';
 import { GlobalContext } from '../Context/Context';
 import Products from '../Pages/Products';
-import AddCategories from '../Pages/AddCategories';
-import AddProducts from '../Pages/AddProducts';
-
+import AddProducts from '../admin/AddProducts';
+import AddCategories from '../admin/AddCategories';
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
   if (loading) {

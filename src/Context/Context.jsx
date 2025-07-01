@@ -1,5 +1,7 @@
 import React, { createContext, useEffect, useReducer, useState } from 'react';
 import { reducer } from './Reducer';
+import axios from 'axios';
+
 export const GlobalContext = createContext(null);
 const initialState = {
     user: {},
@@ -7,15 +9,24 @@ const initialState = {
 };
 export default function ContextProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const userStore = localStorage.getItem("user");
-    if (userStore) {
-      dispatch({ type: "USER_LOGIN", payload: JSON.parse(userStore) });
+useEffect(() => {
+  const checkLogin = async () => {
+    try {
+      const res = await axios.get("http://localhost:5004/me", {
+        withCredentials: true,
+      });
+      console.log(res)
+      dispatch({ type: "USER_LOGIN", payload: res.data.user });
+    } catch (error) {
+      dispatch({ type: "USER_LOGOUT" });
     }
-    setLoading(false);
-  }, []);
+  };
+
+  checkLogin();
+}, []);
+
+
     return (
         <GlobalContext.Provider value={{ state, dispatch }}>
             {children}

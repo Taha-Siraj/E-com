@@ -13,9 +13,9 @@ const Login = () => {
   const { dispatch } = useContext(GlobalContext);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-  const baseUrl = 'https://server-ecom-rho.vercel.app';
+  // const baseUrl = 'https://server-ecom-rho.vercel.app';
   
-  // const baseUrl = 'http://localhost:5004';
+  const baseUrl = 'http://localhost:5004';
   
   useGSAP(() => {
     gsap.from('#login-form', {
@@ -45,7 +45,7 @@ const Login = () => {
         
         toast.success('User logged in successfully');
         dispatch({ type: 'USER_LOGIN', payload: res.data.user});
-        localStorage.setItem("user", JSON.stringify(res.data.user)); 
+        console.log(res.data.user)
         setTimeout(() => navigate('/'), 1500);
       } catch (error) {
         toast.error(error.response?.data?.message || 'Login failed. Try again.');

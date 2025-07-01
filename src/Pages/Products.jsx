@@ -5,7 +5,9 @@ import { Toaster, toast } from 'sonner';
 import Loader from './Loader';
 
 const Products = () => {
-  const baseUrl = 'https://server-ecom-rho.vercel.app';
+  // const baseUrl = 'https://server-ecom-rho.vercel.app';
+  const baseUrl = 'http://localhost:5004';
+
   const [allProduct, setAllProduct] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setAllcategory] = useState([]);

@@ -5,113 +5,38 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import Products from './Products';
 import { Typewriter } from 'react-simple-typewriter';
-import { IoIosLogOut } from "react-icons/io";
+
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const baseUrl = 'https://server-ecom-rho.vercel.app';
-  const handleLogout = async () => {
-    try {
-      await axios.post(`${baseUrl}/logout`, {}, { withCredentials: true });
-      dispatch({ type: 'USER_LOGOUT' });
-      localStorage.removeItem("user");
-      toast.success('Logged out successfully!');
-      navigate('/login');
-    } catch (error) {
-      console.error("Logout Error:", error);
-      toast.error(error.response?.data?.message || "Failed to logout. Try again.");
-    }
-  };
+  // const baseUrl = 'https://server-ecom-rho.vercel.app';
+    const baseUrl = 'http://localhost:5004';
+  
 
-  const navLinks = [
-    { title: 'Home', path: '/' },
-    { title: 'Products', path: '/product' },
-    { title: 'Blog', path: '/blog' },
-    { title: 'Hot Deal', path: '/hotdeal' },
-    ...(state.user.user_role === 1 ?[
-      { title: 'Add product', path: '/addproduct' },
-      { title: 'Add Categories', path: '/AddCategories' },
-    ]: [])
-  ];
+ 
 
   return (
-    <div className="font-poppins bg-white">
-      <header className="sticky top-0 z-50">
-        <nav className="bg-[#FFFFFF] backdrop-blur-lg shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-20">
-              <div className="flex-shrink-0">
-                <Link to="/" className="text-3xl font-bold no-underline">
-                  <span className='text-green-600 '>E</span>-Shop
-                </Link>
-              </div>
+    <div className="font-poppins bg-white py-6 px-10">
+     <div className='bg-[#FCF0E4] w-full px-6 sm:px-10 md:px-14 rounded-lg flex flex-col md:flex-row justify-between items-center gap-6'>
+  {/* Left Content */}
+  <div className='flex flex-col justify-center items-center md:items-start  gap-3 max-w-md py-2'>
+    <h1 className='text-xl sm:text-2xl md:text-3xl sm:text-center md:text-start font-semibold text-green-800 leading-tight'>
+      Grab Upto 50% Off on Selected Headphones
+    </h1>
+    <button className='bg-green-900 py-2 px-4 rounded-md font-semibold hover:bg-green-950 text-white'>
+      Buy Now
+    </button>
+  </div>
 
-              <div className="hidden md:flex items-baseline space-x-6">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.title}
-                    to={link.path}
-                    className="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-base font-medium transition-colors"
-                  >
-                    {link.title}
-                  </Link>
-                ))}
-              </div>
-              
-              <div className="hidden md:block">
-                 {state.user ? (
-                    <IoIosLogOut onClick={handleLogout} className='text-3xl text-gray-500 cursor-pointer hover:text-gray-700'/>
-                 ) : (
-                    <Link to="/login" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-all">
-                        Login
-                    </Link>
-                 )}
-              </div>
+  {/* Image */}
+  <img
+    src="banner.webp"
+    alt="Headphone Banner"
+    className='w-full max-w-xs sm:max-w-sm md:max-w-md'
+  />
+</div>
 
-
-              <div className="md:hidden flex items-center">
-                <button
-                  onClick={() => setMenuOpen(!isMenuOpen)}
-                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                >
-                  <span className="sr-only">Open main menu</span>
-                  {isMenuOpen ? "open" : "close"}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {isMenuOpen && (
-            <div className="md:hidden border-t border-gray-200">
-              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.title}
-                    to={link.path}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-gray-700 hover:bg-indigo-500 hover:text-white block px-3 py-3 rounded-md text-base font-medium transition-colors"
-                  >
-                    {link.title}
-                  </Link>
-                ))}
-                 <div className="pt-4 pb-2">
-                    {state.user ? (
-                        <button onClick={handleLogout} className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-all">
-                            Logout
-                        </button>
-                     ) : (
-                        <Link to="/login" onClick={() => setMenuOpen(false)} className="block w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-all">
-                            Login
-                        </Link>
-                     )}
-                 </div>
-              </div>
-            </div>
-          )}
-        </nav>
-      </header>
-      
       <main>
         <div className="bg-white">
           <div className="text-center py-24 md:py-32 px-4">

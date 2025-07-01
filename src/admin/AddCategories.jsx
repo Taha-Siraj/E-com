@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { toast, Toaster } from 'sonner';
-import Loader from './Loader';
 import { Link } from 'react-router-dom';
 const AddCategories = () => {
-    const baseUrl = 'https://server-ecom-rho.vercel.app';
+    // const baseUrl = 'https://server-ecom-rho.vercel.app';
+    const baseUrl = 'http://localhost:5004';
+
     const [CategoryForm, setCategoryForm] = useState({
         categoryName: "",
         description: "",
