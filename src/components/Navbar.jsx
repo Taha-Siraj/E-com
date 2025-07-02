@@ -71,13 +71,13 @@ const Navbar = () => {
               </div>
               
               <div className="hidden md:block">
-                 {state.user ? (
+                 {(state.user === true) ? 
                     <IoIosLogOut onClick={handleLogout} className='text-3xl text-gray-500 cursor-pointer hover:text-gray-700'/>
-                 ) : (
-                    <Link to="/login" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-all">
+                 : 
+                    <Link to="/login" className=" text-gray-600 no-underline font-semibold hover:underline py-2 px-4 rounded-lg transition-all">
                         Login
                     </Link>
-                 )}
+                 }
               </div>
 
 
