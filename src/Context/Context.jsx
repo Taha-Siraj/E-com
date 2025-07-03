@@ -15,8 +15,8 @@ useEffect(() => {
     try {
       const res = await axios.get("https://server-ecom-rho.vercel.app/me", {
         withCredentials: true,
-      });
-      console.log(res)
+      });     
+      console.log(res.data)
       dispatch({ type: "USER_LOGIN", payload: res.data.user });
     } catch (error) {
       dispatch({ type: "USER_LOGOUT" });
