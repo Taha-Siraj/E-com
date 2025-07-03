@@ -45,7 +45,7 @@ const Fotter = () => {
         </>
       ))}
       </div>
-        <hr />
+      <hr className='h-[2.9px] bg-black flex justify-center items-center border mx-5' />
      <div className="w-full px-5 py-10">
   <div className="w-full flex flex-col md:flex-row justify-between items-start gap-10">
     <div className="max-w-sm w-full">
