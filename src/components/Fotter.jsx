@@ -3,6 +3,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { IoCallSharp } from "react-icons/io5";
 import { IoTimeOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 const Fotter = () => {
 
@@ -44,13 +45,37 @@ const Fotter = () => {
         </>
       ))}
       </div>
-      <div className='px-5'>
         <hr />
-        <div>
-          <h1 className='text-2xl font-extrabold text-green-600' ><span className='text-black'>E</span>-SHOP</h1>
-          <p className='text-[16px]' >Discover curated furniture collections at Shopcart, blending style and comfort to elevate your living spaces.</p>
+      <div className='px-5 w-full flex flex-col md:flex-row justify-between items-start gap-10 py-3'>
+        <div className='max-w-sm w-full'>
+          <h1 className='text-2xl font-extrabold text-green-600 hover:text-black' >
+            <span className='hover:text-green-500 text-black'>E</span>-SHOP</h1>
+          <p className='text-[16px] break-words text-gray-600' >Discover curated furniture collections at Shopcart, blending style and comfort to elevate your living spaces.</p>
         </div>
+      <div className='flex flex-col justify-center gap-y-2 items-start max-w-sm w-full'>
+        <h1 className='text-xl font-semibold'>Quick Links</h1>
+        <Link className='text-[15px] text-gray-600 hover:text-gray-800 no-underline' to={'/'} > Home</Link>
+        <Link className='text-[15px] text-gray-600 hover:text-gray-800 no-underline' to={'/product'}>Shop</Link>
+        <Link className='text-[15px] text-gray-600 hover:text-gray-800 no-underline' to={'/blog'}>Blog</Link>
+        <Link className='text-[15px] text-gray-600 hover:text-gray-800  no-underline' to={'/hotdeal'}>Hot Deal</Link>
       </div>
+
+      <div className='flex flex-col justify-center gap-y-2 items-start capitalize  max-w-sm w-full'>
+        <h1 className='text-xl font-semibold'>Categories</h1>
+        <Link className='text-[15px] text-gray-600 hover:text-gray-800 no-underline' to={'/'}>computer accessories</Link>
+        <Link className='text-[15px] text-gray-600 hover:text-gray-800 no-underline' to={'/'}>Shoes Collection</Link>
+        <Link className='text-[15px] text-gray-600 hover:text-gray-800 no-underline' to={'/'}>Men Collection</Link>
+        <Link className='text-[15px] text-gray-600 hover:text-gray-800  no-underline' to={'/'}>Men Watches</Link>
+        <Link className='text-[15px] text-gray-600 hover:text-gray-800  no-underline' to={'/'}>Women Colection</Link>
+      </div>
+      <div className='flex flex-col justify-center gap-y-2 items-start capitalize  max-w-sm w-full'>
+        <h1 className='text-xl font-semibold'>Newsletter</h1>
+       <p className='text-[16px] text-gray-600' >Subscribe to our newsletter to receive updates and exclusive offers.</p>
+       <input type="text" placeholder='Enter Your email' className='py-1 rounded-lg px-3 w-full border outline-none placeholder:capitalize' />
+       <button className='bg-black w-full text-white py-2 px-4 rounded-lg'>Subscribe</button>
+      </div>
+      </div>
+
 
 
     </div>
