@@ -8,6 +8,7 @@ import { Typewriter } from 'react-simple-typewriter';
 import Navbar from '../components/Navbar';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 import { FaLuggageCart } from 'react-icons/fa';
+import Allblogs from '../Blog/Allblogs';
 
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -92,7 +93,7 @@ const Home = () => {
 
 
 
-  <div className='px-10 py-5'>
+  <div className='px-10'>
     <div className='py-4 items-start px-10 border border-gray-300 rounded-md w-full'>
     <h1 className='text-2xl'>Popular Categories</h1>
      <hr className='h-1'/>
@@ -112,7 +113,7 @@ const Home = () => {
   </div>
 
   <div>
-    <h1 className='ml-10 text-2xl'>Latest Blog</h1>
+    <Allblogs/>
   </div>
   </div>
   );
