@@ -57,9 +57,9 @@ const Home = () => {
       <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Kids collection </button>
       <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Other</button>
     </div>
-  <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-3 p-4'>
-   {HomeProducts.map((eachProduct) => (
-    <div key={eachProduct._id} className='bg-white w-[250px] rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
+  <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-3 p-4'>
+   {HomeProducts.map((eachProduct, index) => (
+    <div key={index} className='bg-white w-[250px] rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
       <div className='relative overflow-hidden'>
         <img src={eachProduct.product_img} alt={eachProduct.product_name} className='w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-300' />
         {eachProduct?.category_name && ( 
@@ -77,8 +77,7 @@ const Home = () => {
               <MdOutlineStarPurple500 key={index} className='text-gray-300' />
             ))}
           </div>
-        <button 
-        onClick={() => navigate(`/product/${eachProduct._id}`)}
+        <button
         className='bg-[#063c28cc] mt-2 flex justify-center gap-x-2 items-center rounded-full py-2 px-4 font-semibold hover:scale-100 transition-all  text-[#f0f0f0]'><FaLuggageCart/>
         Add To cart
       </button>
@@ -93,8 +92,8 @@ const Home = () => {
 
 
 
-  <div className='px-10'>
-    <div className='py-5 items-start px-10 border border-gray-300 rounded-md w-full'>
+  <div className='px-10 py-5'>
+    <div className='py-4 items-start px-10 border border-gray-300 rounded-md w-full'>
     <h1 className='text-2xl'>Popular Categories</h1>
      <hr className='h-1'/>
      <div className='flex justify-center gap-5 items-center flex-wrap '>
@@ -110,6 +109,10 @@ const Home = () => {
     
     <div>
     </div>
+  </div>
+
+  <div>
+    <h1 className='ml-10 text-2xl'>Latest Blog</h1>
   </div>
   </div>
   );
