@@ -12,8 +12,8 @@ const Home = () => {
   const [ allProducts, setAllProducts ] = useState([]);
   const [HomeProducts ,  setHomeProducts] = useState([])
   const navigate = useNavigate();
-  // const baseUrl = 'https://server-ecom-rho.vercel.app';
-    const baseUrl = 'http://localhost:5004';
+  const baseUrl = 'https://server-ecom-rho.vercel.app';
+    // const baseUrl = 'http://localhost:5004';
 
     const fetchProducts = async() => {
       try {

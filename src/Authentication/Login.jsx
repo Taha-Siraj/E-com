@@ -13,9 +13,9 @@ const Login = () => {
   const { dispatch } = useContext(GlobalContext);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-  // const baseUrl = 'https://server-ecom-rho.vercel.app';
+  const baseUrl = 'https://server-ecom-rho.vercel.app';
   
-  const baseUrl = 'http://localhost:5004';
+  // const baseUrl = 'http://localhost:5004';
   
   useGSAP(() => {
     gsap.from('#login-form', {

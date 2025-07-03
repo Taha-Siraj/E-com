@@ -7,8 +7,8 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 import { MdStarPurple500 } from "react-icons/md";
 import { FaLuggageCart } from "react-icons/fa";
 const Products = () => {
-  // const baseUrl = 'https://server-ecom-rho.vercel.app';
-  const baseUrl = 'http://localhost:5004';
+  const baseUrl = 'https://server-ecom-rho.vercel.app';
+  // const baseUrl = 'http://localhost:5004';
 
   const [allProduct, setAllProduct] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
