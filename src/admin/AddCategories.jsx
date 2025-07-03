@@ -98,7 +98,7 @@ const AddCategories = () => {
     return (
     <>
     <Toaster position="top-center" richColors />
-    <div className='min-h-screen font-poppins flex bg-gray-900 justify-center items-center flex-col py-10 px-4 sm:px-6 lg:px-8'>
+    <div className='pt-24 min-h-screen font-poppins flex bg-gray-900 justify-center items-center flex-col py-10 px-4 sm:px-6 lg:px-8'>
   <div ref={formRef} className='border border-gray-700 w-full max-w-md p-8 flex justify-center items-center flex-col gap-6 rounded-xl bg-gray-800 text-gray-100 shadow-2xl'> 
     <h1 className='text-3xl font-extrabold text-white mb-4'>{CategoryID ? "Update Category" : "Add Category"}</h1> 
     <form onSubmit={handleFormCategory} className="w-full flex flex-col gap-5"> 
