@@ -48,15 +48,17 @@ const Home = () => {
   </div>
   </div>
   <main>
-    <div className='flex justify-start px-10 py-6 items-center gap-x-3 '>
+    {/* <div className='flex justify-start px-10 py-6 items-center gap-x-3 '>
       <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Men collection </button>
       <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white  border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Women collection </button>
       <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Kids collection </button>
       <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Other</button>
-    </div>
+    </div> */}
+
+    <h1>Our Peoducts</h1>
   <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-3 p-4'>
-   {HomeProducts.map((eachProduct, index) => (
-    <div key={index} className='bg-white max-w-sm rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
+   {HomeProducts.map((eachProduct) => (
+    <div key={eachProduct.product_name} className='bg-white max-w-sm rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
       <div className='relative overflow-hidden'>
         <img src={eachProduct.product_img} alt={eachProduct.product_name} className='w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-300' />
         {eachProduct?.category_name && ( 

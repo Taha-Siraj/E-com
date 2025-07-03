@@ -6,24 +6,28 @@ const Allblogs = () => {
 
 
     const blogs = [{
+    id: 1,
     img: 'lifestyle.webp',
     title: 'Lifestyle',
     desc: 'Office rental agency or direct? Which is best when renting an office?',
     date: 'February 19, 2025', 
   },
   {
+    id: 2,
     img: 'socialmedia.webp',
     title: 'Social Media',
     desc: 'Lotus Electronics – New Store Launch in Bhilai, Chhattisgarh',
     date: 'February 19, 2025', 
   },     
   {
+    id: 3,
     img: 'company.webp',
     title: 'Company News',
     desc: 'We Invite You to These Wonderful Wine Tasting Events',
     date: 'February 19, 2025', 
   },     
   {
+    id: 4,
     img: 'elctronics.webp',
     title: 'Electronics',
     desc: '10 French Wine Regions to Visit for Amazing Views and Delicious Vinos',
@@ -34,8 +38,8 @@ const Allblogs = () => {
     <div className='mt-24 font-poppins'>
       <h1 className='text-2xl  px-10'>Our Blogs</h1>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 py-10">
-    {blogs.map((blog, index) => (
-        <div key={index} className="flex flex-col justify-start items-start bg-white shadow-md rounded-lg overflow-hidden">
+    {blogs.map((blog) => (
+        <div key={blog.id} className="flex flex-col justify-start items-start bg-white shadow-md rounded-lg overflow-hidden">
         <img
             src={blog.img}
             alt={blog.title}
