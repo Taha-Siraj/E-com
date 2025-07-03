@@ -56,7 +56,7 @@ const Products = () => {
 
             <div className='flex flex-col md:flex-row md:justify-between md:items-center gap-6 mb-8'>
               <h1 className='text-3xl lg:text-4xl font-bold text-gray-800 text-center md:text-left'>
-                Our Products
+                Our Product
               </h1>
               <div className='flex flex-col sm:flex-row items-center justify-center gap-4'>
                 <select
