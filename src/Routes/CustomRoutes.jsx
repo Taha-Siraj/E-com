@@ -8,6 +8,7 @@ import Products from '../Pages/Products';
 import AddProducts from '../admin/AddProducts';
 import AddCategories from '../admin/AddCategories';
 import  Navbar  from '../components/Navbar';
+import Allblogs from '../Blog/Allblogs';
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext); 
   if (loading) {
@@ -28,6 +29,7 @@ const CustomRoutes = () => {
           )}
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Products />} />
+          <Route path="/blog" element={<Allblogs/>} />
           <Route path="*" element={<Navigate to="/" />} />
         </>
       ) : (
