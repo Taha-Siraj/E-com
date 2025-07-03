@@ -52,8 +52,8 @@ const Fotter = () => {
       <h1 className="text-2xl font-extrabold text-green-600">
         <span className="text-black">E</span>-SHOP
       </h1>
-      <p className="text-[16px] text-gray-600 mt-2">
-        Discover curated furniture collections at Shopcart, blending style and comfort to elevate your living spaces.
+      <p className="text-[16px] text-gray-600 mt-2 capitalize">
+        Discover curated OutFits collections at E-shop, blending style and comfort to elevate your living spaces.
       </p>
     </div>
 
