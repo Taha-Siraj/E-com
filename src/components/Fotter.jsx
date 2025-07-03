@@ -76,7 +76,9 @@ const Fotter = () => {
       </div>
       </div>
 
+<hr />
 
+<p className='text-sm text-center text-black'>© 2025 E-SHOP. All rights reserved.</p>
 
     </div>
   )
