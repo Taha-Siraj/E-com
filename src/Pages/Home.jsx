@@ -90,14 +90,14 @@ const Home = () => {
 
 
   <div className='px-10'>
-    <div className='py-4 items-start px-10 border border-gray-300 rounded-md w-full'>
+    <div className='py-4  items-start px-10 border border-gray-300 rounded-md w-full'>
     <h1 className='text-2xl'>Popular Categories</h1>
      <hr className='h-1'/>
      <div className='flex justify-center gap-5 items-center flex-wrap '>
       {allProducts.map((eachProduct) => (
         <div key={eachProduct?.category_id} className='h-[120px] flex justify-start gap-x-7 px-4 items-center w-[350px] bg-[#F6F6F6]' >
         <img src={eachProduct?.product_img} width={80} alt="" className='p-2 hover:scale-105 cursor-pointer border rounded-md border-yellow-700'  />
-        <h1 className='text-[17px] flex flex-col gap-y-2 justify-center items-start font-semibold'>{eachProduct?.category_name}<span className='text-sm font-normal'>1 items Available</span> </h1>
+        <h1 className='text-[17px] flex flex-col gap-y-2 justify-center items-start font-semibold'>{eachProduct?.category_name}<span className='text-sm font-normal'>4 items Available</span> </h1>
       </div>
       ))}
       
