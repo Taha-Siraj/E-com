@@ -30,7 +30,7 @@ const Fotter = () => {
     }        
   ]
   return (
-    <div>
+    <div className='font-poppins'>
         <hr />
       <div className='flex justify-between items-start px-10'>
       {contactInfo.map((info, index) => (
