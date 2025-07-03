@@ -23,7 +23,7 @@ const Navbar = () => {
       { title: 'Add Categories', path: '/AddCategories' },
     ]: [])
   ];
-
+  console.log("state", state?.user?.email)
     const handleLogout = async () => {
       try {
         await axios.post(`${baseUrl}/logout`, {}, { withCredentials: true });
@@ -71,12 +71,10 @@ const Navbar = () => {
               </div>
               
               <div className="hidden md:block">
-                 {(state.user === true) ? 
+                 {(state?.user?.email) ? 
                     <IoIosLogOut onClick={handleLogout} className='text-3xl text-gray-500 cursor-pointer hover:text-gray-700'/>
                  : 
-                    <Link to="/login" className=" text-gray-600 no-underline font-semibold hover:underline py-2 px-4 rounded-lg transition-all">
-                        Login
-                    </Link>
+                null
                  }
               </div>
 
@@ -99,7 +97,7 @@ const Navbar = () => {
                   </Link>
                 ))}
                  <div className="pt-4 pb-2">
-                    {state.user ? (
+                    {state?.user?.email? (
                         <button onClick={handleLogout} className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-all">
                             Logout
                         </button>
