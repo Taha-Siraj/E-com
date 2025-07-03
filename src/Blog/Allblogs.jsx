@@ -31,8 +31,17 @@ const Allblogs = () => {
   return (
     <div className='py-24 font-poppins px-10'>
       <h1 className='text-2xl py-3'>Our Blogs</h1>
-      <div>
-        <div>  </div>
+      <div className='grid grid-cols-4 py-10 '>
+        {blogs.map((blog, index) => (
+        <div key={index} className='flex h-[350px] w-[300px] gap-x-5 flex-col justify-center items-center px-4 py-4'>
+                <img src={blog.img} alt={blog.title} className='w-full rounded-lg' />
+                <div className='flex justify-center items-center gap-x-3'>
+                <h2 className='text-sm text-green-950 font-semibold'>{blog.title}</h2>
+                <p className=' text-sm text-green-950 mt-2'>{blog.date}</p>
+                </div>
+                <p className='text-gray-900'>{blog.desc}</p>
+        </div>
+        ))}
       </div>
     </div>
   )
