@@ -1,4 +1,6 @@
 import React from 'react'
+import { MdDateRange } from "react-icons/md";
+
 
 const Allblogs = () => {
 
@@ -29,20 +31,28 @@ const Allblogs = () => {
   },     
     ]
   return (
-    <div className='py-24 font-poppins px-10'>
-      <h1 className='text-2xl py-3'>Our Blogs</h1>
-      <div className='grid grid-cols-4 py-10 '>
-        {blogs.map((blog, index) => (
-        <div key={index} className='flex h-[350px] w-[300px] gap-x-5 flex-col justify-center items-center px-4 py-4'>
-                <img src={blog.img} alt={blog.title} className='w-full rounded-lg' />
-                <div className='flex justify-center items-center gap-x-3'>
-                <h2 className='text-sm text-green-950 font-semibold'>{blog.title}</h2>
-                <p className=' text-sm text-green-950 mt-2'>{blog.date}</p>
-                </div>
-                <p className='text-gray-900'>{blog.desc}</p>
+    <div className='py-24 font-poppins'>
+      <h1 className='text-2xl  px-10'>Our Blogs</h1>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 py-10">
+    {blogs.map((blog, index) => (
+        <div key={index} className="flex flex-col justify-start items-start bg-white shadow-md rounded-lg overflow-hidden">
+        <img
+            src={blog.img}
+            alt={blog.title}
+            className="w-full h-48 object-cover"
+        />
+        <div className="py-4 px-3 w-full flex justify-center flex-col ">
+            <div className="flex justify-between items-center gap-2 mb-2">
+            <h2 className="text-sm hover:underline text-green-950 cursor-pointer font-semibold">{blog.title}</h2>
+            <p className="flex items-center gap-1 hover:underline cursor-pointer text-sm text-green-950">
+                <MdDateRange /> {blog.date}
+            </p>
+            </div>
+            <p className="text-gray-900 hover:cursor-pointer text-[17px] font-semibold">{blog.desc}</p>
         </div>
-        ))}
-      </div>
+        </div>
+    ))}
+    </div>
     </div>
   )
 }
