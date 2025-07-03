@@ -55,7 +55,7 @@ const Home = () => {
       <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Other</button>
     </div> */}
 
-    <h1>Our Peoducts</h1>
+    <h1 className=' text-3xl  font-bold font-poppins px-10 capitalize  mt-3 '>Our Product :</h1>
   <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-3 p-4'>
    {HomeProducts.map((eachProduct) => (
     <div key={eachProduct.product_name} className='bg-white max-w-sm rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
@@ -68,7 +68,7 @@ const Home = () => {
            )}
         <div className='px-3 text-start  justify-center items-start capitalize py-4 gap-y-3 flex flex-col'>
           <h2 className='text-lg font-semibold text-gray-800'>{eachProduct.product_name}</h2>
-          <p className='text-gray-600'>Price: ${eachProduct.price}</p>
+          <p className='text-gray-600'>Price RS: {eachProduct.price}</p>
           <div className='flex items-center gap-1'>
             {[...Array(5)].map((_, index) => (
               index < eachProduct.rating ? 
