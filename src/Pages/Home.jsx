@@ -1,11 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import  { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../Context/Context';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
+import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Products from './Products';
-import { Typewriter } from 'react-simple-typewriter';
-import Navbar from '../components/Navbar';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 import { FaLuggageCart } from 'react-icons/fa';
 import Allblogs from '../Blog/Allblogs';
