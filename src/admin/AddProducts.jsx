@@ -130,7 +130,7 @@ const AddProducts = () => {
   const titleStyles = "text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500  text-center";
   return (
     <>
-    <div className='bg-gray-950 py-10 min:h-screen flex justify-center items-center flex-col gap-y-10'>
+    <div className='pt-24 bg-gray-950 py-10 min:h-screen flex justify-center items-center flex-col gap-y-10'>
   <Toaster position="top-center" richColors />
   <form ref={formRef} onSubmit={addproduct} className='flex justify-center flex-col border-[0.2px] border-[#dadada4a] rounded-xl min:h-[400px] w-[400px] bg-gray-800 text-gray-200 gap-y-5 font-poppins px-8 py-8 shadow-2xl'> 
     <h1 className='text-3xl font-extrabold text-white mb-4'>{productId ? "Update Product" : "Add Product"}</h1> 
