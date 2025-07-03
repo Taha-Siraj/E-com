@@ -54,19 +54,19 @@ const Home = () => {
       <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Kids collection </button>
       <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Other</button>
     </div>
-  <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-3 p-4'>
+  <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-3 p-4'>
    {HomeProducts.map((eachProduct, index) => (
-    <div key={index} className='bg-white w-[250px] rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
+    <div key={index} className='bg-white max-w-sm rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
       <div className='relative overflow-hidden'>
         <img src={eachProduct.product_img} alt={eachProduct.product_name} className='w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-300' />
         {eachProduct?.category_name && ( 
-       <div className='absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md'> 
+       <div className='absolute top-3 left-3  bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md'> 
            {eachProduct.category_name}
           </div>
            )}
-        <div className='px-3 text-start justify-center items-start capitalize py-4 gap-y-3 flex flex-col'>
+        <div className='px-3 text-start  justify-center items-start capitalize py-4 gap-y-3 flex flex-col'>
           <h2 className='text-lg font-semibold text-gray-800'>{eachProduct.product_name}</h2>
-          <p className='text-gray-600'>Price: ${eachProduct.product_price}</p>
+          <p className='text-gray-600'>Price: ${eachProduct.price}</p>
           <div className='flex items-center gap-1'>
             {[...Array(5)].map((_, index) => (
               index < eachProduct.rating ? 
