@@ -31,7 +31,7 @@ const Allblogs = () => {
   },     
     ]
   return (
-    <div className='py-24 font-poppins'>
+    <div className='mt-24 font-poppins'>
       <h1 className='text-2xl  px-10'>Our Blogs</h1>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 py-10">
     {blogs.map((blog, index) => (
