@@ -13,7 +13,7 @@ const Products = () => {
   const [allProduct, setAllProduct] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setAllcategory] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState([]);
   const [loading, setloading] = useState(true);
   const getProduct = async () => {
     try {
@@ -35,6 +35,8 @@ const Products = () => {
 
   const handleCategoryChange = (e) => {
     const selected = e.target.value;
+    const checked = e.target.checked;
+    console.log(checked)
     setSelectedCategory(selected);
     if (!selected) {
       setFilteredProduct(allProduct);
@@ -59,11 +61,17 @@ const Products = () => {
             <h1 className='text-2xl lg:text-3xl font-semibold text-gray-800 text-start md:text-left'>
                 Get the products as your needs
               </h1>
-              {selectedCategory ? <Link className='text-end text-green-500 cursor-pointer' onClick={handleResetFilter}>Reset Filter</Link> : null  }
+              {selectedCategory.length > 0 && (
+              <button
+                onClick={handleResetFilter}
+                className="text-green-500 cursor-pointer underline text-sm"
+              >
+                Reset Filters
+              </button>
+            )}
          </div>
           <hr />
          <div className="flex flex-col md:flex-row gap-6 px-4 py-6">
-          {/* LEFT: Categories */}
        <div className="w-full md:w-1/4">
        <h1 className="text-xl font-semibold mb-4">Product Categories</h1>
         <div className="flex flex-col gap-2">
