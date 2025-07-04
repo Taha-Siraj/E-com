@@ -15,7 +15,6 @@ const Products = () => {
   const [category, setAllcategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setloading] = useState(true);
-
   const getProduct = async () => {
     try {
       const [productsRes, categoriesRes] = await Promise.all([
@@ -44,6 +43,10 @@ const Products = () => {
       setFilteredProduct(filtered);
     }
   };
+  const handleResetFilter = () => {
+    setSelectedCategory('');
+    setFilteredProduct(allProduct);
+  };
 
   return (
     <>
@@ -51,11 +54,14 @@ const Products = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className='font-poppins bg-[#FFFFFF] pt-24 px-10'>
-          <h1 className='text-2xl lg:text-3xl font-semibold text-gray-800 text-start md:text-left'>
+        <div className='font-poppins bg-[#FFFFFF] pt-24 px-10 '>
+         <div className='flex justify-between items-center'>
+            <h1 className='text-2xl lg:text-3xl font-semibold text-gray-800 text-start md:text-left'>
                 Get the products as your needs
               </h1>
-              <hr />
+              {selectedCategory ? <Link className='text-end text-green-500 cursor-pointer' onClick={handleResetFilter}>Reset Filter</Link> : null  }
+         </div>
+          <hr />
          <div className="flex flex-col md:flex-row gap-6 px-4 py-6">
           {/* LEFT: Categories */}
        <div className="w-full md:w-1/4">
