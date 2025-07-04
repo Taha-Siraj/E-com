@@ -82,14 +82,12 @@ const Products = () => {
     </div>
   </div>
 
-    {/* RIGHT: Products */}
     <div className="w-full md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
   {filteredProduct.map((eachProduct) => (
     <div
       key={eachProduct.product_id}
       className="bg-white max-w-sm w-full rounded-md flex flex-col overflow-hidden  shadow-sm h-full"
     >
-      {/* Image Section */}
       <div className="relative overflow-hidden">
         <img
           src={eachProduct?.product_img}
@@ -103,7 +101,6 @@ const Products = () => {
         )}
       </div>
 
-      {/* Content Section (fixed height with spacing) */}
       <div className="flex flex-col justify-between flex-grow px-2 py-2 gap-3">
         <div className="flex flex-col gap-2">
           <h2 className="text-[14px] py-1 font-semibold text-black" title={eachProduct?.product_name}>
