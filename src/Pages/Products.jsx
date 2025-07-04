@@ -87,7 +87,7 @@ const Products = () => {
   {filteredProduct.map((eachProduct) => (
     <div
       key={eachProduct.product_id}
-      className="bg-white max-w-sm w-full rounded-md flex flex-col overflow-hidden border border-gray-200 shadow-sm h-full"
+      className="bg-white max-w-sm w-full rounded-md flex flex-col overflow-hidden  shadow-sm h-full"
     >
       {/* Image Section */}
       <div className="relative overflow-hidden">
@@ -106,7 +106,7 @@ const Products = () => {
       {/* Content Section (fixed height with spacing) */}
       <div className="flex flex-col justify-between flex-grow px-2 py-2 gap-3">
         <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-semibold text-black" title={eachProduct?.product_name}>
+          <h2 className="text-[14px] py-1 font-semibold text-black" title={eachProduct?.product_name}>
             {eachProduct?.product_name}
           </h2>
           <p className="text-md text-[#93D991] flex items-center gap-1">
@@ -121,11 +121,6 @@ const Products = () => {
             Rs. <span className="text-green-600">{eachProduct?.price}</span>
           </p>
         </div>
-
-        {/* CTA Button at bottom */}
-        {/* <button className="bg-[#063c28cc] w-full flex items-center justify-center gap-2 rounded-full py-2 px-4 text-white font-semibold hover:scale-105 transition-all">
-          <FaLuggageCart /> Add to cart
-        </button> */}
       </div>
     </div>
   ))}
