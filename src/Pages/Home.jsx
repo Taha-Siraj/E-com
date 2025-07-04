@@ -5,24 +5,29 @@ import axios from 'axios';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 import { FaLuggageCart } from 'react-icons/fa';
 import Allblogs from '../Blog/Allblogs';
+import Loader from './Loader';
 
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [ allProducts, setAllProducts ] = useState([]);
-  const [HomeProducts ,  setHomeProducts] = useState([])
+  const [HomeProducts ,  setHomeProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
     const baseUrl = 'http://localhost:5004';
 
     const fetchProducts = async() => {
       try {
+        setLoading(true);
         let res = await axios.get(`${baseUrl}/allproducts`);
         console.log("res.data", res.data.splice(0,6));
         setHomeProducts(res.data.slice(0, 10));
         setAllProducts(res.data.slice(0,6));
+        setLoading(false)
       } catch (error) {
         console.log(error);
+        setLoading(false)
       }
     }
     useEffect(() => {
@@ -56,7 +61,7 @@ const Home = () => {
     </div> */}
 
     <h1 className=' text-3xl  font-bold font-poppins px-10 capitalize  mt-3 '>Our Product :</h1>
-  <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-3 p-4'>
+    {loading ? <Loader/> : <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-3 p-4'>
    {HomeProducts.map((eachProduct) => (
     <div key={eachProduct.product_name} className='bg-white max-w-sm rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
       <div className='relative overflow-hidden'>
@@ -86,7 +91,7 @@ const Home = () => {
       
     </div>
     ))}
-  </div>
+  </div>} 
   </main>
 
 
