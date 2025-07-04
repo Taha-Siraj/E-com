@@ -7,8 +7,8 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 import { MdStarPurple500 } from "react-icons/md";
 import { FaLuggageCart } from "react-icons/fa";
 const Products = () => {
-  const baseUrl = 'https://server-ecom-rho.vercel.app';
-  // const baseUrl = 'http://localhost:5004';
+  // const baseUrl = 'https://server-ecom-rho.vercel.app';
+  const baseUrl = 'http://localhost:5004';
 
   const [allProduct, setAllProduct] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
@@ -51,78 +51,81 @@ const Products = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className='font-poppins bg-[#FFFFFF] min-h-screen pt-24'>
-          <div className='max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8'>
-
-            <div className='flex flex-col md:flex-row md:justify-between md:items-center gap-6 mb-8'>
-              <h1 className='text-3xl lg:text-4xl font-bold text-gray-800 text-center md:text-left'>
-                Our Product
+        <div className='font-poppins bg-[#FFFFFF] pt-24 px-10'>
+          <h1 className='text-2xl lg:text-3xl font-semibold text-gray-800 text-start md:text-left'>
+                Get the products as your needs
               </h1>
-              <div className='flex flex-col sm:flex-row items-center justify-center gap-4'>
-                <select
-                  onChange={handleCategoryChange}
-                  value={selectedCategory}
-                  className='w-full sm:w-auto px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300'
-                >
-                  <option value="">All Categories</option>
-                  {category.map((eachcategory) => (
-                    <option value={eachcategory?.category_name} key={eachcategory.category_id}>
-                      {eachcategory?.category_name}
-                    </option>
-                  ))}
-                </select>
+              <hr />
+         <div className="flex flex-col md:flex-row gap-6 px-4 py-6">
+          {/* LEFT: Categories */}
+       <div className="w-full md:w-1/4">
+       <h1 className="text-xl font-semibold mb-4">Product Categories</h1>
+        <div className="flex flex-col gap-2">
+      {category.map((eachcategory) => (
+        <label key={eachcategory.category_id} className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            value={eachcategory.category_name}
+            onChange={handleCategoryChange}
+            checked={selectedCategory.includes(eachcategory.category_name)}
+            className="accent-green-600 w-4 h-4"
+          />
+          <span className="text-sm text-gray-700">{eachcategory.category_name}</span>
+        </label>
+      ))}
+    </div>
+  </div>
 
-                <Link
-                  to='/AddCategories'
-                  className='w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg font-semibold shadow-md transition-all duration-300 transform hover:-translate-y-0.5'
-                >
-                  Add Categories
-                </Link>
-              </div>
-            </div>
-
-           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 p-4'>
-            {filteredProduct.map((eachProduct) => (
-              <div
-                key={eachProduct.product_id}
-                className='bg-white rounded-md flex flex-col overflow-hidden border-[0.5px] border-[#e2e5f795]'>
-                <div className='relative overflow-hidden'>
-                  <img
-                    src={eachProduct?.product_img}
-                    alt={eachProduct?.product_name || "Product Image"}
-                    className='w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-300' 
-
-                  />
-                  {eachProduct?.category_name && ( 
-                    <div className='absolute top-3  left-3 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md'> 
-                      {eachProduct.category_name}
-                    </div>
-                  )}
-                </div>
-
-                <div className='px-3 text-start justify-center items-start capitalize py-4 gap-y-3 flex flex-col'>
-                  <h2 className='text-[16px] font-semibold text-black' title={eachProduct?.product_name}> 
-                    {eachProduct?.product_name}
-                  </h2>
-                  <p className='text-md flex justify-start items-start text-[#93D991]'><MdOutlineStarPurple500/><MdOutlineStarPurple500/> <MdOutlineStarPurple500/> <MdOutlineStarPurple500/> <MdStarPurple500/> <span className='text-sm text-[#ABABAB]'>5 Reviews</span> </p>
-                    <p className='text-2xl font-bold text-gray-900'>
-                      Rs. <span className='text-green-600'>{eachProduct?.price}</span> 
-                    </p>
-                    <button className='bg-[#063c28cc] mt-2 flex justify-center gap-x-2 items-center rounded-full py-2 px-4 font-semibold hover:scale-100 transition-all  text-[#f0f0f0]'><FaLuggageCart/>  Add to cart</button>
-                </div>
-              </div>
-            ))}
+    {/* RIGHT: Products */}
+    <div className="w-full md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+  {filteredProduct.map((eachProduct) => (
+    <div
+      key={eachProduct.product_id}
+      className="bg-white max-w-sm w-full rounded-md flex flex-col overflow-hidden border border-gray-200 shadow-sm h-full"
+    >
+      {/* Image Section */}
+      <div className="relative overflow-hidden">
+        <img
+          src={eachProduct?.product_img}
+          alt={eachProduct?.product_name || "Product Image"}
+          className="w-full h-56 object-cover transition-transform duration-300 hover:scale-110"
+        />
+        {eachProduct?.category_name && (
+          <div className="absolute top-3 left-3 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+            {eachProduct.category_name}
           </div>
-                      
-            {filteredProduct.length === 0 && (
-                <div className='text-center py-20'>
-                    <h2 className='text-2xl font-semibold text-gray-700'>No Products Found</h2>
-                    <p className='text-gray-500 mt-2'>Please try selecting a different category.</p>
-                </div>
-            )}
+        )}
+      </div>
 
-          </div>
+      {/* Content Section (fixed height with spacing) */}
+      <div className="flex flex-col justify-between flex-grow px-2 py-2 gap-3">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-lg font-semibold text-black" title={eachProduct?.product_name}>
+            {eachProduct?.product_name}
+          </h2>
+          <p className="text-md text-[#93D991] flex items-center gap-1">
+            <MdOutlineStarPurple500 />
+            <MdOutlineStarPurple500 />
+            <MdOutlineStarPurple500 />
+            <MdOutlineStarPurple500 />
+            <MdStarPurple500 />
+            <span className="text-sm text-gray-400 ml-2">5 Reviews</span>
+          </p>
+          <p className="text-xl font-bold text-gray-900">
+            Rs. <span className="text-green-600">{eachProduct?.price}</span>
+          </p>
         </div>
+
+        {/* CTA Button at bottom */}
+        {/* <button className="bg-[#063c28cc] w-full flex items-center justify-center gap-2 rounded-full py-2 px-4 text-white font-semibold hover:scale-105 transition-all">
+          <FaLuggageCart /> Add to cart
+        </button> */}
+      </div>
+    </div>
+  ))}
+    </div>
+    </div>
+    </div>
       )}
     </>
   );

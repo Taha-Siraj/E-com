@@ -9,11 +9,11 @@ const initialState = {
 };
 export default function ContextProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
-
+    
 useEffect(() => {
   const checkLogin = async () => {
     try {
-      const res = await axios.get("https://server-ecom-rho.vercel.app/me", {
+      const res = await axios.get("http://localhost:5004/me", {
         withCredentials: true,
       });     
       console.log(res.data)

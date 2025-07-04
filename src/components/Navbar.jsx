@@ -11,8 +11,8 @@ const Navbar = () => {
     const { state, dispatch } = useContext(GlobalContext);
       const [isMenuOpen, setMenuOpen] = useState(false);
       const navigate = useNavigate()
-      // const baseUrl = 'http://localhost:5004';
-  const baseUrl = 'https://server-ecom-rho.vercel.app';
+      const baseUrl = 'http://localhost:5004';
+  // const baseUrl = 'https://server-ecom-rho.vercel.app';
 
 
      const navLinks = [

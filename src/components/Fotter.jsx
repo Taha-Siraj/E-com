@@ -32,7 +32,8 @@ const Fotter = () => {
       title: 'Email Us',
       text: 'EShop@gmail.com'
     }        
-  ]
+  ];
+  
   return (
     <div className='font-poppins'>
         <hr />
