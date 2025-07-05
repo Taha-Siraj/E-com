@@ -15,7 +15,7 @@ const Products = () => {
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setAllcategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
   const getProduct = async () => {
     try {
       const [productsRes, categoriesRes] = await Promise.all([
