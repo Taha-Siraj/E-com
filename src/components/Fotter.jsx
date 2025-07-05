@@ -4,6 +4,7 @@ import { IoCallSharp } from "react-icons/io5";
 import { IoTimeOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { BiSolidUpArrowSquare } from "react-icons/bi";
 
 const Fotter = () => {
 
@@ -81,7 +82,7 @@ const Fotter = () => {
       <Link className="text-[15px] text-gray-600 hover:text-gray-800" to="/">Women Collection</Link>
     </div>
 
-    <div className="flex flex-col gap-y-3 items-start max-w-sm w-full">
+    <div className="relative flex flex-col gap-y-3 items-start max-w-sm w-full">
       <h1 className="text-xl font-semibold">Newsletter</h1>
       <p className="text-[16px] text-gray-600">
         Subscribe to our newsletter to receive updates and exclusive offers.
@@ -94,6 +95,15 @@ const Fotter = () => {
       <button className="bg-black w-full text-white py-2 px-4 rounded-lg">
         Subscribe
       </button>
+      <div className='absolute bottom-[-60px] right-1 z-50'>
+      <span
+      onClick={() => window.scrollTo({top: "0", behavior: "smooth"}) }
+        className='cursor-pointer shadow-2xl animate-bounce transition hover:scale-110 duration-300'
+      >
+        <BiSolidUpArrowSquare className='text-[45px] text-green-600 shadow-xl rounded-md' />
+      </span>
+      </div>
+      
     </div>
   </div>
 </div>
