@@ -16,7 +16,7 @@ const Login = () => {
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
   
   const baseUrl = 'http://localhost:5004';
-  
+
   useGSAP(() => {
     gsap.from('#login-form', {
      scale: 1.5,
