@@ -95,12 +95,12 @@ const Fotter = () => {
       <button className="bg-black w-full text-white py-2 px-4 rounded-lg">
         Subscribe
       </button>
-      <div className='absolute bottom-[-60px] right-1 z-50'>
+      <div className='absolute bottom-[-60px] right-1 z-50 cursor-pointer transition animate-bounce duration-300'>
       <span
-      onClick={() => window.scrollTo({top: "0", behavior: "smooth"}) }
-        className='cursor-pointer shadow-2xl animate-bounce transition hover:scale-110 duration-300'
+       onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+        className=''
       >
-        <BiSolidUpArrowSquare className='text-[45px] text-green-600 shadow-xl rounded-md' />
+        <BiSolidUpArrowSquare className='text-[50px] text-green-600 shadow-xl rounded-md' />
       </span>
       </div>
       
