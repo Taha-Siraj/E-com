@@ -34,7 +34,7 @@ const ProductDetail = () => {
 
   return (
     <div className="mt-24 font-poppins px-16 py-2 flex flex-col gap-4 md:flex-row justify-between  items-start">
-     <div className='h-full w-full border p-5 rounded-lg flex justify-center items-center '>
+     <div className='h-[550px] w-full border p-5 rounded-lg flex justify-center items-center '>
        <img src={product.product_img} alt={product.product_name} className="w-full h-full object-center hover:scale-110 transition-all duration-300 cursor-pointer" />
      </div>
       <div className='flex flex-col px-0 py-0 gap-0 justify-start items-start'>
