@@ -37,9 +37,10 @@ const ProductDetail = () => {
      <div className='h-full w-full border p-5 rounded-lg flex justify-center items-center '>
        <img src={product.product_img} alt={product.product_name} className="w-full h-full object-center hover:scale-110 transition-all duration-300 cursor-pointer" />
      </div>
-      <div className='flex flex-col justify-start items-start'>
+      <div className='flex flex-col px-0 py-0 gap-0 justify-start items-start'>
         <h2 className="text-2xl md:text-3xl font-semibold">{product.product_name}</h2>
         <p className='text-gray-500 '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde illum expedita dolores aut nostrum, quidem placeat laborum nemo, beatae perspiciatis quae, sint tempore aliquid molestiae consequatur eum earum.</p>
+        <p className="flex justify-center items-center gap-x-2 text-sm text-gray-600 capitalize"><span className='text-[18px] text-black font-semibold' >Description:</span> {product.description || "No description available."}</p>
         <p className="text-md  w-full  text-[#2e902a] flex items-center">
         <MdOutlineStarPurple500 />
         <MdOutlineStarPurple500 />
@@ -48,14 +49,11 @@ const ProductDetail = () => {
         <MdStarPurple500 />
         <span className="text-sm  text-black font-semibold">(120)</span>
       </p>
-      <p className=" text-sm text-gray-600 capitalize"><span className='text-lg text-black font-semibold' >Description:</span> {product.description || "No description available."}</p>
       <hr className='bg-gray-100 h-[0.1px] w-full'/>
-
-      <p className="text-lg text-green-600 font-bold">Rs. {product.price}.00</p>
-      <span className='text-green-500  font-semibold capitalize bg-green-100 py-1 rounded-lg px-2'>in Stock</span>
+      <p className="text-lg text-green-800 font-bold">Rs. {product.price}.00</p>
+      <span className='text-green-700  font-semibold capitalize bg-green-100 py-[2px] rounded-lg px-2'>in Stock</span>
       <hr className='bg-gray-100 h-[0.1px] w-full'/>
-      
-      <button className='bg-[#063c28cc]  flex justify-center gap-x-2 items-center rounded-full py-2 px-4 font-semibold hover:scale-100transition-all  text-[#f0f0f0]'><FaLuggageCart/>
+      <button className='bg-[#063222cc] w-full flex justify-center gap-x-2 items-center rounded-lg py-2 px-4 font-semibold hover:bg-[#063c28] transition-all  text-[#f0f0f0]'><FaLuggageCart/>
       Add To cart
       </button>
       </div>
