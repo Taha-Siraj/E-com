@@ -1,15 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import Loader from './Loader';
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { MdStarPurple500 } from "react-icons/md";
 import { FaLuggageCart } from "react-icons/fa";
+import { use } from 'react';
 const Products = () => {
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
   const baseUrl = 'http://localhost:5004';
-
+ const navigate = useNavigate();
   const [allProduct, setAllProduct] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setAllcategory] = useState([]);
@@ -99,8 +100,9 @@ const Products = () => {
       <div className="relative overflow-hidden">
         <img
           src={eachProduct?.product_img}
+          onClick={() => navigate(`/productsdetails/${eachProduct.product_id}`)}
           alt={eachProduct?.product_name || "Product Image"}
-          className="w-full h-56 object-cover transition-transform duration-300 hover:scale-110"
+          className="w-full h-56 object-cover cursor-pointer transition-transform duration-300 hover:scale-110"
         />
         {eachProduct?.category_name && (
           <div className="absolute top-3 left-3 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
