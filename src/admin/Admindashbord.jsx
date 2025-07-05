@@ -78,7 +78,6 @@ const Admindashbord = () => {
                   <td className="px-6 py-4 whitespace-nowrap">Jane Smith</td>
                   <td className="px-6 py-4 whitespace-nowrap">2025-07-04</td>
                 </tr>
-                {/* More rows */}
               </tbody>
             </table>
           </div>
