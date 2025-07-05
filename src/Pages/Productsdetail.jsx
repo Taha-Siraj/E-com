@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MdOutlineStarPurple500, MdStarPurple500 } from "react-icons/md";
+import { FaLuggageCart } from 'react-icons/fa';
 
 const ProductDetail = () => {
   const baseUrl = 'http://localhost:5004';
@@ -36,7 +37,7 @@ const ProductDetail = () => {
      <div className='h-full w-full border p-5 rounded-lg flex justify-center items-center '>
        <img src={product.product_img} alt={product.product_name} className="w-full h-full object-center hover:scale-110 transition-all duration-300 cursor-pointer" />
      </div>
-      <div className='flex flex-col justify-center items-start'>
+      <div className='flex flex-col justify-start items-start'>
         <h2 className="text-2xl md:text-3xl font-semibold">{product.product_name}</h2>
         <p className='text-gray-500 '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde illum expedita dolores aut nostrum, quidem placeat laborum nemo, beatae perspiciatis quae, sint tempore aliquid molestiae consequatur eum earum.</p>
         <p className="text-md  w-full  text-[#2e902a] flex items-center">
@@ -47,13 +48,16 @@ const ProductDetail = () => {
         <MdStarPurple500 />
         <span className="text-sm  text-black font-semibold">(120)</span>
       </p>
+      <p className=" text-sm text-gray-600 capitalize"><span className='text-lg text-black font-semibold' >Description:</span> {product.description || "No description available."}</p>
       <hr className='bg-gray-100 h-[0.1px] w-full'/>
 
       <p className="text-lg text-green-600 font-bold">Rs. {product.price}.00</p>
       <span className='text-green-500  font-semibold capitalize bg-green-100 py-1 rounded-lg px-2'>in Stock</span>
       <hr className='bg-gray-100 h-[0.1px] w-full'/>
-      <p className="mt-2 text-gray-700">Category: {product.category_name}</p>
-      <p className="mt-4 text-sm text-gray-600">{product.description || "No description available."}</p>
+      
+      <button className='bg-[#063c28cc]  flex justify-center gap-x-2 items-center rounded-full py-2 px-4 font-semibold hover:scale-100transition-all  text-[#f0f0f0]'><FaLuggageCart/>
+      Add To cart
+      </button>
       </div>
     </div>
   );
