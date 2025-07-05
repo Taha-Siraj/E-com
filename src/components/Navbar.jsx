@@ -6,10 +6,12 @@ import axios from 'axios';
 import { toast } from 'sonner';
 import { CiMenuFries } from "react-icons/ci";
 import Home from '../Pages/Home';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 const Navbar = () => {
 
     const { state, dispatch } = useContext(GlobalContext);
       const [isMenuOpen, setMenuOpen] = useState(false);
+
       const navigate = useNavigate()
       const baseUrl = 'http://localhost:5004';
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
@@ -30,7 +32,6 @@ const Navbar = () => {
       try {
         await axios.post(`${baseUrl}/logout`, {}, { withCredentials: true });
         dispatch({ type: 'USER_LOGOUT' });
-        localStorage.removeItem("user");
         toast.success('Logged out successfully!');
         navigate('/login');
       } catch (error) {
@@ -72,12 +73,16 @@ const Navbar = () => {
                 ))}
               </div>
               
-              <div className="hidden md:block">
+              <div className="hidden md:flex justify-center items-center gap-x-5">
+                <button >     
+                   <FaRegHeart className='text-2xl text-gray-600'/>        
+                  </button>
                  {(state?.user?.email) ? 
-                    <IoIosLogOut onClick={handleLogout} className='text-3xl text-gray-500 cursor-pointer hover:text-gray-700'/>
+                    <IoIosLogOut onClick={handleLogout} className='text-3xl text-gray-600 cursor-pointer hover:text-gray-700'/>
                  : 
                 null
                  }
+                   
               </div>
 
 
@@ -109,6 +114,7 @@ const Navbar = () => {
                         </Link>
                      )}
                  </div>
+               
               </div>
             </div>
           )}
