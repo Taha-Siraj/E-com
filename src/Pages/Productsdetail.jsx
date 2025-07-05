@@ -6,7 +6,8 @@ import { FaLuggageCart } from 'react-icons/fa';
 import { toast, Toaster } from 'sonner';
 import { FaRegHeart } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
-
+import { FaGroupArrowsRotate } from "react-icons/fa6";
+import { FaRegQuestionCircle } from "react-icons/fa";
 const ProductDetail = () => {
   const baseUrl = 'http://localhost:5004';
   const { id } = useParams();
@@ -75,10 +76,9 @@ const ProductDetail = () => {
         }
        </button>
       </div>
-      <hr />
-    <details class="w-full">
+    <details class="pt-3 w-full">
   <summary class="cursor-pointer hover:underline  capitalize">
-    <span className='text-[18px]'>  {product.product_name}</span>
+    <span className='text-[16px] font-semibold'>  {product.product_name}</span>
   </summary>
   <div class="flex justify-between items-center ">
     <div className='flex flex-col justify-start items-start space-y-0 '>
@@ -94,7 +94,13 @@ const ProductDetail = () => {
   </div>
 </details>
 
-
+<hr className='bg-gray-100 h-[0.1px] w-full'/>
+<div className='flex justify-between items-center w-full' >
+  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaGroupArrowsRotate/>Compare color</span>
+  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaRegQuestionCircle/>Ask a question</span>
+  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaGroupArrowsRotate/>Delivery & Return</span>
+  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaGroupArrowsRotate/>Share</span>
+</div>
       </div>
     </div>
   );
