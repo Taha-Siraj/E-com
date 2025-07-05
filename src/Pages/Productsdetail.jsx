@@ -98,10 +98,17 @@ const ProductDetail = () => {
 
 <hr className='bg-gray-100 h-[0.1px] w-full'/>
 <div className='flex justify-between items-center w-full' >
-  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaGroupArrowsRotate/>Compare color</span>
-  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaRegQuestionCircle/>Ask a question</span>
-  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><TbTruckDelivery/>Delivery & Return</span>
-  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaShareAlt/>Share</span>
+  <span className='hover:text-red-600 cursor-pointer text-sm flex justify-center items-center gap-x-2 '><FaGroupArrowsRotate/>Compare color</span>
+  <span className='hover:text-red-600 cursor-pointer text-sm flex justify-center items-center gap-x-2 '><FaRegQuestionCircle/>Ask a question</span>
+  <span className='hover:text-red-600 cursor-pointer text-sm flex justify-center items-center gap-x-2 '><TbTruckDelivery/>Delivery & Return</span>
+  <span className='hover:text-red-600  cursor-pointer text-sm flex justify-center items-center gap-x-2 '><FaShareAlt/>Share</span>
+</div>
+<div className='border ' >
+<div>
+<i></i>
+<span> Free Delivery  </span>
+</div>
+<div></div>
 </div>
       </div>
     </div>
