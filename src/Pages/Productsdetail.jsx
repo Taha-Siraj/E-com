@@ -16,9 +16,8 @@ const ProductDetail = () => {
   const fetchProduct = async () => {
     try {
       const res = await axios.get(`${baseUrl}/allproducts`);
-      // ✅ Filter product manually from the array
-      const matchedProduct = res.data.find(
-        (item) => String(item.product_id) === String(id)
+      const matchedProduct = res.data.find((item) => 
+        String(item.product_id) === String(id)
       );
       setProduct(matchedProduct || null);
     } catch (error) {
@@ -76,6 +75,26 @@ const ProductDetail = () => {
         }
        </button>
       </div>
+      <hr />
+    <details class="w-full">
+  <summary class="cursor-pointer hover:underline  capitalize">
+    <span className='text-[18px]'>  {product.product_name}</span>
+  </summary>
+  <div class="flex justify-between items-center ">
+    <div className='flex flex-col justify-start items-start space-y-0 '>
+      <p className='m-0' >category:</p>
+      <p>Collection:</p>
+      <p>Stock:</p>
+    </div>
+    <div className='flex flex-col justify-start items-start space-y-0'>
+      <p className='m-0'>{product.category_name}</p>
+      <p>2025</p>
+      <p>available</p>
+    </div>
+  </div>
+</details>
+
+
       </div>
     </div>
   );
