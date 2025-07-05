@@ -4,13 +4,15 @@ import { useParams } from 'react-router-dom';
 import { MdOutlineStarPurple500, MdStarPurple500 } from "react-icons/md";
 import { FaLuggageCart } from 'react-icons/fa';
 import { toast, Toaster } from 'sonner';
+import { FaRegHeart } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa6";
 
 const ProductDetail = () => {
   const baseUrl = 'http://localhost:5004';
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-
+ const [wishlis , setwishlis] = useState(false);
   const fetchProduct = async () => {
     try {
       const res = await axios.get(`${baseUrl}/allproducts`);
@@ -39,7 +41,7 @@ const ProductDetail = () => {
 
   return (
     <div className="mt-24 font-poppins px-16 py-2 flex flex-col gap-4 md:flex-row justify-between  items-start">
-      <Toaster position="top-right" richColors />
+      <Toaster position="bottom-right" richColors />
 
      <div className='h-[550px] w-full border p-5 rounded-lg flex justify-center items-center '>
        <img src={product.product_img} alt={product.product_name} className="w-full h-full object-center hover:scale-110 transition-all duration-300 cursor-pointer" />
@@ -60,12 +62,20 @@ const ProductDetail = () => {
       <p className="text-lg text-green-800 font-bold">Rs. {product.price}.00</p>
       <span className='text-green-700  font-semibold capitalize bg-green-100 py-[2px] rounded-lg px-2'>in Stock</span>
       <hr className='bg-gray-100 h-[0.1px] w-full'/>
-      <button 
+      <div className='flex justify-between w-full gap-x-5'>
+        <button 
       onClick={handleAddToCart}
       className='bg-[#063222cc] w-full flex justify-center gap-x-2 items-center rounded-lg py-2 px-4 font-semibold hover:bg-[#063c28] transition-all  text-[#f0f0f0] '><FaLuggageCart/>
 
       Add To cart
       </button>
+      <button className='border-[0.5px] border-green-600 p-2 rounded-md' > 
+       {wishlis? <FaHeart className='text-xl object-cover   text-green-900' onClick={() => setwishlis(!wishlis) } />
+       :
+       <FaRegHeart className='text-xl object-cover text-green-600' onClick={() => setwishlis(!wishlis) }/>  
+        }
+       </button>
+      </div>
       </div>
     </div>
   );
