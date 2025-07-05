@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 import { CiMenuFries } from "react-icons/ci";
 import Home from '../Pages/Home';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaHeart, FaLuggageCart, FaRegHeart } from 'react-icons/fa';
 const Navbar = () => {
 
     const { state, dispatch } = useContext(GlobalContext);
@@ -75,7 +75,10 @@ const Navbar = () => {
               
               <div className="hidden md:flex justify-center items-center gap-x-5">
                 <button >     
-                   <FaRegHeart className='text-2xl text-gray-600'/>        
+                   <FaRegHeart className='text-2xl hover:text-green-700 transition-all duration-300 text-gray-600'/>        
+                  </button>
+                <button >     
+                   <FaLuggageCart className='text-2xl hover:text-green-700 transition-all duration-300 text-gray-600'/>        
                   </button>
                  {(state?.user?.email) ? 
                     <IoIosLogOut onClick={handleLogout} className='text-3xl text-gray-600 cursor-pointer hover:text-gray-700'/>
