@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { MdOutlineStarPurple500, MdStarPurple500 } from "react-icons/md";
 
 const ProductDetail = () => {
   const baseUrl = 'http://localhost:5004';
@@ -31,13 +32,29 @@ const ProductDetail = () => {
   if (!product) return <p className="p-10 text-red-500">Product not found</p>;
 
   return (
-    <div className="mt-24 font-poppins px-10 py-2">
-      <h1 className="text-2xl font-semibold mb-4">Product Details</h1>
-      <img src={product.product_img} alt={product.product_name} className="w-64 h-64 object-cover" />
-      <h2 className="text-xl mt-4">{product.product_name}</h2>
-      <p className="text-lg text-green-600 font-bold mt-2">Rs. {product.price}</p>
+    <div className="mt-24 font-poppins px-16 py-2 flex flex-col gap-4 md:flex-row justify-between  items-start">
+     <div className='h-full w-full border p-5 rounded-lg flex justify-center items-center '>
+       <img src={product.product_img} alt={product.product_name} className="w-full h-full object-center hover:scale-110 transition-all duration-300 cursor-pointer" />
+     </div>
+      <div className='flex flex-col justify-center items-start'>
+        <h2 className="text-2xl md:text-3xl font-semibold">{product.product_name}</h2>
+        <p className='text-gray-500 '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde illum expedita dolores aut nostrum, quidem placeat laborum nemo, beatae perspiciatis quae, sint tempore aliquid molestiae consequatur eum earum.</p>
+        <p className="text-md  w-full  text-[#2e902a] flex items-center">
+        <MdOutlineStarPurple500 />
+        <MdOutlineStarPurple500 />
+        <MdOutlineStarPurple500 />
+        <MdOutlineStarPurple500 />
+        <MdStarPurple500 />
+        <span className="text-sm  text-black font-semibold">(120)</span>
+      </p>
+      <hr className='bg-gray-100 h-[0.1px] w-full'/>
+
+      <p className="text-lg text-green-600 font-bold">Rs. {product.price}.00</p>
+      <span className='text-green-500  font-semibold capitalize bg-green-100 py-1 rounded-lg px-2'>in Stock</span>
+      <hr className='bg-gray-100 h-[0.1px] w-full'/>
       <p className="mt-2 text-gray-700">Category: {product.category_name}</p>
       <p className="mt-4 text-sm text-gray-600">{product.description || "No description available."}</p>
+      </div>
     </div>
   );
 };
