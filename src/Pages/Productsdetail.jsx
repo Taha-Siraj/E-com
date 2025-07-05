@@ -8,6 +8,8 @@ import { FaRegHeart } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
 import { FaGroupArrowsRotate } from "react-icons/fa6";
 import { FaRegQuestionCircle } from "react-icons/fa";
+import { TbTruckDelivery } from "react-icons/tb";
+import { FaShareAlt } from "react-icons/fa";
 const ProductDetail = () => {
   const baseUrl = 'http://localhost:5004';
   const { id } = useParams();
@@ -98,8 +100,8 @@ const ProductDetail = () => {
 <div className='flex justify-between items-center w-full' >
   <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaGroupArrowsRotate/>Compare color</span>
   <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaRegQuestionCircle/>Ask a question</span>
-  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaGroupArrowsRotate/>Delivery & Return</span>
-  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaGroupArrowsRotate/>Share</span>
+  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><TbTruckDelivery/>Delivery & Return</span>
+  <span className='hover:text-red-600 text-sm flex justify-center items-center gap-x-2 '><FaShareAlt/>Share</span>
 </div>
       </div>
     </div>
