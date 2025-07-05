@@ -10,6 +10,7 @@ import { FaGroupArrowsRotate } from "react-icons/fa6";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaShareAlt } from "react-icons/fa";
+import { CiDeliveryTruck } from "react-icons/ci";
 const ProductDetail = () => {
   const baseUrl = 'http://localhost:5004';
   const { id } = useParams();
@@ -103,10 +104,10 @@ const ProductDetail = () => {
   <span className='hover:text-red-600 cursor-pointer text-sm flex justify-center items-center gap-x-2 '><TbTruckDelivery/>Delivery & Return</span>
   <span className='hover:text-red-600  cursor-pointer text-sm flex justify-center items-center gap-x-2 '><FaShareAlt/>Share</span>
 </div>
-<div className='border ' >
-<div>
-<i></i>
-<span> Free Delivery  </span>
+<div className='border w-full mt-3' >
+<div className='flex gap-x-3 justify-start items-center py-3 px-3' >
+<i><CiDeliveryTruck className='text-orange-600 text-3xl' /></i>
+<span className='flex justify-start items-start flex-col' > Free Delivery <p className=' text-sm'>Enter your Postal code for Delivey Availability.</p> </span>
 </div>
 <div></div>
 </div>
