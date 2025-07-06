@@ -59,6 +59,7 @@ const CustomRoutes = () => {
           <Route path="*" element={<Navigate to="/admin" />} />
         </>
       )}
+      
     </Routes>
   );
 };
