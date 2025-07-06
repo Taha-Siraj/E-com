@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { toast, Toaster } from 'sonner';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../Context/Context';
+import Loader from '../Pages/Loader';
 const AddCategories = () => {
     // const baseUrl = 'https://server-ecom-rho.vercel.app';
     const {state } = useContext(GlobalContext)
@@ -100,8 +101,8 @@ const AddCategories = () => {
     return (
     <>
     <Toaster position="top-center" richColors />
-    <div className='pt-24 min-h-screen font-poppins flex bg-gray-900 justify-center items-center flex-col py-10 px-4 sm:px-6 lg:px-8'>
-  <div ref={formRef} className='border border-gray-700 w-full max-w-md p-8 flex justify-center items-center flex-col gap-6 rounded-xl bg-gray-800 text-gray-100 shadow-2xl'> 
+    <div className='pt-24 min-h-screen font-poppins flex  justify-center items-center flex-col py-10 px-4 sm:px-6 lg:px-8'>
+  <div ref={formRef} className='border border-gray-500 w-full max-w-md p-8 flex justify-center items-center flex-col gap-6 rounded-xl bg-gray-800 text-gray-100 shadow-2xl'> 
     <h1 className='text-3xl font-extrabold text-white mb-4'>{CategoryID ? "Update Category" : "Add Category"}</h1> 
     <form onSubmit={handleFormCategory} className="w-full flex flex-col gap-5"> 
       <input
@@ -128,15 +129,10 @@ const AddCategories = () => {
     </form>
   </div>
 
-  <button className='bg-green-600 hover:bg-green-700 text-white font-semibold flex justify-center mt-10 rounded-lg py-3 px-6 items-center shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50'>
-    <Link className='text-white' to={"/addproduct"}>Go to Add Product Page</Link> 
-  </button>
 
   <div className="overflow-x-auto w-full max-w-5xl py-10">
     {fetchLoading ? (
-      <div className="flex justify-center items-center h-40">
-        <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-      </div>
+      <Loader/>
     ) : (
       <table className="min-w-full bg-gray-800 text-gray-100 font-poppins capitalize border border-gray-700 shadow-xl rounded-lg overflow-hidden"> 
         <thead className="bg-indigo-600 text-white"> 

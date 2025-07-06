@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 import { GlobalContext } from '../Context/Context';
+import Loader from '../Pages/Loader'
 
 const AddProducts = () => {
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
@@ -41,11 +42,14 @@ const AddProducts = () => {
   }
   const fetchProducts = async () => {
     try {
-       let res =  await axios.get(`${baseUrl}/allproducts`);
-       setAllAddproducts(res.data);
-       console.log(res.data);
-      } catch (error) {
-        console.log(error?.response?.data?.message);
+      setloading(true)
+      let res =  await axios.get(`${baseUrl}/allproducts`);
+      setAllAddproducts(res.data);
+      console.log(res.data);
+      setloading(false)
+    } catch (error) {
+      console.log(error?.response?.data?.message);
+      setloading(false)
       }
     }
     
@@ -132,9 +136,9 @@ const AddProducts = () => {
   const titleStyles = "text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500  text-center";
   return (
     <>
-    <div className='pt-24 bg-gray-950 py-10 min:h-screen flex justify-center items-center flex-col gap-y-10'>
+    <div className='pt-24 py-10 min:h-screen flex justify-center items-center flex-col gap-y-10'>
   <Toaster position="top-center" richColors />
-  <form ref={formRef} onSubmit={addproduct} className='flex justify-center flex-col border-[0.2px] border-[#dadada4a] rounded-xl min:h-[400px] w-[400px] bg-gray-800 text-gray-200 gap-y-5 font-poppins px-8 py-8 shadow-2xl'> 
+  <form ref={formRef} onSubmit={addproduct} className='flex justify-center flex-col border-[0.2px] border-[#dadada4a] rounded-xl min:h-[400px] w-[400px] bg-gray-400 text-gray-200 gap-y-5 font-poppins px-8 py-8 shadow-2xl'> 
     <h1 className='text-3xl font-extrabold text-white mb-4'>{productId ? "Update Product" : "Add Product"}</h1> 
     <input
       type="text"
@@ -188,15 +192,14 @@ const AddProducts = () => {
     </button>
   </form>
 
-  <button className='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold flex justify-center rounded-lg py-3 px-6 items-center shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'>
-    <Link className='text-white' to={"/addcategories"}>Add category Page</Link>
-  </button>
-
+  
+  {loading ? <Loader/>
+  : 
   <div className="flex flex-wrap justify-center gap-8 px-5 w-full py-8">
     {allAddProducts.map((eachProduct) => (
       <div
         key={eachProduct?.product_id}
-        className="bg-gray-800 rounded-xl p-6 w-[320px] flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border-[0.2px] border-[#dadada4a]"
+        className="bg-gray-500 rounded-xl p-6 w-[320px] flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border-[0.2px] border-[#dadada4a]"
       >
         <div className="w-full flex justify-center mb-5">
           <img
@@ -251,7 +254,10 @@ const AddProducts = () => {
         </div>
       </div>
     ))}
-  </div>
+  </div> 
+   }
+
+  
 </div>
     </>
   )
