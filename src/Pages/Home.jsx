@@ -60,7 +60,7 @@ const Home = () => {
       <div className='relative overflow-hidden'>
         <img src={eachProduct.product_img}
          onClick={() => navigate(`/productsdetails/${eachProduct.product_id}`)}
-        alt={eachProduct.product_name} className='w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-300' />
+        alt={eachProduct.product_name} className='w-full hover:scale-110 cursor-pointer  h-56 object-cover transform  transition-transform duration-300' />
         {eachProduct?.category_name && ( 
        <div className='absolute top-3 left-3  bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md'> 
            {eachProduct.category_name}
@@ -73,13 +73,9 @@ const Home = () => {
             {[...Array(5)].map((_, index) => (
               index < eachProduct.rating ? 
               <MdOutlineStarPurple500 key={index} className='text-yellow-500' /> : 
-              <MdOutlineStarPurple500 key={index} className='text-gray-300' />
+              <MdOutlineStarPurple500 key={index} className='text-green-600' />
             ))}
           </div>
-        <button
-        className='bg-[#063c28cc] mt-2 flex justify-center gap-x-2 items-center rounded-full py-2 px-4 font-semibold hover:scale-100 transition-all  text-[#f0f0f0]'><FaLuggageCart/>
-        Add To cart
-      </button>
         </div>
         
       </div>
