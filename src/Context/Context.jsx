@@ -6,6 +6,7 @@ export const GlobalContext = createContext(null);
 const initialState = {
     user: {},
     isLogin: false,
+    baseUrl: 'https://server-ecom-lac.vercel.app'
 };
 export default function ContextProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);

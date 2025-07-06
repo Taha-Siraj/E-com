@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MdOutlineStarPurple500, MdStarPurple500 } from "react-icons/md";
 import { FaLuggageCart } from 'react-icons/fa';
@@ -12,13 +12,17 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { FaShareAlt } from "react-icons/fa";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { BsArrowReturnLeft } from "react-icons/bs";
+import { GlobalContext } from '../Context/Context';
 const ProductDetail = () => {
-  const baseUrl = 'http://localhost:5004';
+
+  const {state } = useContext(GlobalContext)
+  const baseUrl = state.baseUrl;
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
  const [wishlis , setwishlis] = useState(false);
   const fetchProduct = async () => {
+    
     try {
       const res = await axios.get(`${baseUrl}/allproducts`);
       const matchedProduct = res.data.find((item) => 

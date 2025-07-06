@@ -15,7 +15,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
-    const baseUrl = 'http://localhost:5004';
+    const baseUrl = state.baseUrl;
 
     const fetchProducts = async() => {
       try {
@@ -53,13 +53,6 @@ const Home = () => {
   </div>
   </div>
   <main>
-    {/* <div className='flex justify-start px-10 py-6 items-center gap-x-3 '>
-      <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Men collection </button>
-      <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white  border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Women collection </button>
-      <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Kids collection </button>
-      <button className='py-1 px-3 bg-[#EBF5EB] focus:bg-[#3B9C3C] focus:border-0 focus:text-white   border-[0.6px] border-gray-300  rounded-full font-semibold text-black'>Other</button>
-    </div> */}
-
     <h1 className=' text-3xl  font-bold font-poppins px-10 capitalize  mt-3 '>Our Product :</h1>
     {loading ? <Loader/> : <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-3 p-4'>
    {HomeProducts.map((eachProduct) => (

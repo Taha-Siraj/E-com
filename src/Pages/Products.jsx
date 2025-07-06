@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import Loader from './Loader';
@@ -7,15 +7,18 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 import { MdStarPurple500 } from "react-icons/md";
 import { FaLuggageCart } from "react-icons/fa";
 import { use } from 'react';
+import { useCol } from 'react-bootstrap/esm/Col';
+import { GlobalContext } from '../Context/Context';
 const Products = () => {
   // const baseUrl = 'https://server-ecom-rho.vercel.app';
-  const baseUrl = 'http://localhost:5004';
- const navigate = useNavigate();
+  const navigate = useNavigate();
+  const {state } = useContext(GlobalContext)
   const [allProduct, setAllProduct] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [category, setAllcategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [loading, setloading] = useState(true);
+  const baseUrl = state.baseUrl;
   const getProduct = async () => {
     try {
       const [productsRes, categoriesRes] = await Promise.all([
