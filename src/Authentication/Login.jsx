@@ -39,7 +39,6 @@ const Login = () => {
       try {
         setLoader(true);
         const res = await axios.post(`${baseUrl}/login`, values, {
-          headers: { 'Content-Type': 'application/json' },
           withCredentials: true,
         });
         

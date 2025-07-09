@@ -10,7 +10,6 @@ import { use } from 'react';
 import { useCol } from 'react-bootstrap/esm/Col';
 import { GlobalContext } from '../Context/Context';
 const Products = () => {
-  // const baseUrl = 'https://server-ecom-rho.vercel.app';
   const navigate = useNavigate();
   const {state } = useContext(GlobalContext)
   const [allProduct, setAllProduct] = useState([]);
