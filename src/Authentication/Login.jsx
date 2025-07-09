@@ -13,7 +13,6 @@ const Login = () => {
   const {state ,dispatch } = useContext(GlobalContext);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-  // const baseUrl = 'https://server-ecom-rho.vercel.app';
   
   const baseUrl = state.baseUrl;
 
