@@ -6,7 +6,7 @@ export const GlobalContext = createContext(null);
 const initialState = {
     user: {},
     isLogin: false,
-    baseUrl: 'http://localhost:5004',
+    baseUrl: 'https://server-ecom-lac.vercel.app',
     cartCount: 0
 };
 export default function ContextProvider({ children }) {
