@@ -11,13 +11,13 @@ const initialState = {
 };
 export default function ContextProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
-    
-useEffect(() => {
-  const checkLogin = async () => {
-    try {
-      const res = await axios.get("http://localhost:5004/me", {
-        withCredentials: true,
-      });     
+    useEffect(() => {
+      const checkLogin = async () => {
+        try {
+          const res = await axios.get("http://localhost:5004/me", {
+            withCredentials: true,
+          });     
+          //http://localhost:5004
       console.log(res.data)
       dispatch({ type: "USER_LOGIN", payload: res.data.user });
     } catch (error) {
