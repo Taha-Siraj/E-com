@@ -15,7 +15,7 @@ import { BsArrowReturnLeft } from "react-icons/bs";
 import { GlobalContext } from '../Context/Context';
 const ProductDetail = () => {
 
-  const {state } = useContext(GlobalContext)
+  const {state, dispatch} = useContext(GlobalContext)
   const baseUrl = state.baseUrl;
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -50,13 +50,13 @@ const ProductDetail = () => {
       quantity: quantity,
     })
     console.log(res.data)
+    dispatch({type: "SET_CART_COUNT", payload: state.cartCount + quantity,});
     toast.success('Product added to cart successfully!');
     console.log(product)
     console.log(state.user.id)
     } catch (error) {
       console.log(error)
     }
-
   }
 
   
