@@ -21,6 +21,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
  const [wishlis , setwishlis] = useState(false);
+ const [quantity, setQuantity] = useState(1);
   const fetchProduct = async () => {
     
     try {
@@ -28,7 +29,7 @@ const ProductDetail = () => {
       const matchedProduct = res.data.find((item) => 
         String(item.product_id) === String(id)
       );
-      setProduct(matchedProduct || null);
+      setProduct(matchedProduct);
     } catch (error) {
       console.error('Error fetching product:', error);
     } finally {
@@ -40,9 +41,25 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async(product) => {
+    try {
+    let res = await axios.post(`${baseUrl}/cart`,{
+      user_id: state.user.id,
+      product_id: product.product_id,
+      price_per_item: product.price,
+      quantity: quantity,
+    })
+    console.log(res.data)
     toast.success('Product added to cart successfully!');
+    console.log(product)
+    console.log(state.user.id)
+    } catch (error) {
+      console.log(error)
+    }
+
   }
+
+  
 
   if (loading) return <p className="p-10">Loading...</p>;
   if (!product) return <p className="p-10 text-red-500">Product not found</p>;
@@ -68,11 +85,18 @@ const ProductDetail = () => {
       </p>
       <hr className='bg-gray-100 h-[0.1px] w-full'/>
       <p className="text-lg text-green-800 font-bold">Rs. {product.price}.00</p>
+      <input
+      type="number"
+      min="1"
+      className="text-black border outline-none py-2 px-2"
+      onChange={(e) => setQuantity(Number(e.target.value))}
+      value={quantity}
+    />
       <span className='text-green-700  font-semibold capitalize bg-green-100 py-[2px] rounded-lg px-2'>in Stock</span>
       <hr className='bg-gray-100 h-[0.1px] w-full'/>
       <div className='flex justify-between w-full gap-x-5'>
         <button 
-      onClick={handleAddToCart}
+      onClick={() => handleAddToCart(product)}
       className='bg-[#063222cc] w-full flex justify-center gap-x-2 items-center rounded-lg py-2 px-4 font-semibold hover:bg-[#063c28] transition-all  text-[#f0f0f0] '><FaLuggageCart/>
 
       Add To cart

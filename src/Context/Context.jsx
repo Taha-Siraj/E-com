@@ -6,7 +6,8 @@ export const GlobalContext = createContext(null);
 const initialState = {
     user: {},
     isLogin: false,
-    baseUrl: 'http://localhost:5004'
+    baseUrl: 'http://localhost:5004',
+    cartCount: 0
 };
 export default function ContextProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
