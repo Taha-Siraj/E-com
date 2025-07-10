@@ -78,7 +78,9 @@ const Navbar = () => {
                    <FaRegHeart className='text-2xl hover:text-green-700 transition-all duration-300 text-gray-600'/>        
                   </button>
                 <button >     
-                   <FaLuggageCart className='text-2xl hover:text-green-700 transition-all duration-300 text-gray-600'/>        
+                  <Link to={'/cart'}>
+                   <FaLuggageCart className='text-2xl hover:text-green-700 transition-all duration-300 text-gray-600'/> 
+                  </Link>       
                   </button>
                  {(state?.user?.email) ? 
                     <IoIosLogOut onClick={handleLogout} className='text-3xl text-gray-600 cursor-pointer hover:text-gray-700'/>

@@ -11,6 +11,7 @@ import Navbar from '../components/Navbar';
 import Productsdetail from '../Pages/Productsdetail';
 import Allblogs from '../Blog/Allblogs';
 import Admindashbord from '../admin/Admindashbord';
+import Cart from '../Pages/Cart';
 
 const CustomRoutes = () => {
   const { state, loading } = useContext(GlobalContext);
@@ -39,6 +40,7 @@ const CustomRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Products />} />
           <Route path="/blog" element={<Allblogs />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/productsdetails/:id" element={<Productsdetail />} />
           <Route path="/addproduct" element={<Navigate to="/" />} />
           <Route path="/addcategories" element={<Navigate to="/" />} />
@@ -51,6 +53,7 @@ const CustomRoutes = () => {
         <>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<Admindashbord />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/addproduct" element={<AddProducts />} />
           <Route path="/addcategories" element={<AddCategories />} />
           <Route path="/product" element={<Products />} />

@@ -6,7 +6,7 @@ export const GlobalContext = createContext(null);
 const initialState = {
     user: {},
     isLogin: false,
-    baseUrl: 'https://server-ecom-lac.vercel.app'
+    baseUrl: 'http://localhost:5004'
 };
 export default function ContextProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -14,7 +14,7 @@ export default function ContextProvider({ children }) {
 useEffect(() => {
   const checkLogin = async () => {
     try {
-      const res = await axios.get("https://server-ecom-lac.vercel.app/me", {
+      const res = await axios.get("http://localhost:5004/me", {
         withCredentials: true,
       });     
       console.log(res.data)
