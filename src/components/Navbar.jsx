@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { IoIosLogOut } from "react-icons/io";
 import { Link, useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../Context/Context';
@@ -39,6 +39,21 @@ const Navbar = () => {
         toast.error(error.response?.data?.message || "Failed to logout. Try again.");
       }
     };
+
+    useEffect(() => {
+      const fetchCart = async () => {
+            try {
+              let res = await axios.get(`${baseUrl}/cart/${state.user.id}`);
+              const items = res.data?.cartItems || [];
+              const totalQty = items.reduce((sum, item) => sum + item.quantity, 0);
+               dispatch({ type: "SET_CART_COUNT", payload: totalQty })
+              console.log(res.data?.cartItems);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          fetchCart()
+    }, [])
   
 
   return (
@@ -77,11 +92,18 @@ const Navbar = () => {
                 <button >     
                    <FaRegHeart className='text-2xl hover:text-green-700 transition-all duration-300 text-gray-600'/>        
                   </button>
-                <button >     
-                  <Link to={'/cart'}>
-                   <FaLuggageCart className='text-2xl hover:text-green-700 transition-all duration-300 text-gray-600'/> 
-                  </Link>       
-                  </button>
+              
+                 <button className="relative">
+                <Link to="/cart">
+                  <FaLuggageCart className="text-2xl hover:text-green-700 transition-all duration-300 text-gray-600" />
+                  {state.cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                      {state.cartCount}
+                    </span>
+                  )}
+                </Link>
+              </button>
+
                  {(state?.user?.email) ? 
                     <IoIosLogOut onClick={handleLogout} className='text-3xl text-gray-600 cursor-pointer hover:text-gray-700'/>
                  : 

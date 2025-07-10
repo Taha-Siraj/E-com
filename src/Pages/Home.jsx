@@ -30,17 +30,9 @@ const Home = () => {
         setLoading(false)
       }
     }
-    const fetchCart = async () => {
-      try {
-        let res = await axios.get(`${baseUrl}/cart/${state.user.id}`);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    
     useEffect(() => {
       fetchProducts();
-      fetchCart()
     }, [])
 
    
